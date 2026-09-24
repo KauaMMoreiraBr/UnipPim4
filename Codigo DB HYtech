@@ -1,3 +1,23 @@
+-- ============================================================
+-- HytechDB — SCRIPT COMPLETO (v2)
+-- Schema + ajustes de compatibilidade com a interface, já
+-- incorporados nas colunas das tabelas (sem ALTER) + Triggers
+-- + Stored Procedures
+--
+-- Novidades desta versão (a partir da comparação com o front):
+--   • Usuario.status        -> ativar/inativar usuário (tela admin)
+--   • Usuario.foto_url      -> avatar de perfil (aluno/professor)
+--   • TicketSuporte.id_materia -> matéria associada ao ticket
+--   • Desafio.data_criacao  -> data usada na listagem de desafios
+--   • Triggers de desafio/certificado agora leem os valores de
+--     recompensa em ChavesConfig (em vez de valor fixo no código)
+--   • LogAtividade agora é alimentado também por: cadastro de
+--     aluno/professor, login, aprovação/rejeição de questão,
+--     emissão de certificado (com crédito de chaves) e alteração
+--     de configuração da plataforma / status de usuário
+--   • sp_RankingAlunos agora retorna também "fases_concluidas"
+-- ============================================================
+
 CREATE DATABASE HytechDB
 GO
 
@@ -8,13 +28,16 @@ GO
 -- 1. Entidades base
 -- ============================================================
 
+-- Usuario: já com status (ativo/inativo) e foto de perfil
 CREATE TABLE Usuario (
     id_usuario      INT IDENTITY(1,1) PRIMARY KEY,
     nome            VARCHAR(100),
     nickname        VARCHAR(50) UNIQUE,
     email           VARCHAR(100) UNIQUE,
     senha           VARCHAR(255),
-    data_nascimento DATE
+    data_nascimento DATE,
+    status          VARCHAR(20)  NOT NULL DEFAULT 'ativo',   -- 'ativo' | 'inativo'
+    foto_url        VARCHAR(255) NULL
 );
 GO
 
@@ -51,8 +74,8 @@ GO
 CREATE TABLE Aluno (
     id_aluno            INT IDENTITY(1,1) PRIMARY KEY,
     id_usuario          INT NOT NULL,
-    pontos_acumulados   INT,
-    streak_atual        INT,
+    pontos_acumulados   INT NOT NULL DEFAULT 0,
+    streak_atual        INT NOT NULL DEFAULT 0,
     CONSTRAINT FK_Aluno_Usuario
         FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
@@ -67,23 +90,9 @@ CREATE TABLE Admin (
 GO
 
 -- ============================================================
--- 3. Entidades com dependências múltiplas
+-- 3. Matéria (precisa vir antes de TicketSuporte, que agora
+--    referencia Materia)
 -- ============================================================
-
-CREATE TABLE TicketSuporte (
-    id_ticket               INT IDENTITY(1,1) PRIMARY KEY,
-    id_usuario_solicitante  INT NOT NULL,
-    id_usuario_destinatario INT NOT NULL,
-    assunto                 VARCHAR(150),
-    descricao               VARCHAR(MAX),
-    status                  VARCHAR(20),
-    data_abertura           DATETIME,
-    CONSTRAINT FK_Ticket_Solicitante
-        FOREIGN KEY (id_usuario_solicitante) REFERENCES Usuario(id_usuario),
-    CONSTRAINT FK_Ticket_Destinatario
-        FOREIGN KEY (id_usuario_destinatario) REFERENCES Usuario(id_usuario)
-);
-GO
 
 -- Materia: já com as colunas de interface (icone, chaves_para_desbloquear)
 CREATE TABLE Materia (
@@ -116,7 +125,30 @@ CREATE TABLE Aluno_Trilha (
 GO
 
 -- ============================================================
--- 4. Tabelas de Nível Inferior
+-- 4. Ticket de suporte (agora com matéria associada)
+-- ============================================================
+
+-- TicketSuporte: já com id_materia (matéria selecionada no formulário do aluno)
+CREATE TABLE TicketSuporte (
+    id_ticket               INT IDENTITY(1,1) PRIMARY KEY,
+    id_usuario_solicitante  INT NOT NULL,
+    id_usuario_destinatario INT NOT NULL,
+    id_materia              INT NULL,
+    assunto                 VARCHAR(150),
+    descricao               VARCHAR(MAX),
+    status                  VARCHAR(20),
+    data_abertura           DATETIME,
+    CONSTRAINT FK_Ticket_Solicitante
+        FOREIGN KEY (id_usuario_solicitante) REFERENCES Usuario(id_usuario),
+    CONSTRAINT FK_Ticket_Destinatario
+        FOREIGN KEY (id_usuario_destinatario) REFERENCES Usuario(id_usuario),
+    CONSTRAINT FK_Ticket_Materia
+        FOREIGN KEY (id_materia) REFERENCES Materia(id_materia)
+);
+GO
+
+-- ============================================================
+-- 5. Tabelas de Nível Inferior
 -- ============================================================
 
 -- Aula: já com as colunas de interface (ordem, is_extra, chaves_recompensa,
@@ -142,7 +174,7 @@ CREATE TABLE Aluno_Aula (
     id_Alu_Aula         INT IDENTITY(1,1) PRIMARY KEY,
     id_aluno            INT NOT NULL,
     id_aula             INT NOT NULL,
-    progresso_concluido BIT,
+    progresso_concluido BIT NOT NULL DEFAULT 0,
     CONSTRAINT FK_AlunoAula_Aluno
         FOREIGN KEY (id_aluno) REFERENCES Aluno(id_aluno),
     CONSTRAINT FK_AlunoAula_Aula
@@ -152,7 +184,7 @@ CREATE TABLE Aluno_Aula (
 GO
 
 -- ============================================================
--- 5. Questões (quiz de múltipla escolha por matéria)
+-- 6. Questões (quiz de múltipla escolha por matéria)
 -- ============================================================
 
 -- Questao: já com a coluna de interface (codigo_exemplo)
@@ -188,7 +220,7 @@ CREATE TABLE Aluno_Questao (
     id_Alu_Que      INT IDENTITY(1,1) PRIMARY KEY,
     id_aluno        INT NOT NULL,
     id_questao      INT NOT NULL,
-    concluida       BIT,
+    concluida       BIT NOT NULL DEFAULT 0,
     data_conclusao  DATETIME,
     CONSTRAINT FK_AlunoQuestao_Aluno
         FOREIGN KEY (id_aluno) REFERENCES Aluno(id_aluno),
@@ -199,10 +231,11 @@ CREATE TABLE Aluno_Questao (
 GO
 
 -- ============================================================
--- 6. Desafios (entidade separada de Matéria/Aula/Questão)
+-- 7. Desafios (entidade separada de Matéria/Aula/Questão)
 -- ============================================================
 
--- Desafio: já com a coluna de interface (codigo_base)
+-- Desafio: já com codigo_base (código inicial no editor) e
+-- data_criacao (usada na listagem/ordenação de desafios no front)
 CREATE TABLE Desafio (
     id_desafio      INT IDENTITY(1,1) PRIMARY KEY,
     id_professor    INT NOT NULL,
@@ -212,7 +245,8 @@ CREATE TABLE Desafio (
     dica            VARCHAR(MAX),
     dificuldade     VARCHAR(20),
     status          VARCHAR(20),
-    codigo_base     VARCHAR(MAX) NULL,      -- código inicial exibido no editor do desafio
+    codigo_base     VARCHAR(MAX) NULL,          -- código inicial exibido no editor do desafio
+    data_criacao    DATETIME     NULL DEFAULT GETDATE(),
     CONSTRAINT FK_Desafio_Professor
         FOREIGN KEY (id_professor) REFERENCES Professor(id_professor),
     CONSTRAINT FK_Desafio_Materia
@@ -225,7 +259,7 @@ CREATE TABLE Aluno_Desafio (
     id_Alu_Des      INT IDENTITY(1,1) PRIMARY KEY,
     id_aluno        INT NOT NULL,
     id_desafio      INT NOT NULL,
-    concluido       BIT,
+    concluido       BIT NOT NULL DEFAULT 0,
     data_conclusao  DATETIME,
     CONSTRAINT FK_AlunoDesafio_Aluno
         FOREIGN KEY (id_aluno) REFERENCES Aluno(id_aluno),
@@ -236,12 +270,12 @@ CREATE TABLE Aluno_Desafio (
 GO
 
 -- ============================================================
--- 7. Thread de mensagens do Ticket de Suporte
+-- 8. Thread de mensagens do Ticket de Suporte
 -- ============================================================
 
 CREATE TABLE TicketMensagem (
     id_mensagem          INT IDENTITY(1,1) PRIMARY KEY,
-    id_ticket            INT NOT NULL,
+    id_ticket             INT NOT NULL,
     id_usuario_remetente INT NOT NULL,
     texto                VARCHAR(MAX),
     data_hora            DATETIME,
@@ -253,7 +287,9 @@ CREATE TABLE TicketMensagem (
 GO
 
 -- ============================================================
--- 8. Fila de aprovação / moderação de conteúdo
+-- 9. Fila de aprovação / moderação de conteúdo
+--    (tipo: 'aula' | 'questao' — o front deve usar esses mesmos
+--    valores em vez de 'texto', para bater com as triggers)
 -- ============================================================
 
 CREATE TABLE Aprovacao (
@@ -274,7 +310,7 @@ CREATE TABLE Aprovacao (
 GO
 
 -- ============================================================
--- 9. Certificado emitido ao concluir uma matéria
+-- 10. Certificado emitido ao concluir uma matéria
 -- ============================================================
 
 CREATE TABLE Certificado (
@@ -290,7 +326,7 @@ CREATE TABLE Certificado (
 GO
 
 -- ============================================================
--- 10. Log de atividades da plataforma (auditoria)
+-- 11. Log de atividades da plataforma (auditoria)
 -- ============================================================
 
 CREATE TABLE LogAtividade (
@@ -304,7 +340,7 @@ CREATE TABLE LogAtividade (
 GO
 
 -- ============================================================
--- 11. Configuração de gamificação (linha única de parâmetros)
+-- 12. Configuração de gamificação (linha única de parâmetros)
 -- ============================================================
 
 CREATE TABLE ChavesConfig (
@@ -314,6 +350,11 @@ CREATE TABLE ChavesConfig (
     chaves_questao_dificil  INT,
     chaves_certificado      INT
 );
+GO
+
+-- Linha de configuração inicial (mesmos valores usados no front: _PLATAFORMA_CONFIG)
+INSERT INTO ChavesConfig (chaves_questao_facil, chaves_questao_media, chaves_questao_dificil, chaves_certificado)
+VALUES (5, 10, 15, 50);
 GO
 
 -- ============================================================
@@ -351,7 +392,8 @@ BEGIN
 END
 GO
 
--- 2.2 Ao aluno concluir um desafio, credita pontos fixos por dificuldade e loga
+-- 2.2 Ao aluno concluir um desafio, credita pontos por dificuldade (lendo de
+--     ChavesConfig, o mesmo valor editável na tela de configuração do admin) e loga
 CREATE OR ALTER TRIGGER TR_AlunoDesafio_CreditaChaves
 ON Aluno_Desafio
 AFTER INSERT, UPDATE
@@ -359,13 +401,22 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+    DECLARE @facil INT, @media INT, @dificil INT;
+    SELECT TOP 1 @facil = chaves_questao_facil,
+                 @media = chaves_questao_media,
+                 @dificil = chaves_questao_dificil
+    FROM ChavesConfig;
+    SET @facil   = ISNULL(@facil, 5);
+    SET @media   = ISNULL(@media, 10);
+    SET @dificil = ISNULL(@dificil, 15);
+
     UPDATE A
     SET A.pontos_acumulados = A.pontos_acumulados +
         CASE Dsf.dificuldade
-            WHEN 'Fácil'   THEN 5
-            WHEN 'Médio'   THEN 10
-            WHEN 'Difícil' THEN 15
-            ELSE 5
+            WHEN 'Fácil'   THEN @facil
+            WHEN 'Médio'   THEN @media
+            WHEN 'Difícil' THEN @dificil
+            ELSE @facil
         END
     FROM Aluno A
     INNER JOIN inserted I  ON I.id_aluno = A.id_aluno
@@ -373,10 +424,23 @@ BEGIN
     LEFT JOIN deleted D    ON D.id_Alu_Des = I.id_Alu_Des
     WHERE I.concluido = 1
       AND (D.id_Alu_Des IS NULL OR D.concluido = 0);
+
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT U.id_usuario,
+           'Desafio ' + CAST(I.id_desafio AS VARCHAR) + ' concluído (' + Dsf.dificuldade + ')',
+           GETDATE()
+    FROM inserted I
+    INNER JOIN Aluno A    ON A.id_aluno = I.id_aluno
+    INNER JOIN Usuario U  ON U.id_usuario = A.id_usuario
+    INNER JOIN Desafio Dsf ON Dsf.id_desafio = I.id_desafio
+    LEFT JOIN deleted D   ON D.id_Alu_Des = I.id_Alu_Des
+    WHERE I.concluido = 1
+      AND (D.id_Alu_Des IS NULL OR D.concluido = 0);
 END
 GO
 
--- 2.3 Ao professor cadastrar uma questão pendente, gera automaticamente o item na fila de aprovação
+-- 2.3 Ao professor cadastrar uma questão pendente, gera automaticamente o item
+--     na fila de aprovação e loga o envio
 CREATE OR ALTER TRIGGER TR_Questao_GeraAprovacao
 ON Questao
 AFTER INSERT
@@ -386,6 +450,15 @@ BEGIN
     INSERT INTO Aprovacao (tipo, id_questao, id_professor, status, data_submissao)
     SELECT 'questao', I.id_questao, I.id_professor, 'pendente', ISNULL(I.data_criacao, GETDATE())
     FROM inserted I
+    WHERE I.status_aprovacao = 'pendente';
+
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT U.id_usuario,
+           'CONTEÚDO ENVIADO (questão): ' + LEFT(ISNULL(I.enunciado, ''), 60),
+           GETDATE()
+    FROM inserted I
+    INNER JOIN Professor P ON P.id_professor = I.id_professor
+    INNER JOIN Usuario U   ON U.id_usuario = P.id_usuario
     WHERE I.status_aprovacao = 'pendente';
 END
 GO
@@ -401,10 +474,20 @@ BEGIN
     SELECT 'aula', I.id_aula, M.id_professor, 'pendente', GETDATE()
     FROM inserted I
     INNER JOIN Materia M ON M.id_materia = I.id_materia;
+
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT U.id_usuario,
+           'CONTEÚDO ENVIADO (aula): ' + LEFT(ISNULL(I.titulo, ''), 60),
+           GETDATE()
+    FROM inserted I
+    INNER JOIN Materia M   ON M.id_materia = I.id_materia
+    INNER JOIN Professor P ON P.id_professor = M.id_professor
+    INNER JOIN Usuario U   ON U.id_usuario = P.id_usuario;
 END
 GO
 
--- 2.5 Quando o admin muda o status de uma Aprovacao, reflete o status na Questao/Aula de origem
+-- 2.5 Quando o admin muda o status de uma Aprovacao, reflete o status na
+--     Questao de origem e loga a aprovação/rejeição
 CREATE OR ALTER TRIGGER TR_Aprovacao_SincronizaStatus
 ON Aprovacao
 AFTER UPDATE
@@ -419,6 +502,20 @@ BEGIN
 
     -- Aula não tem coluna de status próprio no schema original;
     -- se desejar refletir lá também, adicionar status_aprovacao em Aula.
+
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT U.id_usuario,
+           CASE WHEN I.status = 'aprovado' THEN 'QUESTÃO APROVADA: #' ELSE 'QUESTÃO REJEITADA: #' END
+               + CAST(I.id_questao AS VARCHAR),
+           GETDATE()
+    FROM inserted I
+    INNER JOIN deleted D    ON D.id_aprovacao = I.id_aprovacao
+    INNER JOIN Questao Q    ON Q.id_questao = I.id_questao
+    INNER JOIN Professor P  ON P.id_professor = Q.id_professor
+    INNER JOIN Usuario U    ON U.id_usuario = P.id_usuario
+    WHERE I.tipo = 'questao'
+      AND I.status <> D.status
+      AND I.status IN ('aprovado', 'rejeitado');
 END
 GO
 
@@ -440,13 +537,20 @@ END
 GO
 
 -- 2.7 Emite certificado automaticamente quando o aluno concluiu todas as aulas
---     e todas as questões de uma matéria
+--     e todas as questões de uma matéria — credita chaves_certificado (via
+--     ChavesConfig) e loga a emissão
 CREATE OR ALTER TRIGGER TR_AlunoAula_EmiteCertificado
 ON Aluno_Aula
 AFTER INSERT, UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
+
+    DECLARE @chaves_certificado INT;
+    SELECT TOP 1 @chaves_certificado = chaves_certificado FROM ChavesConfig;
+    SET @chaves_certificado = ISNULL(@chaves_certificado, 50);
+
+    DECLARE @NovosCertificados TABLE (id_aluno INT, id_materia INT);
 
     ;WITH MateriasAfetadas AS (
         SELECT DISTINCT I.id_aluno, Au.id_materia
@@ -455,6 +559,7 @@ BEGIN
         WHERE I.progresso_concluido = 1
     )
     INSERT INTO Certificado (id_aluno, id_materia, data_emissao)
+    OUTPUT inserted.id_aluno, inserted.id_materia INTO @NovosCertificados
     SELECT MA.id_aluno, MA.id_materia, GETDATE()
     FROM MateriasAfetadas MA
     WHERE NOT EXISTS (
@@ -472,6 +577,20 @@ BEGIN
               LEFT JOIN Aluno_Questao AQ2
                      ON AQ2.id_questao = Q2.id_questao AND AQ2.id_aluno = MA.id_aluno AND AQ2.concluida = 1
               WHERE Q2.id_materia = MA.id_materia AND AQ2.id_Alu_Que IS NULL);
+
+    -- credita as chaves do certificado para quem acabou de recebê-lo
+    UPDATE A
+    SET A.pontos_acumulados = A.pontos_acumulados + @chaves_certificado
+    FROM Aluno A
+    INNER JOIN @NovosCertificados NC ON NC.id_aluno = A.id_aluno;
+
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT U.id_usuario,
+           'CERTIFICADO EMITIDO: matéria #' + CAST(NC.id_materia AS VARCHAR) + ' (+' + CAST(@chaves_certificado AS VARCHAR) + ' chaves)',
+           GETDATE()
+    FROM @NovosCertificados NC
+    INNER JOIN Aluno A   ON A.id_aluno = NC.id_aluno
+    INNER JOIN Usuario U ON U.id_usuario = A.id_usuario;
 END
 GO
 
@@ -491,6 +610,54 @@ BEGIN
         RETURN;
     END
     DELETE FROM Materia WHERE id_materia IN (SELECT id_materia FROM deleted);
+END
+GO
+
+-- 2.9 Loga o cadastro de um novo aluno
+CREATE OR ALTER TRIGGER TR_Aluno_LogCadastro
+ON Aluno
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT U.id_usuario, 'CADASTRO: ' + U.nome + ' — Novo Aluno', GETDATE()
+    FROM inserted I
+    INNER JOIN Usuario U ON U.id_usuario = I.id_usuario;
+END
+GO
+
+-- 2.10 Loga o cadastro de um novo professor
+CREATE OR ALTER TRIGGER TR_Professor_LogCadastro
+ON Professor
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT U.id_usuario, 'CADASTRO: ' + U.nome + ' — Novo Professor', GETDATE()
+    FROM inserted I
+    INNER JOIN Usuario U ON U.id_usuario = I.id_usuario;
+END
+GO
+
+-- 2.11 Loga ativação/inativação de usuário (tela de gerenciar usuários do admin)
+CREATE OR ALTER TRIGGER TR_Usuario_LogStatus
+ON Usuario
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF UPDATE(status)
+    BEGIN
+        INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+        SELECT I.id_usuario,
+               'USUÁRIO ' + CASE WHEN I.status = 'ativo' THEN 'ATIVADO' ELSE 'INATIVADO' END + ': ' + I.nome,
+               GETDATE()
+        FROM inserted I
+        INNER JOIN deleted D ON D.id_usuario = I.id_usuario
+        WHERE I.status <> D.status;
+    END
 END
 GO
 
@@ -544,19 +711,20 @@ BEGIN
 END
 GO
 
--- 3.3 Abre um novo ticket de suporte já com a primeira mensagem
+-- 3.3 Abre um novo ticket de suporte já com a primeira mensagem (agora aceita a matéria)
 CREATE OR ALTER PROCEDURE sp_AbrirTicket
     @id_usuario_solicitante  INT,
     @id_usuario_destinatario INT,
     @assunto                 VARCHAR(150),
-    @descricao               VARCHAR(MAX)
+    @descricao               VARCHAR(MAX),
+    @id_materia              INT = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
     DECLARE @id_ticket INT;
 
-    INSERT INTO TicketSuporte (id_usuario_solicitante, id_usuario_destinatario, assunto, descricao, status, data_abertura)
-    VALUES (@id_usuario_solicitante, @id_usuario_destinatario, @assunto, @descricao, 'aberto', GETDATE());
+    INSERT INTO TicketSuporte (id_usuario_solicitante, id_usuario_destinatario, id_materia, assunto, descricao, status, data_abertura)
+    VALUES (@id_usuario_solicitante, @id_usuario_destinatario, @id_materia, @assunto, @descricao, 'aberto', GETDATE());
 
     SET @id_ticket = SCOPE_IDENTITY();
 
@@ -581,6 +749,7 @@ END
 GO
 
 -- 3.5 Admin aprova ou rejeita um item da fila de aprovação
+--     (dispara a TR_Aprovacao_SincronizaStatus, que já loga a decisão)
 CREATE OR ALTER PROCEDURE sp_AvaliarAprovacao
     @id_aprovacao INT,
     @aprovado     BIT
@@ -617,16 +786,22 @@ BEGIN
 END
 GO
 
--- 3.7 Ranking dos N alunos com mais pontos
+-- 3.7 Ranking dos N alunos com mais pontos — agora também retorna fases_concluidas
+--     (aulas + questões concluídas), usado no painel lateral e na tela de ranking
 CREATE OR ALTER PROCEDURE sp_RankingAlunos
     @top INT = 10
 AS
 BEGIN
     SET NOCOUNT ON;
     SELECT TOP (@top)
-           U.nome, U.nickname, A.pontos_acumulados, A.streak_atual
+           U.nome, U.nickname, A.pontos_acumulados, A.streak_atual,
+           ISNULL(AA.fases_aula, 0) + ISNULL(AQ.fases_questao, 0) AS fases_concluidas
     FROM Aluno A
     INNER JOIN Usuario U ON U.id_usuario = A.id_usuario
+    OUTER APPLY (SELECT COUNT(*) AS fases_aula FROM Aluno_Aula x
+                 WHERE x.id_aluno = A.id_aluno AND x.progresso_concluido = 1) AA
+    OUTER APPLY (SELECT COUNT(*) AS fases_questao FROM Aluno_Questao y
+                 WHERE y.id_aluno = A.id_aluno AND y.concluida = 1) AQ
     ORDER BY A.pontos_acumulados DESC;
 END
 GO
@@ -674,5 +849,58 @@ BEGIN
                           ELSE CAST((@aulas_concluidas + @questoes_concluidas) AS DECIMAL(5,2))
                                / (@total_aulas + @total_questoes) * 100 END
     WHERE id_aluno = @id_aluno AND id_trilha = @id_trilha;
+END
+GO
+
+-- 3.9 Registra um login no log de atividades (equivalente ao "LOGIN: <nome>" do front)
+CREATE OR ALTER PROCEDURE sp_RegistrarLogin
+    @id_usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    SELECT id_usuario, 'LOGIN: ' + nome, GETDATE()
+    FROM Usuario
+    WHERE id_usuario = @id_usuario;
+END
+GO
+
+-- 3.10 Ativa/inativa um usuário (tela "Gerenciar Usuários" do admin)
+--      (dispara a TR_Usuario_LogStatus, que já loga a mudança)
+CREATE OR ALTER PROCEDURE sp_AlterarStatusUsuario
+    @id_usuario  INT,
+    @novo_status VARCHAR(20)   -- 'ativo' | 'inativo'
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE Usuario
+    SET status = @novo_status
+    WHERE id_usuario = @id_usuario;
+END
+GO
+
+-- 3.11 Atualiza a configuração de gamificação (tela de configurações do admin)
+--      e loga a alteração — equivalente a salvarConfiguracaoPlataforma() do front
+CREATE OR ALTER PROCEDURE sp_AtualizarConfiguracaoPlataforma
+    @chaves_questao_facil   INT,
+    @chaves_questao_media   INT,
+    @chaves_questao_dificil INT,
+    @chaves_certificado     INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF EXISTS (SELECT 1 FROM ChavesConfig)
+        UPDATE ChavesConfig
+        SET chaves_questao_facil   = @chaves_questao_facil,
+            chaves_questao_media   = @chaves_questao_media,
+            chaves_questao_dificil = @chaves_questao_dificil,
+            chaves_certificado     = @chaves_certificado;
+    ELSE
+        INSERT INTO ChavesConfig (chaves_questao_facil, chaves_questao_media, chaves_questao_dificil, chaves_certificado)
+        VALUES (@chaves_questao_facil, @chaves_questao_media, @chaves_questao_dificil, @chaves_certificado);
+
+    INSERT INTO LogAtividade (id_usuario, descricao, data_hora)
+    VALUES (NULL, 'CONFIGURAÇÃO ATUALIZADA: Pontuação de gamificação', GETDATE());
 END
 GO
