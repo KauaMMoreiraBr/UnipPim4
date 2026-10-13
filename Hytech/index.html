@@ -139,17 +139,35 @@
     transition: all 0.2s;
   }
   .btn-outline-branco:hover { background: rgba(255,255,255,0.1); }
+  /* Mascote da home */
   .hero-imagem {
-    width: 260px;
-    height: 200px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 16px;
+    width: 440px;
+    height: 440px;
+    margin: -60px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 80px;
     position: relative;
+    flex-shrink: 0;
   }
+  .hero-imagem::before {
+    content: '';
+    position: absolute;
+    width: 92%;
+    height: 92%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,180,254,0.50) 0%, rgba(216,180,254,0.18) 45%, rgba(216,180,254,0) 70%);
+  }
+  .hero-imagem img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 24px rgba(0,0,0,0.35));
+    animation: mascote-flutuar 4s ease-in-out infinite;
+  }
+  @keyframes mascote-flutuar { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .hero-imagem img { animation: none; } }
 
   /* ===== BENEFÍCIOS ===== */
   .secao-beneficios { padding: 80px 80px; background: var(--branco); text-align: center; }
@@ -1154,7 +1172,7 @@
     .hero { flex-direction: column; padding: 48px 24px; text-align: center; }
     .hero-texto h1 { font-size: 36px; }
     .hero-botoes { justify-content: center; }
-    .hero-imagem { display: none; }
+    .hero-imagem { width: 260px; height: 260px; margin: 24px auto -16px; }
     .secao-beneficios, .secao-como-funciona, .secao-cta { padding: 48px 24px; }
     .modal { flex-direction: column; padding: 32px 24px; }
     .passos { flex-direction: column; align-items: center; }
@@ -1652,6 +1670,48 @@
   .desafio-aluno-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid #f0f0f0; }
   .desafio-aluno-btn { background: var(--roxo-escuro); color: var(--branco); border: none; border-radius: 8px; padding: 8px 18px; font-family: var(--font-corpo); font-weight: 700; font-size: 13px; cursor: pointer; transition: background 0.2s; }
   .desafio-aluno-btn:hover { background: var(--roxo-medio); }
+
+  /* ===== ÍCONES E IMAGENS (pasta assets/) ===== */
+  .ico { display:inline-block; width:24px; height:24px; background-size:contain; background-repeat:no-repeat; background-position:center; flex-shrink:0; }
+  .pnd-stat .ico { width:18px; height:18px; }
+  .perfil-stat .ico { width:24px; height:24px; }
+  .sidebar-mascote-emoji .mascote-ico { display:block; margin:0 auto; width:64px; height:64px; }
+  .sidebar-mascote-emoji .mascote-inv { filter:invert(1); }
+  .sidebar-mascote-emoji .mascote-mat { display:block; margin:0 auto; width:104px; height:104px; object-fit:contain; }
+  .mat-ico { width:28px; height:28px; object-fit:contain; vertical-align:middle; flex-shrink:0; }
+  .mat-ico-side { width:34px; height:34px; display:block; }
+  .sidebar-item .icon:has(.mat-ico-side) { display:flex; align-items:center; flex-shrink:0; width:34px; height:34px; margin-left:-5px; }
+  .hub-sidebar { width:240px; }
+  .mat-ico-hub { width:36px; height:36px; margin-right:10px; }
+  .mat-ico-sm { width:28px; height:28px; margin-right:6px; }
+  #desafios-aluno-filtros .desafio-aba { display:inline-flex; align-items:center; }
+  .mat-ico-rank { width:40px; height:40px; display:block; }
+  .materia-progress-row .mat-icone { width:40px; display:flex; align-items:center; justify-content:center; }
+  .acao-card-img { background:none; }
+  .acao-card-img img { width:110px; height:110px; object-fit:contain; display:block; }
+  .chave-ico { width:18px; height:18px; vertical-align:-4px; margin-right:2px; }
+  .chaves-badge .chave-ico { margin-right:0; }
+  .es-img { width:44px; height:44px; }
+  .tv-img { width:48px; height:48px; }
+  .nivel-img { width:84px; height:84px; object-fit:contain; display:block; }
+  .conq-img { width:60px; height:60px; object-fit:contain; display:block; margin:0 auto 6px; }
+  .ico-inicio { background-image:url(assets/icons/menu/inicio.png); }
+  .ico-modulos { background-image:url(assets/icons/menu/modulos.png); }
+  .ico-jogar { background-image:url(assets/icons/menu/jogar.png); }
+  .ico-desafios { background-image:url(assets/icons/menu/desafios.png); }
+  .ico-ranking { background-image:url(assets/icons/menu/ranking.png); }
+  .ico-config { background-image:url(assets/icons/menu/configuracoes.png); }
+  .ico-ticket { background-image:url(assets/icons/menu/ticket-suporte.png); }
+  .ico-chave { background-image:url(assets/icons/perfil/chave.png); }
+  .ico-medalha { background-image:url(assets/icons/perfil/ranking.png); }
+  .ico-fases { background-image:url(assets/icons/perfil/fases-concluidas.png); }
+  .ico-play { background-image:url(assets/icons/perfil/fases.png); }
+  .ico-user { background-image:url(assets/icons/perfil/ver-perfil.png); }
+  /* Sidebar padronizada (Início, Acessar módulo, Desafios, Ranking, Configurações, Tickets): mesma altura do mascote para o menu não "pular". Jogar agora (pg-trilha) fica de fora. */
+  #pg-dashboard .sidebar-mascote-emoji, #pg-hub .sidebar-mascote-emoji, #pg-ranking .sidebar-mascote-emoji,
+  #pg-desafios-aluno .sidebar-mascote-emoji, #pg-perfil .sidebar-mascote-emoji, #pg-aluno-tickets .sidebar-mascote-emoji
+    { height:96px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; }
+  #pg-hub .sidebar-mascote-emoji .mascote-mat { width:64px; height:64px; }
 </style>
 </head>
 <body>
@@ -1675,7 +1735,7 @@
         <button class="btn-outline-branco" onclick="_sobreDeAluno=false;renderNavSobre();irPara('pg-sobre')">Conhecer mais</button>
       </div>
     </div>
-    <div class="hero-imagem">🖥️</div>
+    <div class="hero-imagem"><img src="assets/mascote/mascote-home.webp" alt="Mascote da HyTech segurando um notebook e fazendo joinha"></div>
   </section>
 
   <section class="secao-beneficios">
@@ -1755,8 +1815,8 @@
         <a onclick="abrirModal('modal-login')">Entrar na sua Conta</a>
       </div>
         <div class="footer-icons"> 
-          <img src="banco de imagens/instagramWhite.png" class="icon-social">
-          <img src="banco de imagens/facebookWhite.png" class="icon-social">
+          <img src="assets/social/instagram-white.png" class="icon-social" alt="Instagram">
+          <img src="assets/social/facebook-white.png" class="icon-social" alt="Facebook">
         </div>
     </div>
     <div class="footer-bottom">São José dos Campos – 2026</div>
@@ -1954,18 +2014,18 @@
 <div id="pg-dashboard" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-mascote-emoji">🖥️</div>
+    <div class="sidebar-mascote-emoji"><span class="ico ico-inicio mascote-ico"></span></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">o que fazer hoje?</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-dashboard')"><span class="icon">🏠</span>INÍCIO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon">📚</span>ACESSAR MÓDULO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon">🧭</span>JOGAR AGORA</div>
-      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon">🎯</span>DESAFIOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon">🏆</span>RANKING</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon ico ico-modulos"></span>ACESSAR MÓDULO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon ico ico-jogar"></span>JOGAR AGORA</div>
+      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon ico ico-ranking"></span>RANKING</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon">⚙️</span>CONFIGURAÇÕES</div>
-      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon">🎫</span>TICKET DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon ico ico-config"></span>CONFIGURAÇÕES</div>
+      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon ico ico-ticket"></span>TICKET DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
@@ -1987,14 +2047,14 @@
             <div class="pnd-avatar" id="dash-pnd-avatar">F</div>
             <div class="pnd-nick" id="dash-pnd-nick">@usuario</div>
             <hr class="pnd-divider">
-            <div class="pnd-stat"><span>🗝️</span><span id="dash-pnd-chaves">0 Chaves</span></div>
+            <div class="pnd-stat"><span class="ico ico-chave"></span><span id="dash-pnd-chaves">0 Chaves</span></div>
             <div class="pnd-stat"><span>🔥</span><span id="dash-pnd-streak">0 dias streak</span></div>
-            <div class="pnd-stat"><span>🏆</span><span id="dash-pnd-ranking">—° lugar</span></div>
-            <div class="pnd-stat"><span>▶️</span><span id="dash-pnd-fase">0 fases</span></div>
+            <div class="pnd-stat"><span class="ico ico-medalha"></span><span id="dash-pnd-ranking">—° lugar</span></div>
+            <div class="pnd-stat"><span class="ico ico-play"></span><span id="dash-pnd-fase">0 fases</span></div>
             <hr class="pnd-divider">
             <div class="pnd-actions">
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">✏️ Editar perfil</button>
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">👤 Ver perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Editar perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Ver perfil</button>
             </div>
           </div>
         </div>
@@ -2008,7 +2068,7 @@
       </div>
       <div class="acoes-grid">
         <div class="acao-card" onclick="irInterno('pg-hub')">
-          <div class="acao-card-img">📖</div>
+          <div class="acao-card-img"><img src="assets/icons/atalho/conteudo.webp" alt="Conteúdo"></div>
           <div class="acao-card-texto">
             <h3>Mergulhe no Conteúdo</h3>
             <p>Acesse os materiais de ensino completos e entenda o passo a passo de cada lição de forma simples e visual</p>
@@ -2016,7 +2076,7 @@
           </div>
         </div>
         <div class="acao-card" onclick="irInterno('pg-trilha')">
-          <div class="acao-card-img">🎮</div>
+          <div class="acao-card-img"><img src="assets/icons/atalho/desafio.webp" alt="Desafio"></div>
           <div class="acao-card-texto">
             <h3>Hora do Desafio</h3>
             <p>Coloque seu conhecimento à prova com atividades interativas e conquiste suas chaves de progresso</p>
@@ -2032,18 +2092,18 @@
 <div id="pg-hub" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-mascote-emoji">🖥️</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-mat" src="assets/materias/programacao.webp" alt=""></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">o que estudar?</div>
-      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon">🏠</span>INÍCIO</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-hub')"><span class="icon">📚</span>ACESSAR MÓDULO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon">🧭</span>JOGAR AGORA</div>
-      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon">🎯</span>DESAFIOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon">🏆</span>RANKING</div>
+      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-hub')"><span class="icon ico ico-modulos"></span>ACESSAR MÓDULO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon ico ico-jogar"></span>JOGAR AGORA</div>
+      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon ico ico-ranking"></span>RANKING</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon">⚙️</span>CONFIGURAÇÕES</div>
-      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon">🎫</span>TICKET DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon ico ico-config"></span>CONFIGURAÇÕES</div>
+      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon ico ico-ticket"></span>TICKET DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
@@ -2065,14 +2125,14 @@
             <div class="pnd-avatar" id="hub-pnd-avatar">F</div>
             <div class="pnd-nick" id="hub-pnd-nick">@usuario</div>
             <hr class="pnd-divider">
-            <div class="pnd-stat"><span>🗝️</span><span id="hub-pnd-chaves">0 Chaves</span></div>
+            <div class="pnd-stat"><span class="ico ico-chave"></span><span id="hub-pnd-chaves">0 Chaves</span></div>
             <div class="pnd-stat"><span>🔥</span><span id="hub-pnd-streak">0 dias streak</span></div>
-            <div class="pnd-stat"><span>🏆</span><span id="hub-pnd-ranking">—° lugar</span></div>
-            <div class="pnd-stat"><span>▶️</span><span id="hub-pnd-fase">0 fases</span></div>
+            <div class="pnd-stat"><span class="ico ico-medalha"></span><span id="hub-pnd-ranking">—° lugar</span></div>
+            <div class="pnd-stat"><span class="ico ico-play"></span><span id="hub-pnd-fase">0 fases</span></div>
             <hr class="pnd-divider">
             <div class="pnd-actions">
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">✏️ Editar perfil</button>
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">👤 Ver perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Editar perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Ver perfil</button>
             </div>
           </div>
         </div>
@@ -2083,10 +2143,10 @@
       <div class="hub-layout">
         <div class="hub-sidebar">
           <h3>matérias</h3>
-          <div id="hub-mat-1" class="hub-materia-item ativo" onclick="selecionarMateriaHub(1)">💻 Programação</div>
-          <div id="hub-mat-2" class="hub-materia-item" onclick="tentarSelecionarMateriaHub(2)">🎨 Design</div>
-          <div id="hub-mat-3" class="hub-materia-item" onclick="tentarSelecionarMateriaHub(3)">🗄️ Banco de Dados</div>
-          <div id="hub-mat-4" class="hub-materia-item" onclick="tentarSelecionarMateriaHub(4)">🌐 Redes</div>
+          <div id="hub-mat-1" class="hub-materia-item ativo" onclick="selecionarMateriaHub(1)"><img class="mat-ico mat-ico-hub" src="assets/materias/programacao.webp" alt="">Programação</div>
+          <div id="hub-mat-2" class="hub-materia-item" onclick="tentarSelecionarMateriaHub(2)"><img class="mat-ico mat-ico-hub" src="assets/materias/design.webp" alt="">Design</div>
+          <div id="hub-mat-3" class="hub-materia-item" onclick="tentarSelecionarMateriaHub(3)"><img class="mat-ico mat-ico-hub" src="assets/materias/banco-de-dados.webp" alt="">Banco de Dados</div>
+          <div id="hub-mat-4" class="hub-materia-item" onclick="tentarSelecionarMateriaHub(4)"><img class="mat-ico mat-ico-hub" src="assets/materias/redes.webp" alt="">Redes</div>
         </div>
         <div class="hub-conteudo" id="hub-conteudo-area">
           <!-- renderizado via JS -->
@@ -2100,18 +2160,18 @@
 <div id="pg-trilha" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-mascote-emoji">🧭</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-mat" src="assets/materias/programacao.webp" alt=""></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">matérias para se fazer</div>
-      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon">🏠</span>INÍCIO</div>
-      <div id="tril-sb-1" class="sidebar-item ativo" onclick="tentarSelecionarMateriaTrilha(1)"><span class="icon">💻</span>Programação <span id="tril-prog-1" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
-      <div id="tril-sb-2" class="sidebar-item" onclick="tentarSelecionarMateriaTrilha(2)"><span class="icon">🎨</span>Design <span id="tril-prog-2" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
-      <div id="tril-sb-3" class="sidebar-item" onclick="tentarSelecionarMateriaTrilha(3)"><span class="icon">🗄️</span>Banco de Dados <span id="tril-prog-3" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
-      <div id="tril-sb-4" class="sidebar-item" onclick="tentarSelecionarMateriaTrilha(4)"><span class="icon">🌐</span>Redes <span id="tril-prog-4" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
+      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div id="tril-sb-1" class="sidebar-item ativo" onclick="tentarSelecionarMateriaTrilha(1)"><span class="icon"><img class="mat-ico mat-ico-side" src="assets/materias/programacao.webp" alt=""></span>Programação <span id="tril-prog-1" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
+      <div id="tril-sb-2" class="sidebar-item" onclick="tentarSelecionarMateriaTrilha(2)"><span class="icon"><img class="mat-ico mat-ico-side" src="assets/materias/design.webp" alt=""></span>Design <span id="tril-prog-2" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
+      <div id="tril-sb-3" class="sidebar-item" onclick="tentarSelecionarMateriaTrilha(3)"><span class="icon"><img class="mat-ico mat-ico-side" src="assets/materias/banco-de-dados.webp" alt=""></span>Banco de Dados <span id="tril-prog-3" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
+      <div id="tril-sb-4" class="sidebar-item" onclick="tentarSelecionarMateriaTrilha(4)"><span class="icon"><img class="mat-ico mat-ico-side" src="assets/materias/redes.webp" alt=""></span>Redes <span id="tril-prog-4" style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);">0/3</span></div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon">⚙️</span>CONFIGURAÇÕES</div>
-      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon">🎫</span>TICKET DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon ico ico-config"></span>CONFIGURAÇÕES</div>
+      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon ico ico-ticket"></span>TICKET DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
@@ -2133,14 +2193,14 @@
             <div class="pnd-avatar" id="trilha-pnd-avatar">F</div>
             <div class="pnd-nick" id="trilha-pnd-nick">@usuario</div>
             <hr class="pnd-divider">
-            <div class="pnd-stat"><span>🗝️</span><span id="trilha-pnd-chaves">0 Chaves</span></div>
+            <div class="pnd-stat"><span class="ico ico-chave"></span><span id="trilha-pnd-chaves">0 Chaves</span></div>
             <div class="pnd-stat"><span>🔥</span><span id="trilha-pnd-streak">0 dias streak</span></div>
-            <div class="pnd-stat"><span>🏆</span><span id="trilha-pnd-ranking">—° lugar</span></div>
-            <div class="pnd-stat"><span>▶️</span><span id="trilha-pnd-fase">0 fases</span></div>
+            <div class="pnd-stat"><span class="ico ico-medalha"></span><span id="trilha-pnd-ranking">—° lugar</span></div>
+            <div class="pnd-stat"><span class="ico ico-play"></span><span id="trilha-pnd-fase">0 fases</span></div>
             <hr class="pnd-divider">
             <div class="pnd-actions">
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">✏️ Editar perfil</button>
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">👤 Ver perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Editar perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Ver perfil</button>
             </div>
           </div>
         </div>
@@ -2157,18 +2217,18 @@
 <div id="pg-ranking" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-mascote-emoji">🏆</div>
+    <div class="sidebar-mascote-emoji"><span class="ico ico-medalha mascote-ico mascote-inv"></span></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">o que fazer hoje?</div>
-      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon">🏠</span>INÍCIO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon">📚</span>ACESSAR MÓDULO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon">🧭</span>JOGAR AGORA</div>
-      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon">🎯</span>DESAFIOS</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-ranking')"><span class="icon">🏆</span>RANKING</div>
+      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon ico ico-modulos"></span>ACESSAR MÓDULO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon ico ico-jogar"></span>JOGAR AGORA</div>
+      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-ranking')"><span class="icon ico ico-ranking"></span>RANKING</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon">⚙️</span>CONFIGURAÇÕES</div>
-      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon">🎫</span>TICKET DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon ico ico-config"></span>CONFIGURAÇÕES</div>
+      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon ico ico-ticket"></span>TICKET DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
@@ -2190,14 +2250,14 @@
             <div class="pnd-avatar" id="ranking-pnd-avatar">F</div>
             <div class="pnd-nick" id="ranking-pnd-nick">@usuario</div>
             <hr class="pnd-divider">
-            <div class="pnd-stat"><span>🗝️</span><span id="ranking-pnd-chaves">0 Chaves</span></div>
+            <div class="pnd-stat"><span class="ico ico-chave"></span><span id="ranking-pnd-chaves">0 Chaves</span></div>
             <div class="pnd-stat"><span>🔥</span><span id="ranking-pnd-streak">0 dias streak</span></div>
-            <div class="pnd-stat"><span>🏆</span><span id="ranking-pnd-ranking">—° lugar</span></div>
-            <div class="pnd-stat"><span>▶️</span><span id="ranking-pnd-fase">0 fases</span></div>
+            <div class="pnd-stat"><span class="ico ico-medalha"></span><span id="ranking-pnd-ranking">—° lugar</span></div>
+            <div class="pnd-stat"><span class="ico ico-play"></span><span id="ranking-pnd-fase">0 fases</span></div>
             <hr class="pnd-divider">
             <div class="pnd-actions">
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">✏️ Editar perfil</button>
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">👤 Ver perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Editar perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Ver perfil</button>
             </div>
           </div>
         </div>
@@ -2210,7 +2270,7 @@
 
       <!-- BANNER DE NÍVEL -->
       <div class="nivel-banner" id="nivel-banner">
-        <div class="nivel-badge" id="nivel-badge-icone">🥚</div>
+        <div class="nivel-badge" id="nivel-badge-icone"></div>
         <div class="nivel-info">
           <div class="nivel-label">Nível atual</div>
           <div class="nivel-titulo" id="nivel-titulo-display">Iniciante</div>
@@ -2221,11 +2281,11 @@
 
       <!-- BARRA XP GERAL -->
       <div class="ranking-progresso-box">
-        <h3>📊 Progresso Geral</h3>
+        <h3>Progresso Geral</h3>
         <div class="barra-nivel-wrapper">
           <div class="barra-nivel-header">
             <span id="nivel-atual-label">Iniciante</span>
-            <span id="nivel-prox-label">Explorador (19 🗝️)</span>
+            <span id="nivel-prox-label">Explorador (19 <img class="chave-ico" src="assets/icons/perfil/chave.png" alt="chaves">)</span>
           </div>
           <div class="barra-nivel">
             <div class="barra-nivel-fill" id="barra-xp-fill" style="width:0%"></div>
@@ -2236,7 +2296,7 @@
 
       <!-- PROGRESSO POR MATÉRIA -->
       <div class="ranking-progresso-box">
-        <h3>📚 Progresso por Matéria</h3>
+        <h3>Progresso por Matéria</h3>
         <div id="materias-progresso-lista">
           <!-- renderizado via JS -->
         </div>
@@ -2244,7 +2304,7 @@
 
       <!-- CONQUISTAS -->
       <div class="ranking-progresso-box">
-        <h3>🏅 Conquistas</h3>
+        <h3>Conquistas</h3>
         <div class="conquistas-grid" id="conquistas-grid">
           <!-- renderizado via JS -->
         </div>
@@ -2264,18 +2324,18 @@
 <div id="pg-perfil" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-mascote-emoji">👤</div>
+    <div class="sidebar-mascote-emoji"><span class="ico ico-user mascote-ico"></span></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">o que fazer hoje?</div>
-      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon">🏠</span>INÍCIO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon">📚</span>ACESSAR MÓDULO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon">🧭</span>JOGAR AGORA</div>
-      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon">🎯</span>DESAFIOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon">🏆</span>RANKING</div>
+      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon ico ico-modulos"></span>ACESSAR MÓDULO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon ico ico-jogar"></span>JOGAR AGORA</div>
+      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon ico ico-ranking"></span>RANKING</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item ativo"><span class="icon">⚙️</span>CONFIGURAÇÕES</div>
-      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon">🎫</span>TICKET DE SUPORTE</div>
+      <div class="sidebar-item ativo"><span class="icon ico ico-config"></span>CONFIGURAÇÕES</div>
+      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon ico ico-ticket"></span>TICKET DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
@@ -2307,9 +2367,9 @@
           <div class="perfil-nome" id="perfil-nome-display">Pedro Bala</div>
           <div class="perfil-email" id="perfil-email-display">PedroBala@gmail.com</div>
           <div class="perfil-sublinhado"></div>
-          <div class="perfil-stat"><span class="icone">🗝️</span> <span id="perfil-chaves-display">0 Chaves</span></div>
-          <div class="perfil-stat"><span class="icone">🔥</span> <span id="perfil-ranking-pos">6° do Ranking</span></div>
-          <div class="perfil-stat"><span class="icone">🏅</span> <span id="perfil-fases-stat">0 Fases Concluídas</span></div>
+          <div class="perfil-stat"><span class="icone ico ico-chave"></span> <span id="perfil-chaves-display">0 Chaves</span></div>
+          <div class="perfil-stat"><span class="icone ico ico-medalha"></span> <span id="perfil-ranking-pos">6° do Ranking</span></div>
+          <div class="perfil-stat"><span class="icone ico ico-fases"></span> <span id="perfil-fases-stat">0 Fases Concluídas</span></div>
         </div>
 
         <!-- CAMPOS EDITÁVEIS -->
@@ -2317,7 +2377,7 @@
           <div class="perfil-secao">
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">😊</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Nickname</div>
                 <div class="campo-valor" id="perfil-nickname-display">@PedroBala</div>
@@ -2326,7 +2386,7 @@
             </div>
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">✉️</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Email</div>
                 <div class="campo-valor" id="perfil-email-campo">PedroBala@gmail.com</div>
@@ -2335,7 +2395,7 @@
             </div>
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">👤</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Nome completo</div>
                 <div class="campo-valor" id="perfil-nome-campo">Pedro Bala</div>
@@ -2344,7 +2404,7 @@
             </div>
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">🔒</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Senha</div>
                 <div class="campo-valor senha-mask">••••••••</div>
@@ -2369,18 +2429,18 @@
 <div id="pg-desafios-aluno" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-mascote-emoji">🎯</div>
+    <div class="sidebar-mascote-emoji"><span class="ico ico-desafios mascote-ico"></span></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">desafios</div>
-      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon">🏠</span>INÍCIO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon">📚</span>ACESSAR MÓDULO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon">🧭</span>JOGAR AGORA</div>
-      <div class="sidebar-item ativo"><span class="icon">🎯</span>DESAFIOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon">🏆</span>RANKING</div>
+      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon ico ico-modulos"></span>ACESSAR MÓDULO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon ico ico-jogar"></span>JOGAR AGORA</div>
+      <div class="sidebar-item ativo"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon ico ico-ranking"></span>RANKING</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon">⚙️</span>CONFIGURAÇÕES</div>
-      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon">🎫</span>TICKET DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon ico ico-config"></span>CONFIGURAÇÕES</div>
+      <div class="sidebar-item" onclick="abrirTicketsAluno()"><span class="icon ico ico-ticket"></span>TICKET DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
@@ -2402,14 +2462,14 @@
             <div class="pnd-avatar" id="desafios-pnd-avatar">F</div>
             <div class="pnd-nick" id="desafios-pnd-nick">@usuario</div>
             <hr class="pnd-divider">
-            <div class="pnd-stat"><span>🗝️</span><span id="desafios-pnd-chaves">0 Chaves</span></div>
+            <div class="pnd-stat"><span class="ico ico-chave"></span><span id="desafios-pnd-chaves">0 Chaves</span></div>
             <div class="pnd-stat"><span>🔥</span><span id="desafios-pnd-streak">0 dias streak</span></div>
-            <div class="pnd-stat"><span>🏆</span><span id="desafios-pnd-ranking">—° lugar</span></div>
-            <div class="pnd-stat"><span>▶️</span><span id="desafios-pnd-fase">0 fases</span></div>
+            <div class="pnd-stat"><span class="ico ico-medalha"></span><span id="desafios-pnd-ranking">—° lugar</span></div>
+            <div class="pnd-stat"><span class="ico ico-play"></span><span id="desafios-pnd-fase">0 fases</span></div>
             <hr class="pnd-divider">
             <div class="pnd-actions">
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">✏️ Editar perfil</button>
-              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">👤 Ver perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Editar perfil</button>
+              <button class="pnd-action-btn" onclick="fecharPerfilDropdowns();irInterno('pg-perfil')">Ver perfil</button>
             </div>
           </div>
         </div>
@@ -2417,23 +2477,23 @@
       </div>
     </nav>
     <div class="conteudo-interno">
-      <h1 style="font-family:var(--font-titulo);font-size:32px;font-weight:900;margin-bottom:4px;">Desafios 🎯</h1>
+      <h1 style="font-family:var(--font-titulo);font-size:32px;font-weight:900;margin-bottom:4px;">Desafios</h1>
       <p style="color:var(--cinza-texto);font-size:14px;margin-bottom:24px;">Resolva desafios de programação, design e mais. Ganhe chaves ao completar!</p>
 
       <!-- Filtros -->
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;" id="desafios-aluno-filtros">
-        <button class="desafio-aba ativo" onclick="filtrarDesafiosAluno('Todas')" id="dab-aluno-Todas">📋 Todas</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Programação')" id="dab-aluno-Programação">💻 Programação</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Design')" id="dab-aluno-Design">🎨 Design</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Banco de Dados')" id="dab-aluno-BancoDeDados">🗄️ Banco de Dados</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Redes')" id="dab-aluno-Redes">🌐 Redes</button>
+        <button class="desafio-aba ativo" onclick="filtrarDesafiosAluno('Todas')" id="dab-aluno-Todas">Todas</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Programação')" id="dab-aluno-Programação"><img class="mat-ico mat-ico-sm" src="assets/materias/programacao.webp" alt="">Programação</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Design')" id="dab-aluno-Design"><img class="mat-ico mat-ico-sm" src="assets/materias/design.webp" alt="">Design</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Banco de Dados')" id="dab-aluno-BancodeDados"><img class="mat-ico mat-ico-sm" src="assets/materias/banco-de-dados.webp" alt="">Banco de Dados</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosAluno('Redes')" id="dab-aluno-Redes"><img class="mat-ico mat-ico-sm" src="assets/materias/redes.webp" alt="">Redes</button>
       </div>
 
       <div id="desafios-aluno-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;">
         <!-- renderizado via JS -->
       </div>
       <div id="desafios-aluno-vazio" style="display:none;text-align:center;padding:60px 20px;color:var(--cinza-texto);">
-        <div style="font-size:48px;margin-bottom:12px;">🎯</div>
+        <img src="assets/icons/desafio/sem-desafio.webp" alt="Nenhum desafio" style="width:130px;height:130px;object-fit:contain;margin-bottom:8px;">
         <h3 style="font-family:var(--font-titulo);font-size:20px;font-weight:900;margin-bottom:8px;">Nenhum desafio disponível</h3>
         <p style="font-size:14px;">Aguarde novos desafios do professor.</p>
       </div>
@@ -3681,6 +3741,12 @@
   // ============================================================
 
   // ── CONTEÚDO DAS MATÉRIAS ──
+  const CHAVE_IMG = '<img class="chave-ico" src="assets/icons/perfil/chave.png" alt="chaves">';
+const MAT_IMG = {1:'assets/materias/programacao.webp',2:'assets/materias/design.webp',3:'assets/materias/banco-de-dados.webp',4:'assets/materias/redes.webp'};
+function _esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function matImg(i, c){ return '<img class="mat-ico ' + (c||'') + '" src="' + MAT_IMG[i] + '" alt="">'; }
+function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pageId + ' .sidebar-mascote-emoji'); if (el && MAT_IMG[i]) el.innerHTML = '<img class="mascote-mat" src="' + MAT_IMG[i] + '" alt="">'; }
+
   const MATERIAS_DATA = {
     1: {
       nome: 'Programação', icone: '💻',
@@ -4073,6 +4139,7 @@
 
   function renderHub(mIdx, topicoIdx) {
     _hubMateriaAtual = mIdx;
+    _setMascoteMateria('pg-hub', mIdx);
     const p = loadProg();
     const mat = MATERIAS_DATA[mIdx];
     const tIdx = (topicoIdx !== undefined) ? topicoIdx : encontrarTopicoAtual(mIdx, p);
@@ -4098,7 +4165,7 @@
       if (!desbloqueado) cls += ' bloqueado';
       if (tLido) cls += ' concluido';
       if (i === tIdx && desbloqueado) cls += ' ativo-topico';
-      const chIcon = t.isExtra ? '🗝️ Vale 5 Chaves' : '🗝️ Vale 3 Chaves';
+      const chIcon = t.isExtra ? CHAVE_IMG + ' Vale 5 Chaves' : CHAVE_IMG + ' Vale 3 Chaves';
       const clicar = desbloqueado ? `onclick="renderHub(${mIdx},${i})"` : `onclick="mostrarToast('🔒 Conclua o tópico anterior primeiro!')"`;
       gridHtml += `<div class="${cls}" ${clicar}><h3>${t.titulo.split('—')[0].trim()}</h3><p>${t.titulo.includes('—') ? t.titulo.split('—')[1].trim() : ''}</p><div class="chaves-badge">${chIcon}</div></div>`;
     });
@@ -4112,7 +4179,7 @@
     let botaoAvancar = '';
     if (lido) {
       if (topico.isExtra) {
-        botaoAvancar = `<button class="btn-desafios" onclick="irInterno('pg-trilha');renderTrilha(${mIdx})">Fazer Desafios 🎮</button>`;
+        botaoAvancar = `<button class="btn-desafios" onclick="irInterno('pg-trilha');renderTrilha(${mIdx})">Fazer Desafios</button>`;
       } else {
         const prox = tIdx + 1;
         if (prox < mat.topicos.length) {
@@ -4199,6 +4266,7 @@
 
   function renderTrilha(mIdx) {
     _trilhaMateriaAtual = mIdx;
+    _setMascoteMateria('pg-trilha', mIdx);
     _trilhaQuestaoAtual = encontrarQuestaoAtual(mIdx);
     _trilhaRespondido = false;
     _trilhaRespostaCorreta = null;
@@ -4223,7 +4291,7 @@
           <div style="flex:1;">
             <div class="breadcrumb">HubGame → ${mat.nome}</div>
             <div style="background:var(--branco);border-radius:12px;padding:40px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-              <div style="font-size:56px;margin-bottom:16px;">📚</div>
+              <img src="assets/icons/trilha/alerta.png" alt="alerta" style="width:56px;height:56px;object-fit:contain;display:block;margin:0 auto 16px;">
               <h2 style="font-family:var(--font-titulo);font-size:22px;font-weight:900;margin-bottom:12px;">Conclua os Tópicos Primeiro!</h2>
               <p style="color:var(--cinza-texto);font-size:14px;margin-bottom:24px;">Você precisa completar todos os tópicos da ${mat.nome} no Hub de Aulas antes de fazer os desafios.</p>
               <button class="btn-proximo" onclick="irInterno('pg-hub');renderHub(${mIdx})">Ir para o Hub de Aulas →</button>
@@ -4276,11 +4344,11 @@
       else if (i === qIdx) cls += ' ativa desbloqueada';
       else cls += ' desbloqueada';
       const click = desbl && !concluida ? `onclick="renderTrilhaQuestao(${mIdx},${i})"` : '';
-      gridHtml += `<div class="${cls}" ${click}><h3>Questão ${i+1}</h3><p>${concluida ? 'Concluída ✅' : (desbl ? 'Disponível' : 'Bloqueada 🔒')}</p><div class="chaves-badge">🗝️ Vale 5 Chaves</div></div>`;
+      gridHtml += `<div class="${cls}" ${click}><h3>Questão ${i+1}</h3><p>${concluida ? 'Concluída ✅' : (desbl ? 'Disponível' : 'Bloqueada 🔒')}</p><div class="chaves-badge">${CHAVE_IMG} Vale 5 Chaves</div></div>`;
     });
     // Card certificado
     const todasQ = mat.questoes.every((q, i) => p.questoes['m' + mIdx + '-q' + i]);
-    gridHtml += `<div class="questao-card ${todasQ ? 'concluida desbloqueada' : 'bloqueada'}" ${todasQ ? 'onclick="renderCertificado(' + mIdx + ')"' : ''}><h3>🏆 Certificado</h3><p>${todasQ ? 'Disponível!' : 'Conclua todas as questões'}</p><div class="chaves-badge">🗝️ Vale 15 Chaves</div></div>`;
+    gridHtml += `<div class="questao-card ${todasQ ? 'concluida desbloqueada' : 'bloqueada'}" ${todasQ ? 'onclick="renderCertificado(' + mIdx + ')"' : ''}><h3>🏆 Certificado</h3><p>${todasQ ? 'Disponível!' : 'Conclua todas as questões'}</p><div class="chaves-badge">${CHAVE_IMG} Vale 15 Chaves</div></div>`;
     gridHtml += '</div>';
 
     area.innerHTML = `
@@ -4524,18 +4592,18 @@
 <div id="pg-aluno-tickets" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-mascote-emoji">🎫</div>
+    <div class="sidebar-mascote-emoji"><span class="ico ico-ticket mascote-ico"></span></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">ticket de suporte</div>
-      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon">🏠</span>INÍCIO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon">📚</span>ACESSAR MÓDULO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon">🧭</span>JOGAR AGORA</div>
-      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon">🎯</span>DESAFIOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon">🏆</span>RANKING</div>
+      <div class="sidebar-item" onclick="irInterno('pg-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-hub')"><span class="icon ico ico-modulos"></span>ACESSAR MÓDULO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-trilha')"><span class="icon ico ico-jogar"></span>JOGAR AGORA</div>
+      <div class="sidebar-item" onclick="irInterno('pg-desafios-aluno')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-ranking')"><span class="icon ico ico-ranking"></span>RANKING</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon">⚙️</span>CONFIGURAÇÕES</div>
-      <div class="sidebar-item ativo"><span class="icon">🎫</span>TICKET DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-perfil')"><span class="icon ico ico-config"></span>CONFIGURAÇÕES</div>
+      <div class="sidebar-item ativo"><span class="icon ico ico-ticket"></span>TICKET DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
@@ -4577,7 +4645,7 @@
         <label class="campo-label">Mensagem</label>
         <textarea class="campo-textarea" id="ticket-msg-aluno" rows="4" placeholder="Descreva sua dúvida com detalhes..."></textarea>
         <div style="display:flex;justify-content:flex-end;">
-          <button class="btn-amarelo" onclick="enviarTicketAluno()">Enviar Ticket 🎫</button>
+          <button class="btn-amarelo" onclick="enviarTicketAluno()">Enviar Ticket</button>
         </div>
       </div>
 
@@ -4587,14 +4655,14 @@
           <h3 style="font-family:var(--font-titulo);font-size:15px;font-weight:800;color:var(--roxo-escuro);margin-bottom:14px;">Meus Tickets</h3>
           <div id="lista-tickets-aluno">
             <div class="tickets-empty-state">
-              <div class="es-icone">🎫</div>
+              <div class="es-icone"><img class="es-img" src="assets/icons/ticket/ticket.png" alt=""></div>
               <p>Nenhum ticket aberto ainda.<br>Use o formulário acima para enviar sua primeira dúvida.</p>
             </div>
           </div>
         </div>
         <div class="tickets-detalhe-col">
           <div id="detalhe-ticket-aluno" class="ticket-vazio">
-            <div class="tv-icone">💬</div>
+            <div class="tv-icone"><img class="tv-img" src="assets/icons/ticket/chat.png" alt=""></div>
             <p>Selecione um ticket para ver a conversa.</p>
           </div>
         </div>
@@ -4732,7 +4800,7 @@ function renderListaAluno() {
   var container = document.getElementById('lista-tickets-aluno');
   if (!container) return;
   if (tickets.length === 0) {
-    container.innerHTML = '<div class="tickets-empty-state"><div class="es-icone">🎫</div><p>Nenhum ticket aberto ainda.<br>Use o formulário acima para enviar sua primeira dúvida.</p></div>';
+    container.innerHTML = '<div class="tickets-empty-state"><div class="es-icone"><img class="es-img" src="assets/icons/ticket/ticket.png" alt=""></div><p>Nenhum ticket aberto ainda.<br>Use o formulário acima para enviar sua primeira dúvida.</p></div>';
     return;
   }
   container.innerHTML = tickets.map(function(t) {
@@ -5289,23 +5357,27 @@ function aplicarFotoProfEmTudo(src) {
 // ============================================================
 
 // Níveis do aluno baseados em chaves
+const IMG_NIVEIS = {"Iniciante": "assets/badges/niveis/iniciante.webp", "Explorador": "assets/badges/niveis/explorador.webp", "Aprendiz": "assets/badges/niveis/aprendiz.webp", "Desenvolvedor": "assets/badges/niveis/desenvolvedor.webp", "Mestre Python": "assets/badges/niveis/mestre-python.webp"};
+const IMG_CONQUISTAS = {"Primeiro Passo": "assets/badges/conquistas/primeiro-passo.webp", "Leitor": "assets/badges/conquistas/leitor.webp", "Coletor": "assets/badges/conquistas/coletor.webp", "Desafiante": "assets/badges/conquistas/desafiante.webp", "Desbravador": "assets/badges/conquistas/desbravador.webp", "Certificado I": "assets/badges/conquistas/certificado.webp", "All Star": "assets/badges/conquistas/all-star.webp", "Pythonista": "assets/badges/conquistas/pythonista.webp"};
+function _setNivelBadge(n){var el=document.getElementById('nivel-badge-icone');if(el)el.innerHTML='<img class="nivel-img" src="'+IMG_NIVEIS[n.nome]+'" alt="Nível '+n.nome+'">';}
+
 const NIVEIS = [
-  { min: 0,   max: 18,  nome: 'Iniciante',    icone: '🥚', cor: '#94a3b8' },
-  { min: 19,  max: 37,  nome: 'Explorador',   icone: '🌱', cor: '#4ade80' },
-  { min: 38,  max: 56,  nome: 'Aprendiz',     icone: '⚡', cor: '#60a5fa' },
-  { min: 57,  max: 89,  nome: 'Desenvolvedor',icone: '🔥', cor: '#f59e0b' },
-  { min: 90,  max: 999, nome: 'Mestre Python',icone: '🐍', cor: '#a78bfa' },
+  { min: 0,   max: 18,  nome: 'Iniciante',    img: 'iniciante', cor: '#94a3b8' },
+  { min: 19,  max: 37,  nome: 'Explorador',   img: 'explorador', cor: '#4ade80' },
+  { min: 38,  max: 56,  nome: 'Aprendiz',     img: 'aprendiz', cor: '#60a5fa' },
+  { min: 57,  max: 89,  nome: 'Desenvolvedor',img: 'desenvolvedor', cor: '#f59e0b' },
+  { min: 90,  max: 999, nome: 'Mestre Python',img: 'mestre-python', cor: '#a78bfa' },
 ];
 
 const CONQUISTAS_DEF = [
-  { id: 'c1',  icone: '🎯', nome: 'Primeiro Passo',  desc: 'Completou o 1º tópico',         chaves: 3   },
-  { id: 'c2',  icone: '📖', nome: 'Leitor',           desc: 'Leu 4 tópicos',                 chaves: 12  },
-  { id: 'c3',  icone: '🗝️', nome: 'Coletor',          desc: 'Ganhou 19 chaves',              chaves: 19  },
-  { id: 'c4',  icone: '🧩', nome: 'Desafiante',       desc: 'Respondeu a 1ª questão',        chaves: 5   },
-  { id: 'c5',  icone: '🔓', nome: 'Desbravador',      desc: 'Desbloqueou Design',       chaves: 38  },
-  { id: 'c6',  icone: '🏆', nome: 'Certificado I',    desc: 'Obteve o 1º certificado',       questoes: 3 },
-  { id: 'c7',  icone: '🌟', nome: 'All Star',          desc: 'Completou 2 matérias',          chaves: 57  },
-  { id: 'c8',  icone: '🐍', nome: 'Pythonista',       desc: 'Completou todas as matérias',   chaves: 90  },
+  { id: 'c1',  img: 'primeiro-passo', nome: 'Primeiro Passo',  desc: 'Completou o 1º tópico',         chaves: 3   },
+  { id: 'c2',  img: 'leitor', nome: 'Leitor',           desc: 'Leu 4 tópicos',                 chaves: 12  },
+  { id: 'c3',  img: 'coletor', nome: 'Coletor',          desc: 'Ganhou 19 chaves',              chaves: 19  },
+  { id: 'c4',  img: 'desafiante', nome: 'Desafiante',       desc: 'Respondeu a 1ª questão',        chaves: 5   },
+  { id: 'c5',  img: 'desbravador', nome: 'Desbravador',      desc: 'Desbloqueou Design',       chaves: 38  },
+  { id: 'c6',  img: 'certificado', nome: 'Certificado I',    desc: 'Obteve o 1º certificado',       questoes: 3 },
+  { id: 'c7',  img: 'all-star', nome: 'All Star',          desc: 'Completou 2 matérias',          chaves: 57  },
+  { id: 'c8',  img: 'pythonista', nome: 'Pythonista',       desc: 'Completou todas as matérias',   chaves: 90  },
 ];
 
 // Ranking estático dos outros alunos
@@ -5332,7 +5404,7 @@ function renderRanking() {
   const proximoNivel = NIVEIS[nivelIdx + 1];
 
   // Banner de nível
-  _setText('nivel-badge-icone', nivel.icone);
+  _setNivelBadge(nivel);
   _setText('nivel-titulo-display', nivel.nome);
   _setText('nivel-chaves-display', ch + ' chaves coletadas');
   _setText('nivel-prox-display', proximoNivel ? 'Próximo nível: ' + proximoNivel.nome + ' (' + proximoNivel.min + ' chaves)' : '🎉 Nível máximo!');
@@ -5344,7 +5416,7 @@ function renderRanking() {
   const xpTotal = xpMax - xpMin;
   const pct = proximoNivel ? Math.min(100, Math.round((xpAtual / xpTotal) * 100)) : 100;
   _setText('nivel-atual-label', nivel.nome);
-  _setText('nivel-prox-label', proximoNivel ? nivel.nome + ' → ' + proximoNivel.nome + ' (' + proximoNivel.min + ' 🗝️)' : '🎉 Mestre!');
+  (function(){var _np=document.getElementById('nivel-prox-label'); if(_np) _np.innerHTML = proximoNivel ? nivel.nome + ' → ' + proximoNivel.nome + ' (' + proximoNivel.min + ' ' + CHAVE_IMG + ')' : '🎉 Mestre!';})();
   const fillEl = document.getElementById('barra-xp-fill');
   if (fillEl) fillEl.style.width = pct + '%';
   _setText('xp-legenda', proximoNivel ? ch + ' / ' + xpMax + ' chaves para ' + proximoNivel.nome : 'Nível máximo alcançado!');
@@ -5359,7 +5431,7 @@ function renderRanking() {
       const desbloq = typeof materiaDesbloqueada === 'function' ? materiaDesbloqueada(Number(idx), p) : idx == 1;
       return (
         '<div class="materia-progress-row">' +
-          '<span class="mat-icone">' + mat.icone + '</span>' +
+          '<span class="mat-icone">' + matImg(idx, 'mat-ico-rank') + '</span>' +
           '<div class="mat-info">' +
             '<div class="mat-nome">' + mat.nome + (desbloq ? '' : ' 🔒') + '</div>' +
             '<div class="mat-barra"><div class="mat-barra-fill" style="width:' + (desbloq ? pctMat : 0) + '%"></div></div>' +
@@ -5384,7 +5456,7 @@ function renderRanking() {
       }
       return (
         '<div class="conquista-item' + (desbloqueada ? '' : ' bloqueada') + '" title="' + c.desc + '">' +
-          '<div class="conq-icone">' + (desbloqueada ? c.icone : '🔒') + '</div>' +
+          '<div class="conq-icone">' + '<img class="conq-img" src="' + IMG_CONQUISTAS[c.nome] + '" alt="' + c.nome + '">' + '</div>' +
           '<div class="conq-nome">' + c.nome + '</div>' +
         '</div>'
       );
