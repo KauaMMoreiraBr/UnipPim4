@@ -729,7 +729,7 @@
   .topico-card.bloqueado { opacity: 0.45; cursor: not-allowed; background: #f3f3f3; }
   .topico-card.bloqueado:hover { transform: none; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .topico-card.concluido { border: 2px solid #86efac; }
-  .topico-card.concluido h3::after { content: ' ✅'; }
+  .topico-card.concluido h3::after { content: ''; display:inline-block; width:18px; height:18px; margin-left:6px; vertical-align:-3px; background:url(assets/professor/desempenho/aprovados.webp) center/contain no-repeat; }
   .topico-card.ativo-topico { border: 2.5px solid var(--roxo-medio); }
   .btn-proximo { background: var(--roxo-medio); color: var(--branco); border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s; }
   .btn-proximo:hover { background: var(--roxo-escuro); }
@@ -783,7 +783,7 @@
     border-radius: 16px; padding: 40px; text-align: center; color: var(--branco);
     box-shadow: 0 8px 32px rgba(45,10,110,0.3); position: relative; overflow: hidden;
   }
-  .certificado-box::before { content: '🏅'; position: absolute; font-size: 120px; opacity: 0.07; top: -20px; right: -20px; }
+  .certificado-box::before { content: ''; position: absolute; width: 130px; height: 130px; background: url(assets/professor/desempenho/certificados-emitidos.webp) center/contain no-repeat; opacity: 0.07; top: -10px; right: -10px; }
   .certificado-box .cert-titulo { font-family: var(--font-titulo); font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
   .certificado-box .cert-nome { font-family: var(--font-titulo); font-size: 32px; font-weight: 900; margin-bottom: 8px; }
   .certificado-box .cert-desc { opacity: 0.85; font-size: 15px; margin-bottom: 24px; }
@@ -1108,7 +1108,7 @@
     width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
     border: 3px solid var(--roxo-medio); margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto;
   }
-  #input-foto-perfil { display: none; }
+  #input-foto-perfil, #input-foto-prof { display: none; }
 
   /* ===== RANKING / PROGRESSO AVANÇADO ===== */
   .ranking-progresso-box {
@@ -1682,7 +1682,7 @@
   .mat-ico-side { width:34px; height:34px; display:block; }
   .sidebar-item .icon:has(.mat-ico-side) { display:flex; align-items:center; flex-shrink:0; width:34px; height:34px; margin-left:-5px; }
   .hub-sidebar { width:240px; }
-  .mat-ico-hub { width:36px; height:36px; margin-right:10px; }
+  .mat-ico-hub { width:46px; height:46px; margin-right:10px; }
   .mat-ico-sm { width:28px; height:28px; margin-right:6px; }
   #desafios-aluno-filtros .desafio-aba { display:inline-flex; align-items:center; }
   .mat-ico-rank { width:40px; height:40px; display:block; }
@@ -1690,6 +1690,10 @@
   .acao-card-img { background:none; }
   .acao-card-img img { width:110px; height:110px; object-fit:contain; display:block; }
   .chave-ico { width:18px; height:18px; vertical-align:-4px; margin-right:2px; }
+  .ico-img { width:18px; height:18px; object-fit:contain; vertical-align:-4px; margin-right:4px; }
+  .ico-img.ico-lg { width:48px; height:48px; vertical-align:middle; margin:0; }
+  .ico-img.inv { filter:invert(1); }
+  .ico-img.ico-sm { width:14px; height:14px; vertical-align:-2px; margin-right:3px; }
   .chaves-badge .chave-ico { margin-right:0; }
   .es-img { width:44px; height:44px; }
   .tv-img { width:48px; height:48px; }
@@ -1707,11 +1711,54 @@
   .ico-fases { background-image:url(assets/icons/perfil/fases-concluidas.png); }
   .ico-play { background-image:url(assets/icons/perfil/fases.png); }
   .ico-user { background-image:url(assets/icons/perfil/ver-perfil.png); }
-  /* Sidebar padronizada (Início, Acessar módulo, Desafios, Ranking, Configurações, Tickets): mesma altura do mascote para o menu não "pular". Jogar agora (pg-trilha) fica de fora. */
-  #pg-dashboard .sidebar-mascote-emoji, #pg-hub .sidebar-mascote-emoji, #pg-ranking .sidebar-mascote-emoji,
-  #pg-desafios-aluno .sidebar-mascote-emoji, #pg-perfil .sidebar-mascote-emoji, #pg-aluno-tickets .sidebar-mascote-emoji
-    { height:96px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; }
-  #pg-hub .sidebar-mascote-emoji .mascote-mat { width:64px; height:64px; }
+
+  /* ===== PROFESSOR — ÍCONES (assets/professor/) ===== */
+  .ico-p-conteudo { background-image:url(assets/professor/menu/enviar-conteudo.png); }
+  .ico-p-questoes { background-image:url(assets/professor/menu/enviar-questoes.png); }
+  .ico-p-meus { background-image:url(assets/professor/menu/meus-conteudos.png); }
+  .ico-p-desempenho { background-image:url(assets/professor/menu/desempenho-alunos.png); }
+  .sidebar-mascote-emoji .mascote-prof { display:block; margin:0 auto; width:104px; height:104px; object-fit:contain; }
+  .bem-vindo-card h2 .bv-prof-ico { width:44px; height:44px; object-fit:contain; vertical-align:middle; margin-left:4px; }
+  .metrica-card .m-icone img { width:64px; height:64px; object-fit:contain; display:block; margin:0 auto; }
+  .perfil-stat .icone img { width:28px; height:28px; object-fit:contain; display:block; }
+  .perfil-stat .icone { display:inline-flex; align-items:center; justify-content:center; width:30px; }
+  .cert-ico { width:22px; height:22px; object-fit:contain; vertical-align:-6px; margin-right:4px; }
+  .btn-tabela.success { white-space:nowrap; }
+  .email-ico { width:16px; height:16px; object-fit:contain; vertical-align:-3px; margin-right:4px; }
+  .es-img-prof { width:150px; height:auto; object-fit:contain; display:block; margin:0 auto; }
+  #toast .toast-ico.inv { filter:invert(1); }
+  #toast .toast-ico { width:22px; height:22px; object-fit:contain; vertical-align:-6px; margin-right:6px; }
+  .btn-ico { width:15px; height:15px; object-fit:contain; vertical-align:-3px; margin-right:5px; }
+  .btn-tabela { white-space:nowrap; }
+  .desafio-card-footer { flex-wrap:wrap; gap:8px; }
+  .desafio-acoes { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+  .btn-ico-solo { margin-right:0; }
+  .btn-roxo .btn-ico { filter:invert(1); }
+  .aba-btn { display:inline-flex; align-items:center; gap:8px; }
+  .aba-ico { width:26px; height:26px; object-fit:contain; display:block; }
+  .conteudo-item-tipo img { width:44px; height:44px; object-fit:contain; display:block; }
+  .lista-vazia-prof .icone-vazio img { width:84px; height:84px; object-fit:contain; display:block; margin:0 auto; }
+  .esp-opcoes { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .esp-opcao { display:flex; align-items:center; gap:10px; padding:10px 12px; border:1.5px solid #ddd; border-radius:10px; background:#fff; cursor:pointer; font-family:var(--font-corpo); font-size:14px; font-weight:600; text-align:left; }
+  .esp-opcao img { width:40px; height:40px; object-fit:contain; flex-shrink:0; }
+  .esp-opcao.sel { border-color:var(--roxo-medio); background:var(--roxo-bg); }
+  .esp-ico { width:28px; height:28px; object-fit:contain; vertical-align:middle; margin-right:8px; }
+  /* Sidebar padronizada: o topo (ilustração) tem a MESMA altura em todas as páginas (aluno e professor), assim o menu não "pula" ao navegar. */
+  .sidebar-mascote-emoji { height:136px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; }
+
+  /* ===== HOME, CONTA E CONHEÇA MAIS (imagens) ===== */
+  .card-beneficio .icone img { width:96px; height:96px; object-fit:contain; display:block; }
+  .sobre-card .icone img { width:80px; height:80px; object-fit:contain; display:block; margin:0 auto; }
+  .modal-icone { display:flex; justify-content:center; }
+  .modal-icone .modal-img { width:88px; height:88px; object-fit:contain; display:block; }
+  .form-cadastro .icone-form { display:flex; justify-content:center; }
+  .form-cadastro .icone-form .cadastro-img { width:100px; height:100px; object-fit:contain; display:block; }
+  #login-senha, #cad-senha, #cad-senha2 { padding-right:48px; }
+  .btn-olho { position:absolute; right:12px; top:10px; width:24px; height:24px; padding:0; background:none; border:none; cursor:pointer; line-height:0; }
+  .btn-olho img { width:24px; height:24px; display:block; }
+
+  .modal-codigo-box .icone .mascote-saida { width:120px; height:auto; display:block; margin:0 auto; }
+  #desafios-abas .desafio-aba { display:inline-flex; align-items:center; }
 </style>
 </head>
 <body>
@@ -1746,19 +1793,19 @@
     </div>
     <div class="cards-beneficios">
       <div class="card-beneficio">
-        <div class="icone">🎯</div>
+        <div class="icone"><img src="assets/home/facil.webp" alt="Fácil e Prático"></div>
         <h3>Fácil e Prático</h3>
         <p>Simples e objetivo, aprenda de maneira rápida e objetiva, seja direto ao ponto</p>
         <div class="card-mais">+</div>
       </div>
       <div class="card-beneficio">
-        <div class="icone">💎</div>
+        <div class="icone"><img src="assets/home/pontos.webp" alt="Pontos e Prêmios"></div>
         <h3>Pontos = Prêmios</h3>
         <p>Ganhe pontos e desbloqueie novos personagens de perfil</p>
         <div class="card-mais">+</div>
       </div>
       <div class="card-beneficio">
-        <div class="icone">🏅</div>
+        <div class="icone"><img src="assets/home/certificacoes.webp" alt="Certificações"></div>
         <h3>Certificações</h3>
         <p>Ganhe um certificado ao realizar todas as atividades disponíveis.</p>
         <div class="card-mais">+</div>
@@ -1832,21 +1879,24 @@
       <button class="btn-outline-roxo" onclick="fecharModal('modal-login');abrirModal('modal-cadastro-modal')">Criar Cadastro</button>
     </div>
     <div class="modal-direita">
-      <div class="modal-icone">👤</div>
+      <div class="modal-icone"><img id="login-perfil-img" class="modal-img" src="assets/conta/aluno.webp" alt="Aluno"></div>
       <h2>Faça seu Login</h2>
       <div class="modal-sublinhado"></div>
       <div class="perfil-selector">
         <button class="perfil-btn selecionado" id="pbtn-aluno" onclick="selecionarPerfil('aluno')">
-          <span class="pbtn-icon">🎓</span>Aluno
+          Aluno
         </button>
         <button class="perfil-btn" id="pbtn-professor" onclick="selecionarPerfil('professor')">
-          <span class="pbtn-icon">📋</span>Professor
+          Professor
         </button>
       </div>
       <label class="campo-label">E-mail</label>
       <input class="campo-input" type="email" placeholder="seu@email.com" id="login-usuario">
       <label class="campo-label">Senha</label>
-      <input class="campo-input" type="password" placeholder="**************" id="login-senha">
+      <div style="position:relative;">
+        <input class="campo-input" type="password" placeholder="**************" id="login-senha">
+        <button type="button" class="btn-olho" id="icone-senha-login" onclick="toggleSenhaCad('login-senha','icone-senha-login')" aria-label="Mostrar ou ocultar a senha"><img src="assets/icons/senha/senha-oculta.png" alt=""></button>
+      </div>
       <div id="login-erro" style="display:none;color:#dc2626;font-size:13px;font-weight:600;margin-bottom:10px;text-align:center;">Usuário ou senha inválidos. Tente novamente.</div>
       <div class="login-acoes">
         <a class="link-roxo" href="#">Esqueceu a Senha?</a>
@@ -1861,7 +1911,7 @@
   <div class="modal" style="width:100%;height:100vh;border-radius:0;flex-direction:column;align-items:center;overflow-y:auto;padding:40px 20px;">
     <button class="modal-fechar" onclick="fecharModal('modal-cadastro-modal')">✕</button>
     <div class="form-cadastro" style="width:100%;max-width:520px;">
-      <div class="icone-form">🚀</div>
+      <div class="icone-form"><img class="cadastro-img" src="assets/conta/cadastro.webp" alt="Criar cadastro"></div>
       <h2>Comece a usar o HYTECH</h2>
       <div class="sublinhado"></div>
       <p>Cadastre-se gratuitamente e comece sua jornada de aprendizado! <span>Rápido e fácil.</span></p>
@@ -1894,7 +1944,7 @@
         <label class="campo-label">Senha <span style="color:#e53935;">*</span></label>
         <div style="position:relative;">
           <input class="campo-input" id="cad-senha" type="password" placeholder="Mínimo 4 caracteres" oninput="limparErroCadastro();atualizarForcaSenha()" style="margin-bottom:6px;">
-          <button type="button" onclick="toggleSenhaCad('cad-senha','icone-senha-1')" style="position:absolute;right:12px;top:12px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--cinza-texto);" id="icone-senha-1">👁️</button>
+          <button type="button" class="btn-olho" id="icone-senha-1" onclick="toggleSenhaCad('cad-senha','icone-senha-1')" aria-label="Mostrar ou ocultar a senha"><img src="assets/icons/senha/senha-oculta.png" alt=""></button>
         </div>
         <div id="forca-senha-bar" style="height:4px;border-radius:4px;background:#eee;margin-bottom:4px;overflow:hidden;"><div id="forca-senha-fill" style="height:100%;width:0%;border-radius:4px;transition:all 0.3s;"></div></div>
         <div id="forca-senha-label" style="font-size:11px;color:var(--cinza-texto);margin-bottom:8px;"></div>
@@ -1903,7 +1953,7 @@
         <label class="campo-label">Confirmar Senha <span style="color:#e53935;">*</span></label>
         <div style="position:relative;">
           <input class="campo-input" id="cad-senha2" type="password" placeholder="Repita a senha" oninput="limparErroCadastro();verificarSenhasIguais()" style="margin-bottom:0;">
-          <button type="button" onclick="toggleSenhaCad('cad-senha2','icone-senha-2')" style="position:absolute;right:12px;top:12px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--cinza-texto);" id="icone-senha-2">👁️</button>
+          <button type="button" class="btn-olho" id="icone-senha-2" onclick="toggleSenhaCad('cad-senha2','icone-senha-2')" aria-label="Mostrar ou ocultar a senha"><img src="assets/icons/senha/senha-oculta.png" alt=""></button>
         </div>
         <div id="senha-match-label" style="font-size:11px;margin-top:4px;height:16px;"></div>
       </div>
@@ -1914,7 +1964,7 @@
       </div>
       <div class="form-acoes">
         <button class="btn-outline-roxo" onclick="fecharModal('modal-cadastro-modal')">Voltar</button>
-        <button class="btn-amarelo" id="btn-criar-conta" onclick="criarContaV15()">Criar Conta 🚀</button>
+        <button class="btn-amarelo" id="btn-criar-conta" onclick="criarContaV15()">Criar Conta</button>
       </div>
 
       <div style="text-align:center;margin-top:16px;">
@@ -1963,17 +2013,17 @@
     <div class="sobre-secao-titulo">o que fazemos</div>
     <div class="sobre-cards">
       <div class="sobre-card">
-        <div class="icone">🗺️</div>
+        <div class="icone"><img src="assets/conheca-mais/trilha.webp" alt="Trilha dos desafios"></div>
         <h3>Trilha dos desafios</h3>
         <p>Mapa de progressão com níveis desbloqueáveis por acertos</p>
       </div>
       <div class="sobre-card">
-        <div class="icone">🎓</div>
+        <div class="icone"><img src="assets/conheca-mais/hub-aulas.webp" alt="Hub aulas"></div>
         <h3>Hub aulas</h3>
         <p>Textos gerados por IA para suporte teórico imediato</p>
       </div>
       <div class="sobre-card">
-        <div class="icone">👤</div>
+        <div class="icone"><img src="assets/conheca-mais/perfil.webp" alt="Perfil"></div>
         <h3>Perfil</h3>
         <p>Perfil, streak, pontos e acompanhamento do seu desempenho</p>
       </div>
@@ -2505,28 +2555,28 @@
 <div id="pg-prof-perfil" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
+    <div class="sidebar-role-badge">Professor</div>
     <div id="sidebar-prof-esp-perfil" style="margin:0 16px 8px;padding:6px 12px;background:rgba(255,255,255,0.12);border-radius:10px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);text-align:center;display:none;"></div>
-    <div class="sidebar-mascote-emoji">👤</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">meu perfil</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item ativo"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item ativo"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Painel</span>
+        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Início</span>
         <span class="nav-link" onclick="irInterno('pg-prof-conteudo')">Conteúdos</span>
         <span class="nav-link" onclick="irInterno('pg-prof-questoes')">Questões</span>
         <span class="nav-link" onclick="irInterno('pg-prof-meus')">Meus Conteúdos</span>
@@ -2554,9 +2604,9 @@
           <div class="perfil-email" id="prof-perfil-email-display">professor@hytech.com</div>
           <div class="perfil-sublinhado"></div>
           <!-- Stats do professor -->
-          <div class="perfil-stat"><span class="icone">📄</span> <span id="prof-perfil-stat-enviados">0 Conteúdos Enviados</span></div>
-          <div class="perfil-stat"><span class="icone">✅</span> <span id="prof-perfil-stat-aprovados">0 Aprovados</span></div>
-          <div class="perfil-stat"><span class="icone">🎓</span> <span id="prof-perfil-stat-alunos">42 Alunos Ativos</span></div>
+          <div class="perfil-stat"><span class="icone"><img src="assets/professor/perfil/conteudos-enviados.webp" alt=""></span> <span id="prof-perfil-stat-enviados">0 Conteúdos Enviados</span></div>
+          <div class="perfil-stat"><span class="icone"><img src="assets/professor/perfil/aprovados.webp" alt=""></span> <span id="prof-perfil-stat-aprovados">0 Aprovados</span></div>
+          <div class="perfil-stat"><span class="icone"><img src="assets/professor/perfil/alunos-ativos.webp" alt=""></span> <span id="prof-perfil-stat-alunos">42 Alunos Ativos</span></div>
         </div>
 
         <!-- CAMPOS EDITÁVEIS -->
@@ -2564,48 +2614,48 @@
           <div class="perfil-secao">
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">😊</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Nickname</div>
                 <div class="campo-valor" id="prof-perfil-nickname-display">@profsilva</div>
               </div>
-              <button class="btn-editar-campo" onclick="abrirEdicaoProf('nickname')">✏️ Editar</button>
+              <button class="btn-editar-campo" onclick="abrirEdicaoProf('nickname')"><img class="ico-img" src="assets/professor/acoes/editar.png" alt="">Editar</button>
             </div>
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">✉️</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Email</div>
                 <div class="campo-valor" id="prof-perfil-email-campo">professor@hytech.com</div>
               </div>
-              <button class="btn-editar-campo" onclick="abrirEdicaoProf('email')">✏️ Editar</button>
+              <button class="btn-editar-campo" onclick="abrirEdicaoProf('email')"><img class="ico-img" src="assets/professor/acoes/editar.png" alt="">Editar</button>
             </div>
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">👤</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Nome completo</div>
                 <div class="campo-valor" id="prof-perfil-nome-campo">Prof. Silva</div>
               </div>
-              <button class="btn-editar-campo" onclick="abrirEdicaoProf('nome')">✏️ Editar</button>
+              <button class="btn-editar-campo" onclick="abrirEdicaoProf('nome')"><img class="ico-img" src="assets/professor/acoes/editar.png" alt="">Editar</button>
             </div>
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">🎓</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Especialidade</div>
                 <div class="campo-valor" id="prof-perfil-especialidade-display">Programação</div>
               </div>
-              <button class="btn-editar-campo" onclick="abrirEdicaoProf('especialidade')">✏️ Editar</button>
+              <button class="btn-editar-campo" onclick="abrirEdicaoProf('especialidade')"><img class="ico-img" src="assets/professor/acoes/editar.png" alt="">Editar</button>
             </div>
 
             <div class="perfil-campo-editavel">
-              <span class="icone-campo">🔒</span>
+              
               <div class="campo-texto">
                 <div class="campo-label">Senha</div>
                 <div class="campo-valor senha-mask">••••••••</div>
               </div>
-              <button class="btn-editar-campo" onclick="abrirEdicaoProf('senha')">✏️ Alterar</button>
+              <button class="btn-editar-campo" onclick="abrirEdicaoProf('senha')"><img class="ico-img" src="assets/professor/acoes/editar.png" alt="">Alterar</button>
             </div>
 
           </div>
@@ -2625,28 +2675,28 @@
 <div id="pg-prof-desafios" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
+    <div class="sidebar-role-badge">Professor</div>
     <div id="sidebar-prof-esp-desafios" style="margin:0 16px 8px;padding:6px 12px;background:rgba(255,255,255,0.12);border-radius:10px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);text-align:center;display:none;"></div>
-    <div class="sidebar-mascote-emoji">🎯</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">desafios</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item ativo"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item ativo"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Painel</span>
+        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Início</span>
         <span class="nav-link" onclick="irInterno('pg-prof-conteudo')">Conteúdos</span>
         <span class="nav-link" onclick="irInterno('pg-prof-questoes')">Questões</span>
         <span class="nav-link" onclick="irInterno('pg-prof-meus')">Meus Conteúdos</span>
@@ -2658,16 +2708,16 @@
       <div class="nav-dir" onclick="abrirModal('modal-confirmar-saida')">Sair da sua conta</div>
     </nav>
     <div class="conteudo-interno">
-      <h1 style="font-family:var(--font-titulo);font-size:32px;font-weight:900;margin-bottom:4px;">Desafios 🎯</h1>
+      <h1 style="font-family:var(--font-titulo);font-size:32px;font-weight:900;margin-bottom:4px;">Desafios</h1>
       <p style="color:var(--cinza-texto);font-size:14px;margin-bottom:24px;">Crie, organize e categorize desafios por matéria. Os aprovados ficam disponíveis na trilha do aluno.</p>
 
       <!-- ABAS DE MATÉRIA -->
       <div id="desafios-abas" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">
-        <button class="desafio-aba ativo" onclick="filtrarDesafiosMateria('Todas')" id="aba-Todas">📋 Todas</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Programação')" id="aba-Programação">💻 Programação</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Design')" id="aba-Design">🎨 Design</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Banco de Dados')" id="aba-Banco de Dados">🗄️ Banco de Dados</button>
-        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Redes')" id="aba-Redes">🌐 Redes</button>
+        <button class="desafio-aba ativo" onclick="filtrarDesafiosMateria('Todas')" id="aba-Todas">Todas</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Programação')" id="aba-Programação"><img class="mat-ico mat-ico-sm" src="assets/materias/programacao.webp" alt="">Programação</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Design')" id="aba-Design"><img class="mat-ico mat-ico-sm" src="assets/materias/design.webp" alt="">Design</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Banco de Dados')" id="aba-Banco de Dados"><img class="mat-ico mat-ico-sm" src="assets/materias/banco-de-dados.webp" alt="">Banco de Dados</button>
+        <button class="desafio-aba" onclick="filtrarDesafiosMateria('Redes')" id="aba-Redes"><img class="mat-ico mat-ico-sm" src="assets/materias/redes.webp" alt="">Redes</button>
       </div>
 
       <div style="display:flex;gap:16px;margin-bottom:28px;flex-wrap:wrap;align-items:center;">
@@ -2690,7 +2740,7 @@
         <!-- renderizado via JS -->
       </div>
       <div id="desafios-vazio" style="display:none;text-align:center;padding:60px 20px;color:var(--cinza-texto);">
-        <div style="font-size:48px;margin-bottom:12px;">🎯</div>
+        <img src="assets/icons/desafio/sem-desafio.webp" alt="Nenhum desafio" style="width:130px;height:130px;object-fit:contain;margin-bottom:8px;">
         <h3 style="font-family:var(--font-titulo);font-size:20px;font-weight:900;margin-bottom:8px;">Nenhum desafio encontrado</h3>
         <p style="font-size:14px;">Crie o primeiro desafio desta matéria clicando em "+ Novo Desafio".</p>
       </div>
@@ -2714,10 +2764,10 @@
       <div>
         <label class="campo-label">Matéria <span style="color:#e53935;">*</span></label>
         <select id="desafio-materia" style="width:100%;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-family:var(--font-corpo);font-size:14px;outline:none;">
-          <option value="Programação">💻 Programação</option>
-          <option value="Design">🎨 Design</option>
-          <option value="Banco de Dados">🗄️ Banco de Dados</option>
-          <option value="Redes">🌐 Redes</option>
+          <option value="Programação">Programação</option>
+          <option value="Design">Design</option>
+          <option value="Banco de Dados">Banco de Dados</option>
+          <option value="Redes">Redes</option>
         </select>
       </div>
       <div>
@@ -2744,8 +2794,8 @@
 
     <div style="display:flex;gap:12px;justify-content:flex-end;">
       <button class="btn-outline-roxo" onclick="fecharModalNovoDesafio()">Cancelar</button>
-      <button class="btn-roxo" onclick="salvarDesafio('rascunho')" style="padding:11px 20px;">💾 Salvar Rascunho</button>
-      <button class="btn-amarelo" onclick="salvarDesafio('aprovado')" style="padding:11px 20px;">📤 Publicar</button>
+      <button class="btn-roxo" onclick="salvarDesafio('rascunho')" style="padding:11px 20px;"><img class="btn-ico" src="assets/professor/acoes/rascunho.png" alt="">Salvar Rascunho</button>
+      <button class="btn-amarelo" onclick="salvarDesafio('aprovado')" style="padding:11px 20px;"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Publicar</button>
     </div>
   </div>
 </div>
@@ -2753,10 +2803,24 @@
 <!-- ========== TOAST ========== -->
 <div id="toast"></div>
 
+<!-- ========== MODAL: CONFIRMAR EXCLUSÃO ========== -->
+<div id="modal-confirmar-exclusao" class="modal-overlay">
+  <div class="modal-codigo-box" style="width:420px;">
+    <div class="icone"><img class="mascote-saida" src="assets/mascote/emote_cabeca_05.png" alt="Mascote HyTech"></div>
+    <h2 id="exclusao-titulo">Excluir?</h2>
+    <div class="sublinhado"></div>
+    <p id="exclusao-texto" style="color:var(--cinza-texto);font-size:14px;margin-bottom:28px;">Deseja mesmo excluir?</p>
+    <div style="display:flex;gap:16px;justify-content:center;">
+      <button class="btn-outline-roxo" onclick="cancelarExclusao()">Não</button>
+      <button class="btn-amarelo" onclick="confirmarExclusao()">Sim</button>
+    </div>
+  </div>
+</div>
+
 <!-- ========== MODAL: CONFIRMAR SAÍDA ========== -->
 <div id="modal-confirmar-saida" class="modal-overlay">
   <div class="modal-codigo-box" style="width:420px;">
-    <div class="icone">👋</div>
+    <div class="icone"><img class="mascote-saida" src="assets/mascote/emote_cabeca_10.png" alt="Mascote HyTech"></div>
     <h2>Sair da conta?</h2>
     <div class="sublinhado"></div>
     <p style="color:var(--cinza-texto);font-size:14px;margin-bottom:28px;">Tem certeza que deseja sair da sua conta?</p>
@@ -2772,28 +2836,28 @@
 <div id="pg-prof-dashboard" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
+    <div class="sidebar-role-badge">Professor</div>
     <div id="sidebar-prof-esp" style="margin:0 16px 8px;padding:6px 12px;background:rgba(255,255,255,0.12);border-radius:10px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);text-align:center;display:none;"></div>
-    <div class="sidebar-mascote-emoji">👨‍🏫</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
-      <div class="sidebar-secao">painel</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-secao">início</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link ativo">Painel</span>
+        <span class="nav-link ativo">Início</span>
         <span class="nav-link" onclick="irInterno('pg-prof-conteudo')">Conteúdos</span>
         <span class="nav-link" onclick="irInterno('pg-prof-questoes')">Questões</span>
         <span class="nav-link" onclick="irInterno('pg-prof-meus')">Meus Conteúdos</span>
@@ -2806,19 +2870,19 @@
     </nav>
     <div class="conteudo-interno">
       <div class="bem-vindo-card">
-        <h2 id="prof-boas-vindas">Bem-vindo, Prof. Silva! 👨‍🏫</h2>
+        <h2 id="prof-boas-vindas">Bem-vindo, Prof. Silva! <img class="bv-prof-ico" src="assets/conta/professor.webp" alt=""></h2>
         <p>Gerencie seus conteúdos, envie questões e acompanhe o desempenho dos seus alunos.</p>
         <div id="prof-especialidade-badge" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:var(--roxo-claro);color:var(--roxo-escuro);font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;"></div>
       </div>
       <div class="metricas-grid">
-        <div class="metrica-card animada"><div class="m-icone">📄</div><div class="m-valor" id="dash-prof-enviados">0</div><div class="m-label">Conteúdos Enviados</div></div>
-        <div class="metrica-card animada"><div class="m-icone">✅</div><div class="m-valor" id="dash-prof-aprovados">0</div><div class="m-label">Aprovados</div></div>
-        <div class="metrica-card animada"><div class="m-icone">⏳</div><div class="m-valor" id="dash-prof-pendentes">0</div><div class="m-label">Aguardando Aprovação</div></div>
-        <div class="metrica-card animada"><div class="m-icone">🎓</div><div class="m-valor">42</div><div class="m-label">Alunos Ativos</div></div>
+        <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/conteudos-enviados.webp" alt=""></div><div class="m-valor" id="dash-prof-enviados">0</div><div class="m-label">Conteúdos Enviados</div></div>
+        <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/aprovados.webp" alt=""></div><div class="m-valor" id="dash-prof-aprovados">0</div><div class="m-label">Aprovados</div></div>
+        <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/aguardando-aprovacao.webp" alt=""></div><div class="m-valor" id="dash-prof-pendentes">0</div><div class="m-label">Aguardando Aprovação</div></div>
+        <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/alunos-ativos.webp" alt=""></div><div class="m-valor">42</div><div class="m-label">Alunos Ativos</div></div>
       </div>
       <div class="acoes-grid">
         <div class="acao-card" onclick="irInterno('pg-prof-conteudo')">
-          <div class="acao-card-img">📝</div>
+          <div class="acao-card-img"><img src="assets/professor/inicio/enviar-conteudo.webp" alt=""></div>
           <div class="acao-card-texto">
             <h3>Enviar Conteúdo</h3>
             <p>Crie textos explicativos, organize trilhas de aprendizagem e publique para os alunos.</p>
@@ -2826,7 +2890,7 @@
           </div>
         </div>
         <div class="acao-card" onclick="irInterno('pg-prof-questoes')">
-          <div class="acao-card-img">❓</div>
+          <div class="acao-card-img"><img src="assets/professor/inicio/enviar-com-questoes.webp" alt=""></div>
           <div class="acao-card-texto">
             <h3>Enviar Questões</h3>
             <p>Crie questões de múltipla escolha e desafios para os alunos responderem.</p>
@@ -2842,27 +2906,27 @@
 <div id="pg-prof-conteudo" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
-    <div class="sidebar-mascote-emoji">📝</div>
+    <div class="sidebar-role-badge">Professor</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">enviar conteúdo</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Painel</span>
+        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Início</span>
         <span class="nav-link ativo">Conteúdos</span>
         <span class="nav-link" onclick="irInterno('pg-prof-questoes')">Questões</span>
         <span class="nav-link" onclick="irInterno('pg-prof-meus')">Meus Conteúdos</span>
@@ -2912,27 +2976,27 @@
 <div id="pg-prof-questoes" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
-    <div class="sidebar-mascote-emoji">❓</div>
+    <div class="sidebar-role-badge">Professor</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">enviar questões</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Painel</span>
+        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Início</span>
         <span class="nav-link" onclick="irInterno('pg-prof-conteudo')">Conteúdos</span>
         <span class="nav-link ativo">Questões</span>
         <span class="nav-link" onclick="irInterno('pg-prof-meus')">Meus Conteúdos</span>
@@ -2989,27 +3053,27 @@
 <div id="pg-prof-meus" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
-    <div class="sidebar-mascote-emoji">📂</div>
+    <div class="sidebar-role-badge">Professor</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">meus conteúdos</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Painel</span>
+        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Início</span>
         <span class="nav-link" onclick="irInterno('pg-prof-conteudo')">Conteúdos</span>
         <span class="nav-link" onclick="irInterno('pg-prof-questoes')">Questões</span>
         <span class="nav-link ativo">Meus Conteúdos</span>
@@ -3024,8 +3088,8 @@
       <h1 style="font-family:var(--font-titulo);font-size:28px;font-weight:900;margin-bottom:4px;">Meus Conteúdos</h1>
       <p style="color:var(--cinza-texto);font-size:14px;margin-bottom:20px;">Visualize e gerencie todos os seus conteúdos e questões.</p>
       <div class="abas">
-        <button class="aba-btn ativa" onclick="trocarAba('aba-textos', this)">📄 Textos Explicativos</button>
-        <button class="aba-btn" onclick="trocarAba('aba-questoes-lista', this)">❓ Questões</button>
+        <button class="aba-btn ativa" onclick="trocarAba('aba-textos', this)"><img class="aba-ico" src="assets/professor/meus/textos-explicativos.webp" alt="">Textos Explicativos</button>
+        <button class="aba-btn" onclick="trocarAba('aba-questoes-lista', this)"><img class="aba-ico" src="assets/professor/meus/questoes.webp" alt="">Questões</button>
       </div>
       <div id="aba-textos" class="aba-conteudo ativa">
         <div id="lista-conteudos-prof" style="margin-top:16px;"></div>
@@ -3041,27 +3105,27 @@
 <div id="pg-prof-alunos" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
-    <div class="sidebar-mascote-emoji">📊</div>
+    <div class="sidebar-role-badge">Professor</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">desempenho dos alunos</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item ativo" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Painel</span>
+        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Início</span>
         <span class="nav-link" onclick="irInterno('pg-prof-conteudo')">Conteúdos</span>
         <span class="nav-link" onclick="irInterno('pg-prof-questoes')">Questões</span>
         <span class="nav-link" onclick="irInterno('pg-prof-meus')">Meus Conteúdos</span>
@@ -3076,9 +3140,9 @@
       <h1 style="font-family:var(--font-titulo);font-size:28px;font-weight:900;margin-bottom:4px;">Desempenho dos Alunos</h1>
       <p style="color:var(--cinza-texto);font-size:14px;margin-bottom:28px;">Acompanhe as métricas de aprendizado da sua turma.</p>
       <div class="metricas-grid" style="grid-template-columns:1fr 1fr 1fr;">
-        <div class="metrica-card"><div class="m-icone">🎓</div><div class="m-valor">42</div><div class="m-label">Alunos Ativos</div></div>
-        <div class="metrica-card"><div class="m-icone">✅</div><div class="m-valor" id="taxa-acerto-media">84%</div><div class="m-label">Taxa de Acerto Média</div></div>
-        <div class="metrica-card"><div class="m-icone">🏅</div><div class="m-valor">14</div><div class="m-label">Certificados Emitidos</div></div>
+        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/alunos-ativos.webp" alt=""></div><div class="m-valor">42</div><div class="m-label">Alunos Ativos</div></div>
+        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/aprovados.webp" alt=""></div><div class="m-valor" id="taxa-acerto-media">84%</div><div class="m-label">Taxa de Acerto</div></div>
+        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/certificados-emitidos.webp" alt=""></div><div class="m-valor">14</div><div class="m-label">Certificados Emitidos</div></div>
       </div>
       <table class="tabela-admin">
         <thead><tr><th>Aluno</th><th>E-mail</th><th>Chaves</th><th>Fases</th><th>Taxa Acerto</th><th>Certificados</th><th>Última Atividade</th><th>Contato</th></tr></thead>
@@ -3256,7 +3320,10 @@
     var icon  = document.getElementById(iconId);
     if (!input) return;
     input.type = input.type === 'password' ? 'text' : 'password';
-    if (icon) icon.textContent = input.type === 'password' ? '👁️' : '🙈';
+    if (icon) {
+      var _img = icon.querySelector('img');
+      if (_img) _img.src = input.type === 'password' ? 'assets/icons/senha/senha-oculta.png' : 'assets/icons/senha/senha-aberta.png';
+    }
   }
 
   function _validarEmailFormato(email) {
@@ -3356,10 +3423,10 @@
       { id: 'perfil-email-campo',   valor: usuario.email   },
       { id: 'perfil-nome-campo',    valor: usuario.nome    },
       // professor
-      { id: 'prof-boas-vindas',
-        valor: `Bem-vindo, ${usuario.nome}! 👨‍🏫` }
+      { id: 'prof-boas-vindas-x', valor: '' }
     ];
 
+    if (usuario.role === 'professor' && typeof _setBoasVindasProf === 'function') _setBoasVindasProf(usuario.nome);
     campos.forEach(({ id, valor }) => {
       const el = document.getElementById(id);
       if (el) el.textContent = valor;
@@ -3376,11 +3443,11 @@
       const sidebarEsp = document.getElementById('sidebar-prof-esp');
       const sidebarEsp2 = document.getElementById('sidebar-prof-esp-perfil');
       if (badge || sidebarEsp || sidebarEsp2) {
-        const icones = { 'Programação': '💻', 'Design': '🎨', 'Banco de Dados': '🗄️', 'Redes': '🌐' };
+        const icones = {};
         const esp = usuario.especialidade || '';
         if (esp) {
-          const espText = (icones[esp] || '📚') + ' ' + esp;
-          if (badge) { badge.textContent = (icones[esp] || '📚') + ' Especialidade: ' + esp; badge.style.display = 'inline-flex'; }
+          const espText = esp;
+          if (badge) { badge.textContent = 'Especialidade: ' + esp; badge.style.display = 'inline-flex'; }
           if (sidebarEsp)  { sidebarEsp.textContent  = espText; sidebarEsp.style.display  = 'block'; }
           if (sidebarEsp2) { sidebarEsp2.textContent = espText; sidebarEsp2.style.display = 'block'; }
         } else {
@@ -3667,6 +3734,8 @@
   let perfilSelecionado = 'aluno';
   function selecionarPerfil(perfil) {
     perfilSelecionado = perfil;
+    var _pi = document.getElementById('login-perfil-img');
+    if (_pi) { _pi.src = (perfil === 'professor') ? 'assets/conta/professor.webp' : 'assets/conta/aluno.webp'; _pi.alt = (perfil === 'professor') ? 'Professor' : 'Aluno'; }
     ['aluno','professor'].forEach(p => {
       document.getElementById('pbtn-'+p).classList.toggle('selecionado', p === perfil);
     });
@@ -3725,7 +3794,22 @@
   // ============================================================
   function mostrarToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
+    var m = /^✅ (Conteúdo publicado!|Questão publicada!)$/.exec(msg);
+    var TOAST_ICONS = { '🗝️': ['assets/icons/perfil/chave.png', false], '🔑': ['assets/icons/perfil/chave.png', false], '🔒': ['assets/icons/trilha/cadeado.png', true], '🔓': ['assets/icons/trilha/cadeado-aberto.png', true], '🎉': ['assets/icons/trilha/acerto.png', true] };
+    var mi = /^(🗝️|🔑|🔒|🔓|🎉) ?([\s\S]*)$/.exec(msg);
+    if (m) {
+      t.textContent = '';
+      var ic = document.createElement('img');
+      ic.className = 'toast-ico'; ic.src = 'assets/professor/inicio/aprovados.webp'; ic.alt = '';
+      t.appendChild(ic); t.appendChild(document.createTextNode(m[1]));
+    } else if (mi) {
+      t.textContent = '';
+      var ic2 = document.createElement('img');
+      ic2.className = 'toast-ico' + (TOAST_ICONS[mi[1]][1] ? ' inv' : ''); ic2.src = TOAST_ICONS[mi[1]][0]; ic2.alt = '';
+      t.appendChild(ic2); t.appendChild(document.createTextNode(mi[2]));
+    } else {
+      t.textContent = msg;
+    }
     t.classList.add('visivel');
     setTimeout(() => t.classList.remove('visivel'), 2800);
   }
@@ -3749,7 +3833,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
 
   const MATERIAS_DATA = {
     1: {
-      nome: 'Programação', icone: '💻',
+      nome: 'Programação', icone: '',
       chavesParaDesbloquear: 0,  // desbloqueada por padrão
       topicos: [
         {
@@ -3824,7 +3908,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       ]
     },
     2: {
-      nome: 'Design', icone: '🎨',
+      nome: 'Design', icone: '',
       chavesParaDesbloquear: 19,
       topicos: [
         {
@@ -3901,7 +3985,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       ]
     },
     3: {
-      nome: 'Banco de Dados', icone: '🗄️',
+      nome: 'Banco de Dados', icone: '',
       chavesParaDesbloquear: 38,
       topicos: [
         {
@@ -3977,7 +4061,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       ]
     },
     4: {
-      nome: 'Redes', icone: '🌐',
+      nome: 'Redes', icone: '',
       chavesParaDesbloquear: 57,
       topicos: [
         {
@@ -4173,7 +4257,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
 
     // Construir conteúdo do tópico
     const botaoAcao = lido
-      ? `<button class="btn-lido-ativo marcado" disabled>✅ Lido!</button>`
+      ? `<button class="btn-lido-ativo marcado" disabled><img class="ico-img" src="assets/professor/desempenho/aprovados.webp" alt="">Lido!</button>`
       : `<button class="btn-lido-ativo" onclick="marcarLidoHub(${mIdx},${tIdx})">Marcar como Lido</button>`;
 
     let botaoAvancar = '';
@@ -4344,7 +4428,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       else if (i === qIdx) cls += ' ativa desbloqueada';
       else cls += ' desbloqueada';
       const click = desbl && !concluida ? `onclick="renderTrilhaQuestao(${mIdx},${i})"` : '';
-      gridHtml += `<div class="${cls}" ${click}><h3>Questão ${i+1}</h3><p>${concluida ? 'Concluída ✅' : (desbl ? 'Disponível' : 'Bloqueada 🔒')}</p><div class="chaves-badge">${CHAVE_IMG} Vale 5 Chaves</div></div>`;
+      gridHtml += `<div class="${cls}" ${click}><h3>Questão ${i+1}</h3><p>${concluida ? 'Concluída ✅' : (desbl ? 'Disponível' : 'Bloqueada '+'<img class="ico-img ico-sm" src="assets/icons/trilha/cadeado.png" alt="">')}</p><div class="chaves-badge">${CHAVE_IMG} Vale 5 Chaves</div></div>`;
     });
     // Card certificado
     const todasQ = mat.questoes.every((q, i) => p.questoes['m' + mIdx + '-q' + i]);
@@ -4364,7 +4448,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
             <div class="alternativas" id="alts-container">
               ${questao.alternativas.map((a, ai) => `<button class="alternativa" onclick="selecionarAltTrilha(this, ${a.correta})">${a.texto}</button>`).join('')}
             </div>
-            <div class="msg-resposta msg-acerto" id="msg-acerto-trilha">🎉 Correto! +5 chaves conquistadas!</div>
+            <div class="msg-resposta msg-acerto" id="msg-acerto-trilha"><img class="ico-img" src="assets/icons/trilha/acerto.png" alt="">Correto! +5 chaves conquistadas!</div>
             <div class="msg-resposta msg-erro" id="msg-erro-trilha">❌ Tente novamente!</div>
             <button class="btn-confirmar" id="btn-confirmar-trilha" onclick="confirmarRespostaTrilha(${mIdx},${qIdx})">Confirmar Resposta</button>
             <button class="btn-proxima-pergunta" id="btn-proxima-trilha" onclick="proximaPergunta(${mIdx},${qIdx+1})">Próxima Pergunta →</button>
@@ -4450,7 +4534,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       if (!p.materiaConcluida) p.materiaConcluida = {};
       p.materiaConcluida[mIdx] = true; // marca a atual como concluída (necessário para gerar o botão desbloquear)
       saveProg(p);
-      bonus = '<div style="margin-bottom:16px;"><span class="chave-ganho-badge">🗝️ +15 Chaves de Certificado!</span></div>';
+      bonus = '<div style="margin-bottom:16px;"><span class="chave-ganho-badge"><img class="ico-img" src="assets/icons/perfil/chave.png" alt="">+15 Chaves de Certificado!</span></div>';
       mostrarToast('🏆 Matéria ' + mIdx + ' concluída! +15 chaves!');
     }
 
@@ -4462,14 +4546,14 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       const chavesAtual = loadProg().chaves || 0;
       const jaDesbloqueada = !!(loadProg().materiaConcluida && loadProg().materiaConcluida[mIdx + 1]);
       if (jaDesbloqueada) {
-        proximaBtn = `<button class="btn-proxima-materia" onclick="irInterno('pg-hub');renderHub(${mIdx+1})">▶️ Ir para ${proxMat.nome} →</button>`;
+        proximaBtn = `<button class="btn-proxima-materia" onclick="irInterno('pg-hub');renderHub(${mIdx+1})"><img class="ico-img" src="assets/icons/perfil/fases.png" alt="">Ir para ${proxMat.nome} →</button>`;
       } else if (chavesAtual >= chavesNecessarias) {
-        proximaBtn = `<button class="btn-proxima-materia" onclick="desbloquearProximaMateria(${mIdx})">🔓 Usar ${chavesNecessarias} chaves para desbloquear ${proxMat.nome} →</button>`;
+        proximaBtn = `<button class="btn-proxima-materia" onclick="desbloquearProximaMateria(${mIdx})"><img class="ico-img" src="assets/icons/trilha/cadeado-aberto.png" alt="">Usar ${chavesNecessarias} <img class="ico-img" src="assets/icons/perfil/chave.png" alt=""> chaves para desbloquear ${proxMat.nome} →</button>`;
       } else {
-        proximaBtn = `<div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:14px 20px;font-size:13px;opacity:0.9;">🔒 Você precisa de <strong>${chavesNecessarias} chaves</strong> para desbloquear ${proxMat.nome}.<br>Você tem <strong>${chavesAtual} chaves</strong>. Continue coletando!</div>`;
+        proximaBtn = `<div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:14px 20px;font-size:13px;opacity:0.9;"><img class="ico-img inv" src="assets/icons/trilha/cadeado.png" alt="">Você precisa de <strong>${chavesNecessarias} chaves</strong> para desbloquear ${proxMat.nome}.<br>Você tem <strong>${chavesAtual} chaves</strong>. Continue coletando!</div>`;
       }
     } else if (mIdx >= 4) {
-      proximaBtn = `<p style="opacity:0.8;font-size:14px;">🎉 Você concluiu todas as matérias! Parabéns!</p>`;
+      proximaBtn = `<p style="opacity:0.8;font-size:14px;"><img class="ico-img inv" src="assets/icons/trilha/acerto.png" alt="">Você concluiu todas as matérias! Parabéns!</p>`;
     }
 
     const hoje = new Date().toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
@@ -4480,7 +4564,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       </div>
       <div class="certificado-box">
         <div class="cert-titulo">Certificado de Conclusão</div>
-        <div style="font-size:48px;margin-bottom:12px;">🏅</div>
+        <div style="margin-bottom:12px;"><img class="ico-img ico-lg" src="assets/professor/desempenho/certificados-emitidos.webp" alt=""></div>
         <p style="opacity:0.75;font-size:13px;margin-bottom:6px;">Este certificado é concedido a</p>
         <div class="cert-nome">${nomeAluno}</div>
         <div class="cert-desc">por concluir com êxito o módulo</div>
@@ -4489,7 +4573,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
         ${bonus}
         ${proximaBtn}
         <div style="margin-top:20px;">
-          <button onclick="gerarComprovanteTXT('${nomeAluno.replace(/'/g,"\\'")}','${mat.nome.replace(/'/g,"\\'")} — Python','${hoje}')" style="background:rgba(255,255,255,0.18);color:#fff;border:2px solid rgba(255,255,255,0.5);padding:10px 22px;border-radius:8px;font-family:var(--font-corpo);font-weight:700;font-size:13px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">📄 Baixar Comprovante TXT</button>
+          <button onclick="gerarComprovanteTXT('${nomeAluno.replace(/'/g,"\\'")}','${mat.nome.replace(/'/g,"\\'")} — Python','${hoje}')" style="background:rgba(255,255,255,0.18);color:#fff;border:2px solid rgba(255,255,255,0.5);padding:10px 22px;border-radius:8px;font-family:var(--font-corpo);font-weight:700;font-size:13px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'"><img class="ico-img" src="assets/professor/desempenho/certificados-emitidos.webp" alt="">Baixar Comprovante TXT</button>
         </div>
       </div>`;
     sincronizarChaves();
@@ -4675,27 +4759,27 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
 <div id="pg-prof-tickets" class="pagina layout-interno">
   <aside class="sidebar">
     <div class="sidebar-logo">HYTECH</div>
-    <div class="sidebar-role-badge">👨‍🏫 Professor</div>
-    <div class="sidebar-mascote-emoji">🎫</div>
+    <div class="sidebar-role-badge">Professor</div>
+    <div class="sidebar-mascote-emoji"><img class="mascote-prof" src="assets/conta/professor.webp" alt="Professor"></div>
     <div class="sidebar-nav-items">
       <div class="sidebar-secao">tickets de suporte</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon">🏠</span>PAINEL</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon">📝</span>ENVIAR CONTEÚDO</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon">❓</span>ENVIAR QUESTÕES</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon">📂</span>MEUS CONTEÚDOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon">📊</span>DESEMPENHO ALUNOS</div>
-      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon">🎯</span>DESAFIOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-dashboard')"><span class="icon ico ico-inicio"></span>INÍCIO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-conteudo')"><span class="icon ico ico-p-conteudo"></span>ENVIAR CONTEÚDO</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-questoes')"><span class="icon ico ico-p-questoes"></span>ENVIAR QUESTÕES</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-meus')"><span class="icon ico ico-p-meus"></span>MEUS CONTEÚDOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-alunos')"><span class="icon ico ico-p-desempenho"></span>DESEMPENHO ALUNOS</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-desafios')"><span class="icon ico ico-desafios"></span>DESAFIOS</div>
     </div>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon">⚙️</span>MEU PERFIL</div>
-      <div class="sidebar-item ativo" onclick="abrirTicketsProf()"><span class="icon">🎫</span>TICKETS DE SUPORTE</div>
+      <div class="sidebar-item" onclick="irInterno('pg-prof-perfil')"><span class="icon ico ico-user"></span>MEU PERFIL</div>
+      <div class="sidebar-item ativo" onclick="abrirTicketsProf()"><span class="icon ico ico-ticket"></span>TICKETS DE SUPORTE</div>
     </div>
   </aside>
   <div class="area-principal">
     <nav class="navbar-interna">
       <div class="logo" style="color:var(--preto);font-family:var(--font-titulo);font-weight:900;font-size:20px;">HYTECH</div>
       <div class="nav-centro">
-        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Painel</span>
+        <span class="nav-link" onclick="irInterno('pg-prof-dashboard')">Início</span>
         <span class="nav-link" onclick="irInterno('pg-prof-conteudo')">Conteúdos</span>
         <span class="nav-link" onclick="irInterno('pg-prof-questoes')">Questões</span>
         <span class="nav-link" onclick="irInterno('pg-prof-meus')">Meus Conteúdos</span>
@@ -4715,14 +4799,14 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
           <h3 style="font-family:var(--font-titulo);font-size:15px;font-weight:800;color:var(--roxo-escuro);margin-bottom:14px;">Tickets Recebidos</h3>
           <div id="lista-tickets-prof">
             <div class="tickets-empty-state">
-              <div class="es-icone">📭</div>
+              <div class="es-icone"><img class="es-img-prof" src="assets/professor/ticket/nenhum-ticket.webp" alt=""></div>
               <p>Nenhum ticket recebido ainda.<br>Aguarde os alunos enviarem dúvidas.</p>
             </div>
           </div>
         </div>
         <div class="tickets-detalhe-col">
           <div id="detalhe-ticket-prof" class="ticket-vazio">
-            <div class="tv-icone">💬</div>
+            <div class="tv-icone"><img class="tv-img" src="assets/icons/ticket/chat.png" alt=""></div>
             <p>Selecione um ticket para responder.</p>
           </div>
         </div>
@@ -4828,7 +4912,7 @@ function selecionarTicketAluno(id) {
   var msgHtml = ticket.mensagens.map(function(m) {
     var lado = m.remetente === 'aluno' ? 'msg-aluno' : 'msg-professor';
     return '<div class="msg-balao ' + lado + '">' +
-      '<div class="msg-remetente">' + (m.remetente === 'aluno' ? '🎓 ' + escHtml(m.nome) : '👨‍🏫 Professor') + '</div>' +
+      '<div class="msg-remetente">' + (m.remetente === 'aluno' ? '<img class="ico-img" src="assets/conta/aluno.webp" alt="">' + escHtml(m.nome) : '<img class="ico-img" src="assets/conta/professor.webp" alt="">Professor') + '</div>' +
       escHtml(m.texto) +
       '<div class="msg-hora">' + m.hora + '</div>' +
     '</div>';
@@ -4877,7 +4961,7 @@ function renderListaProf() {
   var container = document.getElementById('lista-tickets-prof');
   if (!container) return;
   if (tickets.length === 0) {
-    container.innerHTML = '<div class="tickets-empty-state"><div class="es-icone">📭</div><p>Nenhum ticket recebido ainda.<br>Aguarde os alunos enviarem dúvidas.</p></div>';
+    container.innerHTML = '<div class="tickets-empty-state"><div class="es-icone"><img class="es-img-prof" src="assets/professor/ticket/nenhum-ticket.webp" alt=""></div><p>Nenhum ticket recebido ainda.<br>Aguarde os alunos enviarem dúvidas.</p></div>';
     return;
   }
   container.innerHTML = tickets.map(function(t) {
@@ -4886,7 +4970,7 @@ function renderListaProf() {
     return '<div class="ticket-item ' + statusClass + ativo + '" onclick="selecionarTicketProf(' + t.id + ')">' +
       '<div class="ticket-item-titulo">' + escHtml(t.assunto) + '</div>' +
       '<div class="ticket-item-meta">' +
-        '<span>👤 ' + escHtml(t.aluno) + ' · ' + escHtml(t.materia) + '</span>' +
+        '<span><img class="ico-img" src="assets/conta/aluno.webp" alt="">' + escHtml(t.aluno) + ' · ' + escHtml(t.materia) + '</span>' +
         '<span class="ticket-badge ' + statusClass + '">' + (t.status === 'respondido' ? 'Respondido' : 'Aberto') + '</span>' +
       '</div>' +
     '</div>';
@@ -4905,7 +4989,7 @@ function selecionarTicketProf(id) {
   var msgHtml = ticket.mensagens.map(function(m) {
     var lado = m.remetente === 'aluno' ? 'msg-aluno' : 'msg-professor';
     return '<div class="msg-balao ' + lado + '">' +
-      '<div class="msg-remetente">' + (m.remetente === 'aluno' ? '🎓 ' + escHtml(m.nome) : '👨‍🏫 Professor') + '</div>' +
+      '<div class="msg-remetente">' + (m.remetente === 'aluno' ? '<img class="ico-img" src="assets/conta/aluno.webp" alt="">' + escHtml(m.nome) : '<img class="ico-img" src="assets/conta/professor.webp" alt="">Professor') + '</div>' +
       escHtml(m.texto) +
       '<div class="msg-hora">' + m.hora + '</div>' +
     '</div>';
@@ -5201,13 +5285,13 @@ function _initPerfilProfLocal() {
 function atualizarCamposPerfilProf() {
   _initPerfilProfLocal();
   const p = _perfilProfLocal;
-  const icones = { 'Programação': '💻', 'Design': '🎨', 'Banco de Dados': '🗄️', 'Redes': '🌐' };
+  const icones = {};
   _setText('prof-perfil-nome-display',          p.nome);
   _setText('prof-perfil-email-display',         p.email);
   _setText('prof-perfil-nickname-display',      p.nickname);
   _setText('prof-perfil-email-campo',           p.email);
   _setText('prof-perfil-nome-campo',            p.nome);
-  _setText('prof-perfil-especialidade-display', (icones[p.especialidade] || '📚') + ' ' + p.especialidade);
+  _setEspDisplayProf(p.especialidade);
   // Avatar inicial (se sem foto)
   if (!_fotoProfDataURL) {
     _setText('prof-perfil-avatar-inicial', p.inicial);
@@ -5216,8 +5300,8 @@ function atualizarCamposPerfilProf() {
   const badge = document.getElementById('prof-especialidade-badge');
   const sidebarEsp  = document.getElementById('sidebar-prof-esp');
   const sidebarEsp2 = document.getElementById('sidebar-prof-esp-perfil');
-  const espText = (icones[p.especialidade] || '📚') + ' ' + p.especialidade;
-  if (badge)       { badge.textContent = '🎓 Especialidade: ' + p.especialidade; badge.style.display = 'inline-flex'; }
+  const espText = p.especialidade;
+  if (badge)       { badge.textContent = 'Especialidade: ' + p.especialidade; badge.style.display = 'inline-flex'; }
   if (sidebarEsp)  { sidebarEsp.textContent  = espText; sidebarEsp.style.display  = 'block'; }
   if (sidebarEsp2) { sidebarEsp2.textContent = espText; sidebarEsp2.style.display = 'block'; }
   // Sync sessão visual (em memória)
@@ -5229,8 +5313,7 @@ function atualizarCamposPerfilProf() {
     }
   } catch(e) {}
   // Atualiza boas-vindas
-  const bv = document.getElementById('prof-boas-vindas');
-  if (bv) bv.textContent = 'Bem-vindo, ' + p.nome + '! 👨‍🏫';
+  _setBoasVindasProf(p.nome);
 }
 
 function atualizarStatsPerfilProf() {
@@ -5239,6 +5322,24 @@ function atualizarStatsPerfilProf() {
                     (window._PROF_QUESTOES    || []).filter(function(c){ return c.status === 'aprovado'; }).length;
   _setText('prof-perfil-stat-enviados',  enviados  + ' Conteúdos Enviados');
   _setText('prof-perfil-stat-aprovados', aprovados + ' Aprovados');
+}
+
+function selecionarEspProf(btn) {
+  document.querySelectorAll('.esp-opcao').forEach(function(b){ b.classList.toggle('sel', b === btn); });
+  document.getElementById('input-edicao-campo-prof').value = btn.getAttribute('data-v');
+}
+
+var _ESP_IMG = { 'Programação':'programacao', 'Design':'design', 'Banco de Dados':'banco-de-dados', 'Redes':'redes' };
+function _setEspDisplayProf(esp) {
+  var el = document.getElementById('prof-perfil-especialidade-display');
+  if (!el) return;
+  el.textContent = '';
+  if (_ESP_IMG[esp]) {
+    var im = document.createElement('img');
+    im.className = 'esp-ico'; im.src = 'assets/materias/' + _ESP_IMG[esp] + '.webp'; im.alt = '';
+    el.appendChild(im);
+  }
+  el.appendChild(document.createTextNode(esp || ''));
 }
 
 function abrirEdicaoProf(campo) {
@@ -5257,12 +5358,13 @@ function abrirEdicaoProf(campo) {
       '<div class="caixa">' +
         '<h3>Editar Especialidade</h3>' +
         '<label style="font-size:12px;font-weight:700;color:var(--cinza-texto);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">Especialidade</label>' +
-        '<select id="input-edicao-campo-prof" style="width:100%;padding:12px 16px;border:1.5px solid #ddd;border-radius:8px;font-family:var(--font-corpo);font-size:14px;margin-bottom:16px;outline:none;">' +
-          '<option value="Programação"'    + (esp === 'Programação'    ? ' selected' : '') + '>💻 Programação</option>' +
-          '<option value="Design"'         + (esp === 'Design'         ? ' selected' : '') + '>🎨 Design</option>' +
-          '<option value="Banco de Dados"' + (esp === 'Banco de Dados' ? ' selected' : '') + '>🗄️ Banco de Dados</option>' +
-          '<option value="Redes"'          + (esp === 'Redes'          ? ' selected' : '') + '>🌐 Redes</option>' +
-        '</select>' +
+        '<input type="hidden" id="input-edicao-campo-prof" value="' + esp + '">' +
+        '<div class="esp-opcoes">' +
+          [['Programação','programacao'],['Design','design'],['Banco de Dados','banco-de-dados'],['Redes','redes']].map(function(m) {
+            return '<button type="button" class="esp-opcao' + (esp === m[0] ? ' sel' : '') + '" data-v="' + m[0] + '" onclick="selecionarEspProf(this)">' +
+              '<img src="assets/materias/' + m[1] + '.webp" alt="">' + m[0] + '</button>';
+          }).join('') +
+        '</div>' +
         '<div class="acoes">' +
           '<button class="btn-cancelar-campo" onclick="document.getElementById(\'modal-edicao-campo-prof\').remove()">Cancelar</button>' +
           '<button class="btn-salvar-campo" onclick="salvarEdicaoProf(\'especialidade\')">Salvar</button>' +
@@ -5407,7 +5509,7 @@ function renderRanking() {
   _setNivelBadge(nivel);
   _setText('nivel-titulo-display', nivel.nome);
   _setText('nivel-chaves-display', ch + ' chaves coletadas');
-  _setText('nivel-prox-display', proximoNivel ? 'Próximo nível: ' + proximoNivel.nome + ' (' + proximoNivel.min + ' chaves)' : '🎉 Nível máximo!');
+  _setText('nivel-prox-display', proximoNivel ? 'Próximo nível: ' + proximoNivel.nome + ' (' + proximoNivel.min + ' chaves)' : 'Nível máximo!');
 
   // Barra XP
   const xpMin = nivel.min;
@@ -5416,7 +5518,7 @@ function renderRanking() {
   const xpTotal = xpMax - xpMin;
   const pct = proximoNivel ? Math.min(100, Math.round((xpAtual / xpTotal) * 100)) : 100;
   _setText('nivel-atual-label', nivel.nome);
-  (function(){var _np=document.getElementById('nivel-prox-label'); if(_np) _np.innerHTML = proximoNivel ? nivel.nome + ' → ' + proximoNivel.nome + ' (' + proximoNivel.min + ' ' + CHAVE_IMG + ')' : '🎉 Mestre!';})();
+  (function(){var _np=document.getElementById('nivel-prox-label'); if(_np) _np.innerHTML = proximoNivel ? nivel.nome + ' → ' + proximoNivel.nome + ' (' + proximoNivel.min + ' ' + CHAVE_IMG + ')' : 'Mestre!';})();
   const fillEl = document.getElementById('barra-xp-fill');
   if (fillEl) fillEl.style.width = pct + '%';
   _setText('xp-legenda', proximoNivel ? ch + ' / ' + xpMax + ' chaves para ' + proximoNivel.nome : 'Nível máximo alcançado!');
@@ -5433,7 +5535,7 @@ function renderRanking() {
         '<div class="materia-progress-row">' +
           '<span class="mat-icone">' + matImg(idx, 'mat-ico-rank') + '</span>' +
           '<div class="mat-info">' +
-            '<div class="mat-nome">' + mat.nome + (desbloq ? '' : ' 🔒') + '</div>' +
+            '<div class="mat-nome">' + mat.nome + (desbloq ? '' : ' <img class="ico-img ico-sm" src="assets/icons/trilha/cadeado.png" alt="">') + '</div>' +
             '<div class="mat-barra"><div class="mat-barra-fill" style="width:' + (desbloq ? pctMat : 0) + '%"></div></div>' +
           '</div>' +
           '<span class="mat-pct">' + (desbloq ? pctMat + '%' : '—') + '</span>' +
@@ -5577,6 +5679,15 @@ function _salvarEstadoGlobal() {
 }
 
 // ── CONTADOR PAINEL PROFESSOR ──
+function _setBoasVindasProf(nome) {
+  var h = document.getElementById('prof-boas-vindas');
+  if (!h) return;
+  h.textContent = 'Bem-vindo, ' + nome + '! ';
+  var i = document.createElement('img');
+  i.className = 'bv-prof-ico'; i.src = 'assets/conta/professor.webp'; i.alt = '';
+  h.appendChild(i);
+}
+
 function atualizarContadoresDashProf() {
   var todos = _PROF_CONTEUDOS.concat(_PROF_QUESTOES);
   var total   = todos.length;
@@ -5707,18 +5818,18 @@ function renderListaConteudos() {
   var lista = document.getElementById('lista-conteudos-prof');
   if (!lista) return;
   if (_PROF_CONTEUDOS.length === 0) {
-    lista.innerHTML = '<div class="lista-vazia-prof"><div class="icone-vazio">📄</div><p>Nenhum conteúdo ainda. Crie seu primeiro conteúdo!</p></div>';
+    lista.innerHTML = '<div class="lista-vazia-prof"><div class="icone-vazio"><img src="assets/professor/meus/textos-explicativos.webp" alt=""></div><p>Nenhum conteúdo ainda. Crie seu primeiro conteúdo!</p></div>';
     return;
   }
   lista.innerHTML = _PROF_CONTEUDOS.map(function(item) {
-    var acoes = '<button class="btn-mini btn-mini-excluir" onclick="excluirConteudo(\'' + item.id + '\')">🗑 Excluir</button>';
+    var acoes = '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'conteudo\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
     if (item.status === 'rascunho') {
-      acoes = '<button class="btn-mini btn-mini-editar" onclick="editarConteudo(\'' + item.id + '\')">✏️ Editar</button>' +
-              '<button class="btn-mini btn-mini-enviar" onclick="enviarRascunhoConteudo(\'' + item.id + '\')">📤 Enviar</button>' +
-              '<button class="btn-mini btn-mini-excluir" onclick="excluirConteudo(\'' + item.id + '\')">🗑 Excluir</button>';
+      acoes = '<button class="btn-mini btn-mini-editar" onclick="editarConteudo(\'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
+              '<button class="btn-mini btn-mini-enviar" onclick="enviarRascunhoConteudo(\'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>' +
+              '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'conteudo\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
     }
     return '<div class="conteudo-item-card">' +
-      '<div class="conteudo-item-tipo">📝</div>' +
+      '<div class="conteudo-item-tipo"><img src="assets/professor/meus/textos-explicativos.webp" alt=""></div>' +
       '<div class="conteudo-item-body">' +
         '<div class="conteudo-item-titulo">' + item.titulo + '</div>' +
         '<div class="conteudo-item-meta"><span>📚 ' + item.materia + '</span><span>🗂 ' + item.topico + '</span><span>📅 ' + item.data + '</span>' + _badgePill(item.status) + '</div>' +
@@ -5732,18 +5843,18 @@ function renderListaQuestoes() {
   var lista = document.getElementById('lista-questoes-prof');
   if (!lista) return;
   if (_PROF_QUESTOES.length === 0) {
-    lista.innerHTML = '<div class="lista-vazia-prof"><div class="icone-vazio">❓</div><p>Nenhuma questão ainda. Crie sua primeira questão!</p></div>';
+    lista.innerHTML = '<div class="lista-vazia-prof"><div class="icone-vazio"><img src="assets/professor/meus/questoes.webp" alt=""></div><p>Nenhuma questão ainda. Crie sua primeira questão!</p></div>';
     return;
   }
   lista.innerHTML = _PROF_QUESTOES.map(function(item) {
-    var acoes = '<button class="btn-mini btn-mini-excluir" onclick="excluirQuestao(\'' + item.id + '\')">🗑 Excluir</button>';
+    var acoes = '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'questao\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
     if (item.status === 'rascunho') {
-      acoes = '<button class="btn-mini btn-mini-editar" onclick="mostrarToast(\'Editar: abra o formulário de Enviar Questões\')">✏️ Editar</button>' +
-              '<button class="btn-mini btn-mini-enviar" onclick="enviarRascunhoQuestao(\'' + item.id + '\')">📤 Enviar</button>' +
-              '<button class="btn-mini btn-mini-excluir" onclick="excluirQuestao(\'' + item.id + '\')">🗑 Excluir</button>';
+      acoes = '<button class="btn-mini btn-mini-editar" onclick="mostrarToast(\'Editar: abra o formulário de Enviar Questões\')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
+              '<button class="btn-mini btn-mini-enviar" onclick="enviarRascunhoQuestao(\'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>' +
+              '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'questao\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
     }
     return '<div class="conteudo-item-card">' +
-      '<div class="conteudo-item-tipo">❓</div>' +
+      '<div class="conteudo-item-tipo"><img src="assets/professor/meus/questoes.webp" alt=""></div>' +
       '<div class="conteudo-item-body">' +
         '<div class="conteudo-item-titulo">' + item.enunciado + '</div>' +
         '<div class="conteudo-item-meta"><span>📚 ' + item.materia + '</span><span>⚡ ' + item.dificuldade + '</span><span>📅 ' + item.data + '</span>' + _badgePill(item.status) + '</div>' +
@@ -5751,6 +5862,31 @@ function renderListaQuestoes() {
       '</div>' +
     '</div>';
   }).join('');
+}
+
+var _exclusaoPendente = null;
+function pedirExclusao(tipo, id) {
+  var nomes = { conteudo: ['Excluir conteúdo?', 'Deseja mesmo excluir este conteúdo?'],
+                questao:  ['Excluir questão?',  'Deseja mesmo excluir esta questão?'],
+                desafio:  ['Excluir desafio?',  'Deseja mesmo excluir este desafio?'] }[tipo];
+  if (!nomes) return;
+  _exclusaoPendente = { tipo: tipo, id: id };
+  document.getElementById('exclusao-titulo').textContent = nomes[0];
+  document.getElementById('exclusao-texto').textContent = nomes[1];
+  abrirModal('modal-confirmar-exclusao');
+}
+function cancelarExclusao() {
+  _exclusaoPendente = null;
+  fecharModal('modal-confirmar-exclusao');
+}
+function confirmarExclusao() {
+  var p = _exclusaoPendente;
+  _exclusaoPendente = null;
+  fecharModal('modal-confirmar-exclusao');
+  if (!p) return;
+  if (p.tipo === 'conteudo') excluirConteudo(p.id);
+  else if (p.tipo === 'questao') excluirQuestao(p.id);
+  else if (p.tipo === 'desafio') excluirDesafio(p.id);
 }
 
 function excluirConteudo(id) {
@@ -5817,12 +5953,12 @@ function renderDesempenhoAlunos() {
     return '<tr>' +
       '<td><strong>' + a.nome + '</strong></td>' +
       '<td class="aluno-email-cell">' + a.email + '</td>' +
-      '<td>🗝️ ' + a.chaves + '</td>' +
+      '<td><img class="chave-ico" src="assets/icons/perfil/chave.png" alt=""> ' + a.chaves + '</td>' +
       '<td>' + a.fases + '/16</td>' +
       '<td><div style="font-size:13px;font-weight:700;">' + a.acerto + '%</div><div class="acerto-bar"><div class="acerto-bar-fill" style="width:' + a.acerto + '%"></div></div></td>' +
-      '<td>' + (a.certs > 0 ? '🏅 ' + a.certs : '—') + '</td>' +
+      '<td>' + (a.certs > 0 ? '<img class="cert-ico" src="assets/professor/desempenho/certificados-emitidos.webp" alt=""> ' + a.certs : '—') + '</td>' +
       '<td>' + a.ultima + '</td>' +
-      '<td><button class="btn-tabela success" onclick="mostrarToast(\'E-mail enviado para ' + a.nome + '!\')">📧 E-mail</button></td>' +
+      '<td><button class="btn-tabela success" onclick="mostrarToast(\'E-mail enviado para ' + a.nome + '!\')"><img class="email-ico" src="assets/professor/desempenho/email.png" alt="">E-mail</button></td>' +
     '</tr>';
   }).join('');
 
@@ -5889,18 +6025,16 @@ var _MAT_BADGE_CLASS = {
   'Banco de Dados': 'desafio-badge-bd',
   'Redes':          'desafio-badge-redes'
 };
-var _MAT_ICONE = {
-  'Programação':'💻', 'Design':'🎨', 'Banco de Dados':'🗄️', 'Redes':'🌐'
-};
+var _MAT_ICONE = {};
 var _DIFIC_ICONE = { 'Fácil':'🟢', 'Médio':'🟡', 'Difícil':'🔴' };
 
 function sincronizarSidebarEspDesafios() {
   const sessao = typeof Auth !== 'undefined' ? Auth.getSessao() : null;
   if (!sessao) return;
-  const icones = { 'Programação':'💻','Design':'🎨','Banco de Dados':'🗄️','Redes':'🌐' };
+  const icones = {};
   const esp = sessao.especialidade || '';
   const el = document.getElementById('sidebar-prof-esp-desafios');
-  if (el && esp) { el.textContent = (icones[esp]||'📚') + ' ' + esp; el.style.display = 'block'; }
+  if (el && esp) { el.textContent = esp; el.style.display = 'block'; }
 }
 
 function filtrarDesafiosMateria(mat) {
@@ -5947,7 +6081,7 @@ function renderDesafios() {
     return (
       '<div class="desafio-card">' +
         '<div class="desafio-badges">' +
-          '<span class="desafio-badge-mat ' + matCls + '">' + _MAT_ICONE[d.materia] + ' ' + d.materia + '</span>' +
+          '<span class="desafio-badge-mat ' + matCls + '">' + d.materia + '</span>' +
           '<span class="desafio-badge-dific ' + dCls + '">' + (_DIFIC_ICONE[d.dificuldade]||'') + ' ' + d.dificuldade + '</span>' +
         '</div>' +
         '<div class="desafio-card-titulo">' + _esc(d.titulo) + '</div>' +
@@ -5956,9 +6090,9 @@ function renderDesafios() {
         '<div class="desafio-card-footer">' +
           '<span class="desafio-status-badge ' + stCls + '">' + stLbl + '</span>' +
           '<div class="desafio-acoes">' +
-            '<button class="btn-tabela" onclick="editarDesafio(' + d.id + ')">✏️ Editar</button>' +
-            (d.status === 'rascunho' ? '<button class="btn-tabela" onclick="enviarDesafioAprovacao(' + d.id + ')">📤 Enviar</button>' : '') +
-            '<button class="btn-tabela danger" onclick="excluirDesafio(' + d.id + ')">🗑</button>' +
+            '<button class="btn-tabela" onclick="editarDesafio(' + d.id + ')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
+            (d.status === 'rascunho' ? '<button class="btn-tabela" onclick="enviarDesafioAprovacao(' + d.id + ')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>' : '') +
+            '<button class="btn-tabela danger" title="Excluir" onclick="pedirExclusao(\'desafio\', ' + d.id + ')"><img class="btn-ico btn-ico-solo" src="assets/professor/acoes/excluir.png" alt=""></button>' +
           '</div>' +
         '</div>' +
       '</div>'
@@ -6104,12 +6238,12 @@ function renderConteudosProfNoHub(mIdx) {
   if (conteudos.length === 0) return '';
 
   var html = '<div style="margin-top:24px;border-top:2px dashed #e0e0e0;padding-top:20px;">';
-  html += '<h3 style="font-family:var(--font-titulo);font-size:16px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;">📝 <span>Conteúdos Extras do Professor</span> <span style="background:#7b61ff;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;">' + conteudos.length + ' novo' + (conteudos.length > 1 ? 's' : '') + '</span></h3>';
+  html += '<h3 style="font-family:var(--font-titulo);font-size:16px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;"><img class="ico-img" src="assets/professor/meus/textos-explicativos.webp" alt=""> <span>Conteúdos Extras do Professor</span> <span style="background:#7b61ff;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;">' + conteudos.length + ' novo' + (conteudos.length > 1 ? 's' : '') + '</span></h3>';
 
   conteudos.forEach(function(c) {
     html += '<div style="background:#f8f6ff;border:1.5px solid #e8e0ff;border-radius:12px;padding:18px;margin-bottom:12px;">';
-    html += '<div style="font-family:var(--font-titulo);font-size:14px;font-weight:900;margin-bottom:6px;">📄 ' + _esc(c.titulo) + '</div>';
-    html += '<div style="font-size:12px;color:var(--cinza-texto);margin-bottom:8px;">🗂 ' + _esc(c.topico) + ' · 👨‍🏫 ' + _esc(c.authorNome || 'Professor') + ' · 📅 ' + _esc(c.data) + '</div>';
+    html += '<div style="font-family:var(--font-titulo);font-size:14px;font-weight:900;margin-bottom:6px;"><img class="ico-img" src="assets/professor/meus/textos-explicativos.webp" alt="">' + _esc(c.titulo) + '</div>';
+    html += '<div style="font-size:12px;color:var(--cinza-texto);margin-bottom:8px;">🗂 ' + _esc(c.topico) + ' · <img class="ico-img ico-sm" src="assets/conta/professor.webp" alt="">' + _esc(c.authorNome || 'Professor') + ' · 📅 ' + _esc(c.data) + '</div>';
     if (c.texto) {
       html += '<div style="font-size:13px;color:#333;line-height:1.6;margin-bottom:8px;">' + _esc(c.texto).replace(/\n/g, '<br>') + '</div>';
     }
