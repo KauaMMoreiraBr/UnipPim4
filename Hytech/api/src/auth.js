@@ -6,6 +6,7 @@ function criarAuth(cfg) {
     // O token carrega os ids. As rotas leem id_aluno/id_professor DAQUI, nunca do corpo da requisição.
     const payload = {
       nome: u.nome,
+      nickname: u.nickname,
       email: u.email,
       papel: u.papel,
       id_aluno: u.id_aluno ?? null,
@@ -31,7 +32,7 @@ function criarAuth(cfg) {
         issuer: cfg.jwt.issuer, audience: cfg.jwt.audience, algorithms: ['HS256'],
       });
       req.usuario = {
-        id_usuario: Number(d.sub), nome: d.nome, email: d.email, papel: d.papel,
+        id_usuario: Number(d.sub), nome: d.nome, nickname: d.nickname, email: d.email, papel: d.papel,
         id_aluno: d.id_aluno, id_professor: d.id_professor,
       };
       next();

@@ -17,13 +17,8 @@ class Db {
     return this._pool;
   }
 
-  /**
-   * Executa uma procedure e devolve as linhas (recordset).
-   * @param {string} proc    nome da procedure, ex.: 'sp_ListarMaterias'
-   * @param {object} params  { nomeSemArroba: valor }
-   * @param {object} tipos   (opcional) { nomeSemArroba: sql.Date } quando o tipo não puder ser inferido
-   */
-  async exec(proc, params = {}, tipos = {}) {
+  /** Executa a procedure e devolve o resultado bruto (todas as tabelas de resultado). */
+  async _executar(proc, params, tipos) {
     try {
       const pool = await this._obterPool();
       const req = pool.request();
@@ -32,13 +27,29 @@ class Db {
         if (tipos[nome]) req.input(nome, tipos[nome], v);
         else req.input(nome, v);
       }
-      const r = await req.execute(proc);
-      return r.recordset || [];
+      return await req.execute(proc);
     } catch (e) {
       // 50000 = RAISERROR(...) das procedures
       if (e && e.number === 50000) throw new ServicoError(e.message);
       throw e;
     }
+  }
+
+  /**
+   * Executa uma procedure e devolve as linhas da PRIMEIRA tabela de resultado.
+   * @param {string} proc    nome da procedure, ex.: 'sp_ListarMaterias'
+   * @param {object} params  { nomeSemArroba: valor }
+   * @param {object} tipos   (opcional) { nomeSemArroba: sql.Date } quando o tipo não puder ser inferido
+   */
+  async exec(proc, params = {}, tipos = {}) {
+    const r = await this._executar(proc, params, tipos);
+    return r.recordset || [];
+  }
+
+  /** Para procedures com VÁRIOS SELECT (ex.: sp_ProgressoAluno): devolve um array de arrays. */
+  async execMulti(proc, params = {}, tipos = {}) {
+    const r = await this._executar(proc, params, tipos);
+    return r.recordsets || [];
   }
 
   async fechar() { if (this._pool) { await this._pool.close(); this._pool = null; } }

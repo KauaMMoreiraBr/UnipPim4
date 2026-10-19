@@ -783,12 +783,42 @@
     border-radius: 16px; padding: 40px; text-align: center; color: var(--branco);
     box-shadow: 0 8px 32px rgba(45,10,110,0.3); position: relative; overflow: hidden;
   }
-  .certificado-box::before { content: ''; position: absolute; width: 130px; height: 130px; background: url(assets/professor/desempenho/certificados-emitidos.webp) center/contain no-repeat; opacity: 0.07; top: -10px; right: -10px; }
   .certificado-box .cert-titulo { font-family: var(--font-titulo); font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
   .certificado-box .cert-nome { font-family: var(--font-titulo); font-size: 32px; font-weight: 900; margin-bottom: 8px; }
   .certificado-box .cert-desc { opacity: 0.85; font-size: 15px; margin-bottom: 24px; }
   .certificado-box .cert-modulo { background: var(--amarelo); color: var(--preto); display: inline-block; border-radius: 8px; padding: 8px 20px; font-weight: 800; font-size: 16px; margin-bottom: 24px; }
   .certificado-box .cert-data { opacity: 0.6; font-size: 12px; margin-bottom: 28px; }
+
+  /* Tela "Parabéns" do certificado (cores vêm da matéria: --c-main/--c-dark/--c-d1/--c-d2) */
+  .cert-conquista { position: relative; overflow: hidden; border-radius: 20px; padding: 34px 28px 30px; color: #fff;
+    background: radial-gradient(circle at 18% 20%, var(--c-d2) 0%, var(--c-d1) 70%); box-shadow: 0 10px 36px rgba(20,10,60,.35);
+    display: grid; grid-template-columns: 230px 1fr; gap: 12px; align-items: center; border: 2px solid var(--c-main); }
+  .cert-conquista .cc-mascote { position: relative; text-align: center; min-height: 270px; }
+  .cert-conquista .cc-mascote img.mascote { width: 190px; max-width: 100%; position: relative; z-index: 2; animation: ccPula 1.6s ease-in-out infinite; filter: drop-shadow(0 10px 14px rgba(0,0,0,.35)); }
+  .cc-sparkle { position: absolute; z-index: 1; width: 26px; height: 26px; animation: ccBrilha 1.8s ease-in-out infinite; }
+  .cc-sparkle svg { width: 100%; height: 100%; display: block; }
+  @keyframes ccPula { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(2deg); } }
+  @keyframes ccBrilha { 0%,100% { transform: scale(.7) rotate(0); opacity: .55; } 50% { transform: scale(1.15) rotate(20deg); opacity: 1; } }
+  .cert-conquista .cc-centro { text-align: center; position: relative; z-index: 2; }
+  .cert-conquista .cc-estrela { width: 112px; height: 112px; object-fit: contain; filter: drop-shadow(0 6px 14px var(--c-main)); animation: ccPop .7s ease-out both; }
+  @keyframes ccPop { 0% { transform: scale(.3); opacity: 0; } 70% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
+  .cert-conquista .cc-eyebrow { font-family: var(--font-titulo); font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--c-main); margin: 4px 0 6px; }
+  .cert-conquista .cc-titulo { font-family: var(--font-titulo); font-size: 30px; font-weight: 900; margin: 0 0 6px; line-height: 1.15; }
+  .cert-conquista .cc-texto { opacity: .9; font-size: 15px; margin-bottom: 14px; }
+  .cert-conquista .cc-modulo { display: inline-flex; align-items: center; gap: 10px; background: rgba(0,0,0,.35); border: 2px solid var(--c-main); border-radius: 999px; padding: 6px 22px 6px 8px; font-family: var(--font-titulo); font-weight: 900; font-size: 18px; margin-bottom: 16px; }
+  .cert-conquista .cc-modulo img { width: 44px; height: 44px; object-fit: contain; }
+  .cert-conquista .cc-infos { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 18px; }
+  .cert-conquista .cc-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: 10px; padding: 7px 12px; font-size: 13px; font-weight: 700; }
+  .cert-conquista .cc-chip img { width: 18px; height: 18px; object-fit: contain; }
+  .cert-conquista .cc-acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 16px; }
+  .cert-conquista .cc-btn-pdf { background: var(--amarelo); color: var(--preto); border: none; padding: 13px 26px; border-radius: 10px; font-weight: 800; font-size: 15px; cursor: pointer; font-family: var(--font-corpo); transition: all .2s; }
+  .cert-conquista .cc-btn-pdf:hover { background: var(--amarelo-hover); transform: translateY(-2px); }
+  .cert-conquista .cc-btn-sec { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.6); padding: 11px 22px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: var(--font-corpo); }
+  .cert-conquista .cc-btn-sec:hover { background: rgba(255,255,255,.14); }
+  .cert-conquista .cc-btn-pdf:disabled, .cert-conquista .cc-btn-sec:disabled { opacity: .6; cursor: wait; }
+  .cert-conquista .cc-txt { background: none; border: none; color: rgba(255,255,255,.7); font-size: 12px; text-decoration: underline; cursor: pointer; margin-top: 12px; font-family: var(--font-corpo); }
+  @media (max-width: 760px) { .cert-conquista { grid-template-columns: 1fr; } .cert-conquista .cc-mascote { min-height: 230px; } .cert-conquista .cc-mascote img.mascote { width: 150px; } }
+  @media (prefers-reduced-motion: reduce) { .cert-conquista .cc-mascote img.mascote, .cc-sparkle, .cert-conquista .cc-estrela { animation: none; } }
   .btn-proxima-materia { background: var(--amarelo); color: var(--preto); border: none; padding: 14px 32px; border-radius: 10px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.2s; }
   .btn-proxima-materia:hover { background: var(--amarelo-hover); transform: translateY(-2px); }
   .trilha-sidebar { width: 200px; flex-shrink: 0; padding-right: 24px; }
@@ -2601,12 +2631,12 @@
             <div style="text-align:center;font-size:11px;color:var(--cinza-texto);margin-top:8px;font-weight:600;">📷 Clique para alterar</div>
           </div>
           <div class="perfil-nome" id="prof-perfil-nome-display">Prof. Silva</div>
-          <div class="perfil-email" id="prof-perfil-email-display">professor@hytech.com</div>
+          <div class="perfil-email" id="prof-perfil-email-display">—</div>
           <div class="perfil-sublinhado"></div>
           <!-- Stats do professor -->
           <div class="perfil-stat"><span class="icone"><img src="assets/professor/perfil/conteudos-enviados.webp" alt=""></span> <span id="prof-perfil-stat-enviados">0 Conteúdos Enviados</span></div>
           <div class="perfil-stat"><span class="icone"><img src="assets/professor/perfil/aprovados.webp" alt=""></span> <span id="prof-perfil-stat-aprovados">0 Aprovados</span></div>
-          <div class="perfil-stat"><span class="icone"><img src="assets/professor/perfil/alunos-ativos.webp" alt=""></span> <span id="prof-perfil-stat-alunos">42 Alunos Ativos</span></div>
+          <div class="perfil-stat"><span class="icone"><img src="assets/professor/perfil/alunos-ativos.webp" alt=""></span> <span id="prof-perfil-stat-alunos">0 Alunos Ativos</span></div>
         </div>
 
         <!-- CAMPOS EDITÁVEIS -->
@@ -2626,7 +2656,7 @@
               
               <div class="campo-texto">
                 <div class="campo-label">Email</div>
-                <div class="campo-valor" id="prof-perfil-email-campo">professor@hytech.com</div>
+                <div class="campo-valor" id="prof-perfil-email-campo">—</div>
               </div>
               <button class="btn-editar-campo" onclick="abrirEdicaoProf('email')"><img class="ico-img" src="assets/professor/acoes/editar.png" alt="">Editar</button>
             </div>
@@ -2646,7 +2676,6 @@
                 <div class="campo-label">Especialidade</div>
                 <div class="campo-valor" id="prof-perfil-especialidade-display">Programação</div>
               </div>
-              <button class="btn-editar-campo" onclick="abrirEdicaoProf('especialidade')"><img class="ico-img" src="assets/professor/acoes/editar.png" alt="">Editar</button>
             </div>
 
             <div class="perfil-campo-editavel">
@@ -2795,7 +2824,7 @@
     <div style="display:flex;gap:12px;justify-content:flex-end;">
       <button class="btn-outline-roxo" onclick="fecharModalNovoDesafio()">Cancelar</button>
       <button class="btn-roxo" onclick="salvarDesafio('rascunho')" style="padding:11px 20px;"><img class="btn-ico" src="assets/professor/acoes/rascunho.png" alt="">Salvar Rascunho</button>
-      <button class="btn-amarelo" onclick="salvarDesafio('aprovado')" style="padding:11px 20px;"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Publicar</button>
+      <button class="btn-amarelo" onclick="salvarDesafio('enviar')" style="padding:11px 20px;"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar para aprovação</button>
     </div>
   </div>
 </div>
@@ -2878,7 +2907,7 @@
         <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/conteudos-enviados.webp" alt=""></div><div class="m-valor" id="dash-prof-enviados">0</div><div class="m-label">Conteúdos Enviados</div></div>
         <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/aprovados.webp" alt=""></div><div class="m-valor" id="dash-prof-aprovados">0</div><div class="m-label">Aprovados</div></div>
         <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/aguardando-aprovacao.webp" alt=""></div><div class="m-valor" id="dash-prof-pendentes">0</div><div class="m-label">Aguardando Aprovação</div></div>
-        <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/alunos-ativos.webp" alt=""></div><div class="m-valor">42</div><div class="m-label">Alunos Ativos</div></div>
+        <div class="metrica-card animada"><div class="m-icone"><img src="assets/professor/inicio/alunos-ativos.webp" alt=""></div><div class="m-valor" id="dash-prof-alunos">0</div><div class="m-label">Alunos Ativos</div></div>
       </div>
       <div class="acoes-grid">
         <div class="acao-card" onclick="irInterno('pg-prof-conteudo')">
@@ -2965,7 +2994,7 @@
         <input class="campo-input" id="cont-dica" type="text" placeholder="Uma dica prática sobre o conteúdo">
         <div style="display:flex;gap:12px;justify-content:flex-end;">
           <button class="btn-lido" onclick="salvarRascunhoConteudo()">Salvar Rascunho</button>
-          <button class="btn-amarelo" onclick="enviarConteudoAprovacao()">Publicar</button>
+          <button class="btn-amarelo" onclick="enviarConteudoAprovacao()">Enviar para aprovação</button>
         </div>
       </div>
     </div>
@@ -3042,7 +3071,7 @@
         <p style="font-size:12px;color:var(--cinza-texto);margin-bottom:16px;">⚠️ Selecione o botão de rádio ao lado da alternativa correta.</p>
         <div style="display:flex;gap:12px;justify-content:flex-end;">
           <button class="btn-lido" onclick="salvarRascunhoQuestao()">Salvar Rascunho</button>
-          <button class="btn-amarelo" onclick="enviarQuestaoAprovacao()">Publicar</button>
+          <button class="btn-amarelo" onclick="enviarQuestaoAprovacao()">Enviar para aprovação</button>
         </div>
       </div>
     </div>
@@ -3140,9 +3169,9 @@
       <h1 style="font-family:var(--font-titulo);font-size:28px;font-weight:900;margin-bottom:4px;">Desempenho dos Alunos</h1>
       <p style="color:var(--cinza-texto);font-size:14px;margin-bottom:28px;">Acompanhe as métricas de aprendizado da sua turma.</p>
       <div class="metricas-grid" style="grid-template-columns:1fr 1fr 1fr;">
-        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/alunos-ativos.webp" alt=""></div><div class="m-valor">42</div><div class="m-label">Alunos Ativos</div></div>
-        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/aprovados.webp" alt=""></div><div class="m-valor" id="taxa-acerto-media">84%</div><div class="m-label">Taxa de Acerto</div></div>
-        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/certificados-emitidos.webp" alt=""></div><div class="m-valor">14</div><div class="m-label">Certificados Emitidos</div></div>
+        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/alunos-ativos.webp" alt=""></div><div class="m-valor" id="desempenho-total-alunos">0</div><div class="m-label">Alunos Ativos</div></div>
+        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/aprovados.webp" alt=""></div><div class="m-valor" id="taxa-acerto-media">0%</div><div class="m-label">Taxa de Acerto</div></div>
+        <div class="metrica-card"><div class="m-icone"><img src="assets/professor/desempenho/certificados-emitidos.webp" alt=""></div><div class="m-valor" id="desempenho-total-certs">0</div><div class="m-label">Certificados Emitidos</div></div>
       </div>
       <table class="tabela-admin">
         <thead><tr><th>Aluno</th><th>E-mail</th><th>Chaves</th><th>Fases</th><th>Taxa Acerto</th><th>Certificados</th><th>Última Atividade</th><th>Contato</th></tr></thead>
@@ -3158,6 +3187,7 @@
 
 
 <script src="js/api.js"></script>
+<script src="js/certificado.js"></script>
 <script>
   // ============================================================
   // HYTECH — SISTEMA DE AUTENTICAÇÃO
@@ -3199,39 +3229,6 @@
     }
   };
 
-  // ============================================================
-  // LQ_USUARIOS — Armazenamento em memória (sem persistência)
-  // ============================================================
-  const LQ_USUARIOS = {
-    _lista: [],
-
-    getAll() {
-      return LQ_USUARIOS._lista;
-    },
-
-    save(lista) {
-      LQ_USUARIOS._lista = lista;
-    },
-
-    adicionar(usuario) {
-      const lista = this.getAll();
-      lista.push(usuario);
-      this.save(lista);
-    },
-
-    emailExiste(email) {
-      const lista = this.getAll();
-      const fixos = typeof USUARIOS_DB !== 'undefined' ? USUARIOS_DB : [];
-      return lista.some(u => u.email.toLowerCase() === email.toLowerCase()) ||
-             fixos.some(u => u.email.toLowerCase() === email.toLowerCase());
-    },
-
-    proximoId() {
-      const lista = this.getAll();
-      if (lista.length === 0) return 1000;
-      return Math.max(...lista.map(u => u.id)) + 1;
-    }
-  };
 
   // ============================================================
   // V15 — SISTEMA DE CADASTRO EXPANDIDO (ALUNO + PROFESSOR)
@@ -3316,7 +3313,7 @@
       id: u.id, nome: u.nome, nickname: u.nickname, email: u.email,
       role: u.papel,                       // 'aluno' | 'professor'
       inicial: (u.nome || '?').charAt(0).toUpperCase(),
-      especialidade: u.especialidade || null,
+      especialidade: u.especialidade || null, foto: u.foto || null,
       idAluno: u.id_aluno, idProfessor: u.id_professor
     };
   }
@@ -3326,6 +3323,110 @@
   async function carregarConfigChaves() {
     try { CONFIG_CHAVES = await Api.config(); } catch (e) { console.warn('Config de chaves indisponível:', e.message); }
   }
+
+  // ── Estado do aluno vindo do banco (Fase 3) ──
+  var _estadoAluno = null;          // resposta de GET /aluno/estado
+  var _certTentado = {};            // matérias cujo certificado já foi reconferido no servidor
+  var _certNovo = {};               // matérias cujo certificado foi emitido AGORA (mostra o bônus)
+
+  // Limpa TUDO que é da pessoa anterior (logout, novo login, cadastro, sessão expirada)
+  function resetProg() {
+    _progState = { chaves: 0, materiaAtualHub: 1, materiaAtualTrilha: 1, topicos: {}, questoes: {}, materiaConcluida: {} };
+    _conteudoCarregado = false;
+    _estadoAluno = null; _certTentado = {}; _certNovo = {};
+    if (typeof resetTickets === 'function') resetTickets();
+    if (typeof resetProf === 'function') resetProf();
+    _perfilLocal = null; _fotoDataURL = null; _perfilProfLocal = null; _fotoProfDataURL = null;
+    Object.values(MATERIAS_DATA).forEach(function (m) { m.topicos = []; m.questoes = []; delete m.dbId; });
+  }
+
+  // Foto só entra na página se for uma imagem em base64 (evita injeção de CSS/HTML)
+  function _fotoSegura(src) { return typeof src === 'string' && /^data:image\/(png|jpeg|jpg|webp);base64,[A-Za-z0-9+\/=]+$/.test(src); }
+
+  // "Fases" = tópicos lidos + questões concluídas (mesma conta do banco). total = o que existe carregado.
+  function _contarFases(p) {
+    let feitas = 0, total = 0;
+    Object.entries(MATERIAS_DATA).forEach(function (kv) {
+      const idx = kv[0], mat = kv[1];
+      total += mat.topicos.length + mat.questoes.length;
+      mat.topicos.forEach(function (t) { if ((p.topicos[t.id] || {}).lido) feitas++; });
+      mat.questoes.forEach(function (q, i) { if (p.questoes['m' + idx + '-q' + i]) feitas++; });
+    });
+    return { feitas: feitas, total: total };
+  }
+
+  function _certDaMateria(idx) {
+    const m = MATERIAS_DATA[idx];
+    if (!_estadoAluno || !m || !m.dbId) return null;
+    return _estadoAluno.certificados.find(function (c) { return c.idMateria === m.dbId; }) || null;
+  }
+
+  // Lê do banco: chaves (saldo), tópicos lidos, questões feitas, matérias liberadas, certificados, streak, posição.
+  async function carregarEstadoDoAluno() {
+    try {
+      const e = await Api.get('/aluno/estado');
+      _estadoAluno = e;
+      const p = loadProg();
+      p.chaves = e.resumo.saldoChaves;
+      p.topicos = {}; p.questoes = {}; p.materiaConcluida = {};
+      const aulasOk = new Set(e.aulasConcluidas), questoesOk = new Set(e.questoesConcluidas);
+      const liberada = {}; e.materias.forEach(function (m) { liberada[m.id] = m.desbloqueada; });
+      Object.entries(MATERIAS_DATA).forEach(function (kv) {
+        const idx = kv[0], mat = kv[1];
+        mat.topicos.forEach(function (t) { if (t.dbId && aulasOk.has(t.dbId)) p.topicos[t.id] = { lido: true }; });
+        mat.questoes.forEach(function (q, i) { if (q.dbId && questoesOk.has(q.dbId)) p.questoes['m' + idx + '-q' + i] = true; });
+        if (mat.dbId && liberada[mat.dbId]) p.materiaConcluida[idx] = true;   // aqui significa "desbloqueada"
+      });
+      // dados da conta
+      const s = Auth.getSessao();
+      if (s) { s.nome = e.perfil.nome; s.nickname = e.perfil.nickname; s.email = e.perfil.email; s.inicial = (e.perfil.nome || '?').charAt(0).toUpperCase(); }
+      _perfilLocal = { nome: e.perfil.nome, nickname: e.perfil.nickname, email: e.perfil.email, senha: '••••••••', inicial: (e.perfil.nome || '?').charAt(0).toUpperCase() };
+      if (_fotoSegura(e.perfil.foto)) { _fotoDataURL = e.perfil.foto; aplicarFotoEmTudo(_fotoDataURL); }
+      saveProg(p);                 // atualiza todos os contadores da tela
+      atualizarCamposPerfil();
+    } catch (err) {
+      console.warn('Estado do aluno indisponível:', err.message);
+      mostrarToast('⚠️ Não foi possível carregar o seu progresso.');
+    }
+  }
+
+  // Carrega matérias, aulas e questões do banco e preenche MATERIAS_DATA (mesmo formato de antes).
+  var _conteudoCarregado = false;
+  async function carregarConteudoDaApi() {
+    try {
+      const materias = await Api.materias();
+      for (const m of materias) {
+        const idx = Object.keys(MATERIAS_DATA).find(function (k) { return MATERIAS_DATA[k].nome === m.titulo; });
+        if (!idx) continue;                       // matéria nova do admin que o site ainda não tem tela
+        const alvo = MATERIAS_DATA[idx];
+        alvo.dbId = m.id;
+        alvo.chavesParaDesbloquear = m.chavesParaDesbloquear;
+        const res = await Promise.all([Api.get('/materias/' + m.id + '/aulas'), Api.get('/materias/' + m.id + '/questoes')]);
+        alvo.topicos = res[0].map(function (a) {
+          return {
+            id: 'a' + a.id, dbId: a.id,
+            titulo: _esc(a.topico ? a.topico + ' — ' + a.titulo : a.titulo),   // o hub separa pelo '—'; _esc: texto de professor nunca vira HTML
+            chaves: a.chaves, isExtra: a.isExtra, autor: a.autor || '',
+            conteudo: a.conteudo || '', exemplo: a.exemplo || '',
+            dica: { titulo: (a.dica && a.dica.titulo) || '', corpo: (a.dica && a.dica.corpo) || '' }
+          };
+        });
+        alvo.questoes = res[1].map(function (q) {
+          return {
+            dbId: q.id, pergunta: q.pergunta, codigo: q.codigo || '', chaves: q.chaves,
+            alternativas: q.alternativas.map(function (x) { return { id: x.id, texto: x.texto }; })   // sem 'correta'
+          };
+        });
+      }
+      _conteudoCarregado = true;
+    } catch (e) {
+      console.warn('Conteúdo indisponível:', e.message);
+      mostrarToast('⚠️ Não foi possível carregar o conteúdo das matérias.');
+    }
+  }
+  const _MSG_SEM_CONTEUDO = '<div style="background:var(--branco);border-radius:12px;padding:40px;text-align:center;">' +
+    '<h2 style="font-family:var(--font-titulo);font-size:20px;font-weight:900;margin-bottom:10px;">Conteúdo indisponível</h2>' +
+    '<p style="color:var(--cinza-texto);font-size:14px;">Esta matéria ainda não tem conteúdo publicado ou o servidor não respondeu. Tente de novo em instantes.</p></div>';
 
   async function criarContaV15() {
     var nome   = ((document.getElementById('cad-nome')  || {}).value || '').trim();
@@ -3358,9 +3459,11 @@
     try {
       await Api.cadastro({ nome: nome, nickname: nick, email: email, senha: senha, dataNascimento: nascIso });
       var u = await Api.login(email, senha);        // já entra logado depois de criar a conta
+      resetProg();
       var sessao = Auth.login(_usuarioDaApi(u));
       atualizarInterface(sessao);
-      carregarConfigChaves();
+      await carregarConfigChaves();
+      if (sessao.role === 'aluno') { await carregarConteudoDaApi(); await carregarEstadoDoAluno(); }
       fecharModal('modal-cadastro-modal');
 
       ['cad-nome','cad-nick','cad-email','cad-nasc','cad-senha','cad-senha2'].forEach(function(id) {
@@ -3379,22 +3482,6 @@
 
   // Manter compatibilidade com código legado
   function criarContaAluno() { criarContaV15(); }
-
-  // ── LISTA DE ALUNOS DO PROFESSOR (turma) — incluir cadastrados ──
-  function sincronizarAlunosNaTurma() {
-    if (typeof _ALUNOS_TURMA === 'undefined') return;
-    const cadastrados = LQ_USUARIOS.getAll();
-    // Só adicionar alunos na turma (não professores)
-    cadastrados.filter(function(u){ return u.role === 'aluno'; }).forEach(function(u) {
-      const jaExiste = _ALUNOS_TURMA.some(function(a) { return a.email === u.email; });
-      if (!jaExiste) {
-        _ALUNOS_TURMA.push({
-          nome: u.nome, email: u.email,
-          chaves: 0, fases: 0, acerto: 0, certs: 0, ultima: 'Nunca'
-        });
-      }
-    });
-  }
 
   // ── ROTEAMENTO POR ROLE ──
   const ROTAS_POR_ROLE = {
@@ -3463,8 +3550,15 @@
   function fazerLogout() {
     Auth.logout();
     Api.sair();
+    resetProg();
     irPara('pg-home');
   }
+  // Token venceu (ou foi recusado): volta para a home
+  document.addEventListener('hytech:sessao-expirada', function () {
+    Auth.logout(); resetProg();
+    mostrarToast('⚠️ Sua sessão expirou. Entre novamente.');
+    irPara('pg-home');
+  });
 
   // ── LOGIN PRINCIPAL ──
   async function realizarLogin() {
@@ -3487,10 +3581,13 @@
     try {
       // A API confere e-mail e senha no banco e devolve o perfil REAL (aluno ou professor).
       const u = await Api.login(email, senha);
+      resetProg();                                  // nada da pessoa anterior pode vazar para esta
       const sessao = Auth.login(_usuarioDaApi(u));
 
       atualizarInterface(sessao);
-      carregarConfigChaves();
+      await carregarConfigChaves();
+      if (sessao.role === 'aluno') { await carregarConteudoDaApi(); await carregarEstadoDoAluno(); carregarDesafiosAluno(); }
+      else { if (_fotoSegura(u.foto)) { _fotoProfDataURL = u.foto; } await carregarPerfilProfessor(); }
 
       fecharModal('modal-login');
       fecharModal('modal-cadastro-modal');
@@ -3520,7 +3617,6 @@
       localStorage.removeItem('lq_prof_questoes');
       localStorage.removeItem('lq_conteudos_publicados');
     } catch(e) {}
-    setTimeout(function(){ if (typeof sincronizarAlunosNaTurma === 'function') sincronizarAlunosNaTurma(); }, 200);
   }
 
   // ============================================================
@@ -3614,10 +3710,7 @@
     var grid = document.getElementById('desafios-aluno-grid');
     var vazio = document.getElementById('desafios-aluno-vazio');
     if (!grid) return;
-    // Pegar desafios aprovados
-    var desafios = (typeof _DESAFIOS_DB !== 'undefined' ? _DESAFIOS_DB : []).filter(function(d) {
-      return d.status === 'aprovado';
-    });
+    var desafios = (typeof _desafiosAluno !== 'undefined' && _desafiosAluno) ? _desafiosAluno : [];
     if (_filtroDesafioAluno !== 'Todas') {
       desafios = desafios.filter(function(d) { return d.materia === _filtroDesafioAluno; });
     }
@@ -3627,30 +3720,25 @@
       return;
     }
     if (vazio) vazio.style.display = 'none';
-    var _DIFIC_ICONE = { 'Fácil': '🟢', 'Médio': '🟡', 'Difícil': '🔴' };
+    var _DIF = { 'Fácil': '🟢', 'Médio': '🟡', 'Difícil': '🔴' };
+    var _DK = { 'Fácil': 'Facil', 'Médio': 'Medio', 'Difícil': 'Dificil' };
     var _MAT_CLS = { 'Programação': 'desafio-badge-prog', 'Design': 'desafio-badge-design', 'Banco de Dados': 'desafio-badge-bd', 'Redes': 'desafio-badge-redes' };
     grid.innerHTML = desafios.map(function(d) {
-      var mCls = _MAT_CLS[d.materia] || '';
       return '<div class="desafio-aluno-card">' +
         '<div class="desafio-badges">' +
-          '<span class="desafio-badge-mat ' + mCls + '">' + d.materia + '</span>' +
-          '<span class="desafio-badge-dific dific-' + d.dificuldade + '">' + (_DIFIC_ICONE[d.dificuldade] || '') + ' ' + d.dificuldade + '</span>' +
+          '<span class="desafio-badge-mat ' + (_MAT_CLS[d.materia] || '') + '">' + _esc(d.materia) + '</span>' +
+          '<span class="desafio-badge-dific dific-' + (_DK[d.dificuldade] || 'Facil') + '">' + (_DIF[d.dificuldade] || '') + ' ' + _esc(d.dificuldade) + '</span>' +
         '</div>' +
-        '<div class="desafio-aluno-titulo">' + d.titulo + '</div>' +
-        '<div class="desafio-aluno-enunciado">' + d.enunciado + '</div>' +
-        (d.dica ? '<div style="font-size:12px;color:#7b61ff;font-weight:600;">💡 ' + d.dica + '</div>' : '') +
+        '<div class="desafio-aluno-titulo">' + _esc(d.titulo) + '</div>' +
+        '<div class="desafio-aluno-enunciado">' + _esc(d.enunciado) + '</div>' +
+        (d.dica ? '<div style="font-size:12px;color:#7b61ff;font-weight:600;">💡 ' + _esc(d.dica) + '</div>' : '') +
         '<div class="desafio-aluno-footer">' +
-          '<span class="desafio-status-badge dst-aprovado">✅ Disponível</span>' +
-          '<button class="desafio-aluno-btn" onclick="verDesafioAluno(' + d.id + ')">▶ Resolver</button>' +
+          '<span class="desafio-status-badge dst-aprovado">' + (d.concluido ? '✅ Concluído' : 'Disponível') + '</span>' +
+          '<button class="desafio-aluno-btn" onclick="verDesafioAluno(' + d.id + ')">' + (d.concluido ? 'Ver' : '▶ Resolver') + '</button>' +
         '</div>' +
       '</div>';
     }).join('');
   }
-
-  function verDesafioAluno(id) {
-    mostrarToast('🎯 Desafio em breve disponível para resolução!');
-  }
-
 
   // Tracks whether "Sobre" was opened from aluno panel or public home
   var _sobreDeAluno = false;
@@ -3748,7 +3836,7 @@
   function confirmarResposta() {
     if (respondido) return;
     const selecionada = document.querySelector('.alternativa.selecionada');
-    if (!selecionada) { alert('Por favor, selecione uma alternativa antes de confirmar.'); return; }
+    if (!selecionada) { mostrarToast('⚠️ Selecione uma alternativa antes de confirmar.'); return; }
     respondido = true;
     if (respostaCorreta) {
       selecionada.classList.remove('selecionada');
@@ -3815,312 +3903,16 @@ function _esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function
 function matImg(i, c){ return '<img class="mat-ico ' + (c||'') + '" src="' + MAT_IMG[i] + '" alt="">'; }
 function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pageId + ' .sidebar-mascote-emoji'); if (el && MAT_IMG[i]) el.innerHTML = '<img class="mascote-mat" src="' + MAT_IMG[i] + '" alt="">'; }
 
+  // ── CONTEÚDO DAS MATÉRIAS ──
+  // Vem da API (aulas + questões do banco) logo após o login: ver carregarConteudoDaApi().
+  // Aqui só fica o esqueleto. O gabarito NÃO existe mais no navegador:
+  // a resposta é conferida no servidor (POST /aluno/questoes/:id/responder).
+  // 'chavesParaDesbloquear' é só reserva; o valor real vem do banco.
   const MATERIAS_DATA = {
-    1: {
-      nome: 'Programação', icone: '',
-      chavesParaDesbloquear: 0,  // desbloqueada por padrão
-      topicos: [
-        {
-          id: 't1-1', titulo: 'Tópico 1 — Variáveis em Python',
-          chaves: 3,
-          conteudo: `<p>Aprender programação começa com entender como armazenar e organizar informações. Variáveis são como caixas onde você guarda dados — um número, um texto, qualquer valor que o programa precisará usar depois.</p><br>
-          <p>Em Python, criar uma variável é simples: você escolhe um nome e atribui um valor. A linguagem decide sozinha qual tipo de dado está sendo guardado (tipagem dinâmica).</p><br>
-          <p>Classificar essas informações corretamente é o que permite criar programas organizados e eficientes.</p>`,
-          exemplo: `nome = "HYTECH"\nidade = 1\nativo = True`,
-          dica: { titulo: 'Nomeie bem suas variáveis!', corpo: 'Use nomes descritivos em vez de letras genéricas como "x". Um nome como "quantidadeAlunos" é muito mais fácil de entender do que "qa".' }
-        },
-        {
-          id: 't1-2', titulo: 'Tópico 2 — Tipos de Dados',
-          chaves: 3,
-          conteudo: `<p>Python possui vários tipos de dados nativos: <strong>int</strong> (números inteiros), <strong>float</strong> (decimais), <strong>str</strong> (texto), <strong>bool</strong> (verdadeiro/falso) e <strong>list</strong> (listas).</p><br>
-          <p>Saber qual tipo usar em cada situação é fundamental para escrever código eficiente e evitar erros inesperados no programa.</p><br>
-          <p>Python identifica o tipo automaticamente, mas você pode verificar usando a função <code>type()</code>.</p>`,
-          exemplo: `numero = 42           # int\npreco = 9.99          # float\nnome = "Python"       # str\nativo = True          # bool\nnotas = [8, 9, 7.5]  # list`,
-          dica: { titulo: 'Use type() para inspecionar!', corpo: 'Quando tiver dúvida sobre o tipo de uma variável, use print(type(variavel)) para ver exatamente o que Python está guardando.' }
-        },
-        {
-          id: 't1-3', titulo: 'Tópico 3 — Operadores',
-          chaves: 3,
-          conteudo: `<p>Operadores permitem realizar cálculos e comparações com variáveis. Os aritméticos são: <strong>+</strong> adição, <strong>-</strong> subtração, <strong>*</strong> multiplicação, <strong>/</strong> divisão e <strong>**</strong> potência.</p><br>
-          <p>Os operadores de comparação (<strong>==</strong>, <strong>!=</strong>, <strong>&gt;</strong>, <strong>&lt;</strong>) retornam True ou False e são fundamentais nas estruturas de decisão.</p>`,
-          exemplo: `a = 10\nb = 3\nprint(a + b)   # 13\nprint(a ** b)  # 1000\nprint(a > b)   # True`,
-          dica: { titulo: 'Cuidado com / e //!', corpo: 'Em Python 3, a divisão "/" sempre retorna float. Use "//" para divisão inteira. Ex: 10/3 = 3.333 e 10//3 = 3.' }
-        },
-        {
-          id: 't1-extra', titulo: 'Tópico Extra — Input e Output',
-          chaves: 5, isExtra: true,
-          conteudo: `<p>Todo programa precisa se comunicar com o usuário. Em Python, usamos <strong>input()</strong> para ler dados digitados e <strong>print()</strong> para exibir resultados.</p><br>
-          <p>O <code>input()</code> sempre retorna uma string, então se precisar de número, converta com <code>int()</code> ou <code>float()</code>.</p>`,
-          exemplo: `nome = input("Qual é o seu nome? ")\nidade = int(input("Qual a sua idade? "))\nprint(f"Olá, {nome}! Você tem {idade} anos.")`,
-          dica: { titulo: 'f-strings são poderosas!', corpo: 'Use f"texto {variavel}" para incluir variáveis diretamente no texto. É mais legível do que concatenar strings com "+".' }
-        }
-      ],
-      questoes: [
-        {
-          pergunta: 'O que é uma variável em programação?',
-          codigo: `# Exemplo:\nnome = "Maria"\nidade = 25\nprint(nome, idade)`,
-          alternativas: [
-            { texto: 'A) Um tipo de operador matemático', correta: false },
-            { texto: 'B) Um espaço na memória para armazenar um valor', correta: true },
-            { texto: 'C) Uma função que exibe texto na tela', correta: false },
-            { texto: 'D) Um comentário no código', correta: false },
-            { texto: 'E) Um arquivo de configuração do Python', correta: false }
-          ]
-        },
-        {
-          pergunta: 'Qual é o tipo de dado do valor 3.14 em Python?',
-          codigo: `x = 3.14\nprint(type(x))`,
-          alternativas: [
-            { texto: 'A) int', correta: false },
-            { texto: 'B) str', correta: false },
-            { texto: 'C) float', correta: true },
-            { texto: 'D) bool', correta: false },
-            { texto: 'E) number', correta: false }
-          ]
-        },
-        {
-          pergunta: 'Qual operador é usado para potência em Python?',
-          codigo: `resultado = 2 ** 10\nprint(resultado)  # ?`,
-          alternativas: [
-            { texto: 'A) ^', correta: false },
-            { texto: 'B) ^^', correta: false },
-            { texto: 'C) pow()', correta: false },
-            { texto: 'D) **', correta: true },
-            { texto: 'E) *^', correta: false }
-          ]
-        }
-      ]
-    },
-    2: {
-      nome: 'Design', icone: '',
-      chavesParaDesbloquear: 19,
-      topicos: [
-        {
-          id: 't2-1', titulo: 'Tópico 1 — Fundamentos do Design',
-          chaves: 3,
-          conteudo: `<p>Design é a arte de resolver problemas de forma visual e funcional. Os princípios fundamentais do design gráfico e digital guiam a criação de peças que comunicam com clareza e impacto.</p><br>
-          <p>Os quatro pilares do design são: <strong>Contraste</strong> (destacar elementos importantes), <strong>Repetição</strong> (criar consistência visual), <strong>Alinhamento</strong> (organizar o layout) e <strong>Proximidade</strong> (agrupar itens relacionados). Esses princípios formam o acrônimo <strong>CRAP</strong>.</p><br>
-          <p>Aplicar esses princípios é o primeiro passo para criar layouts profissionais e harmoniosos.</p>`,
-          exemplo: `PRINCÍPIOS DO DESIGN (CRAP)\n\nC — Contraste: elementos diferentes devem\n    ser claramente distintos\nR — Repetição: repita estilos para coesão\nA — Alinhamento: nada deve ser posto\n    aleatoriamente na página\nP — Proximidade: itens relacionados devem\n    estar agrupados visualmente`,
-          dica: { titulo: 'Menos é mais!', corpo: 'Bons designers sabem quando parar. Evite sobrecarregar o layout com elementos em excesso. O espaço em branco (whitespace) também é um elemento do design.' }
-        },
-        {
-          id: 't2-2', titulo: 'Tópico 2 — Teoria das Cores',
-          chaves: 3,
-          conteudo: `<p>A cor é uma das ferramentas mais poderosas do design. Ela transmite emoções, cria hierarquia e orienta o olhar do usuário. Entender o círculo cromático é essencial para criar combinações harmoniosas.</p><br>
-          <p>Principais harmonias cromáticas: <strong>Monocromática</strong> (variações de um tom), <strong>Complementar</strong> (cores opostas no círculo), <strong>Análoga</strong> (cores vizinhas) e <strong>Triádica</strong> (três cores equidistantes).</p><br>
-          <p>Cada cor carrega significados culturais: azul transmite confiança, vermelho urgência, verde natureza e equilíbrio.</p>`,
-          exemplo: `HARMONIAS CROMÁTICAS\n\nMonocromática:  #2D0A6E → #5B2D8E → #9B6FD0\n                (mesmo matiz, luminosidades diferentes)\n\nComplementar:   Azul  ←→  Laranja\n                Verde ←→  Vermelho\n\nAnáloga:        Azul + Azul-Verde + Verde\n                (cores próximas no círculo)`,
-          dica: { titulo: 'Regra 60-30-10!', corpo: 'Use a cor dominante em 60% do layout, a secundária em 30% e a cor de destaque (accent) em apenas 10%. Essa proporção cria equilíbrio visual natural.' }
-        },
-        {
-          id: 't2-3', titulo: 'Tópico 3 — Tipografia',
-          chaves: 3,
-          conteudo: `<p>Tipografia é o estudo e uso das fontes para comunicação visual. A escolha certa da fonte pode transmitir personalidade, credibilidade e hierarquia de informação.</p><br>
-          <p>As famílias tipográficas principais são: <strong>Serif</strong> (com serifa — clássicas, como Times New Roman), <strong>Sans-serif</strong> (sem serifa — modernas, como Arial), <strong>Display</strong> (decorativas, para títulos) e <strong>Monospace</strong> (código, como Courier).</p><br>
-          <p>A hierarquia tipográfica organiza a leitura: títulos maiores, subtítulos médios e corpo de texto menor.</p>`,
-          exemplo: `HIERARQUIA TIPOGRÁFICA\n\nTítulo (H1):    36–48px  |  Font-weight: 800\nSubtítulo (H2): 24–32px  |  Font-weight: 700\nTítulo (H3):    18–22px  |  Font-weight: 600\nCorpo do texto: 14–16px  |  Font-weight: 400\nLegenda:        11–13px  |  Font-weight: 400\n\nDica: máximo 2-3 famílias tipográficas por projeto`,
-          dica: { titulo: 'Legibilidade acima de tudo!', corpo: 'Uma fonte bonita que não se lê bem é um design ruim. Priorize sempre a legibilidade, especialmente em textos longos. Contraste entre fundo e texto deve ser alto.' }
-        },
-        {
-          id: 't2-extra', titulo: 'Tópico Extra — UI/UX e Prototipação',
-          chaves: 5, isExtra: true,
-          conteudo: `<p><strong>UI (User Interface)</strong> refere-se à aparência visual de um produto digital — botões, ícones, cores, tipografia. <strong>UX (User Experience)</strong> foca na experiência do usuário ao interagir com o produto — fluxos, usabilidade e acessibilidade.</p><br>
-          <p>A prototipação é o processo de criar representações visuais do produto antes do desenvolvimento. Ferramentas como <strong>Figma</strong>, Adobe XD e Sketch permitem criar wireframes e protótipos interativos.</p><br>
-          <p>O processo de design segue etapas: pesquisa → wireframe → protótipo → teste → refinamento.</p>`,
-          exemplo: `FLUXO DE DESIGN UI/UX\n\n1. Pesquisa de usuário (entrevistas, personas)\n2. Arquitetura da informação (sitemap)\n3. Wireframe (esboço estrutural, sem cores)\n4. Protótipo de alta fidelidade (Figma)\n5. Teste de usabilidade (com usuários reais)\n6. Handoff para desenvolvimento\n7. Iteração com base no feedback`,
-          dica: { titulo: 'Teste com usuários reais!', corpo: 'Não presuma que o seu design é intuitivo. Faça testes de usabilidade com pelo menos 5 usuários reais. Problemas que parecem óbvios ao designer são invisíveis a quem usa pela primeira vez.' }
-        }
-      ],
-      questoes: [
-        {
-          pergunta: 'Qual é o acrônimo que representa os quatro princípios fundamentais do design?',
-          codigo: `Contraste, Repetição, Alinhamento, Proximidade\n\nEsses princípios guiam a organização visual\nde qualquer layout profissional.`,
-          alternativas: [
-            { texto: 'A) DRAW', correta: false },
-            { texto: 'B) CRAP', correta: true },
-            { texto: 'C) GRID', correta: false },
-            { texto: 'D) FLOW', correta: false },
-            { texto: 'E) FORM', correta: false }
-          ]
-        },
-        {
-          pergunta: 'Qual harmonia cromática utiliza cores opostas no círculo cromático?',
-          codigo: `Exemplos de pares:\n- Azul  ←→  Laranja\n- Verde ←→  Vermelho\n- Roxo  ←→  Amarelo`,
-          alternativas: [
-            { texto: 'A) Harmonia monocromática', correta: false },
-            { texto: 'B) Harmonia análoga', correta: false },
-            { texto: 'C) Harmonia complementar', correta: true },
-            { texto: 'D) Harmonia triádica', correta: false },
-            { texto: 'E) Harmonia quadrada', correta: false }
-          ]
-        },
-        {
-          pergunta: 'Na hierarquia tipográfica, qual é a finalidade de usar tamanhos e pesos diferentes para títulos e corpo de texto?',
-          codigo: `Título (H1):   48px — peso 800\nSubtítulo (H2): 28px — peso 700\nCorpo:         16px — peso 400`,
-          alternativas: [
-            { texto: 'A) Apenas para fins estéticos, sem impacto funcional', correta: false },
-            { texto: 'B) Orientar o olhar do leitor e organizar a leitura por importância', correta: true },
-            { texto: 'C) Economizar espaço no layout', correta: false },
-            { texto: 'D) Garantir compatibilidade com todos os navegadores', correta: false },
-            { texto: 'E) Definir a paleta de cores do projeto', correta: false }
-          ]
-        }
-      ]
-    },
-    3: {
-      nome: 'Banco de Dados', icone: '',
-      chavesParaDesbloquear: 38,
-      topicos: [
-        {
-          id: 't3-1', titulo: 'Tópico 1 — Introdução a Banco de Dados',
-          chaves: 3,
-          conteudo: `<p>Um banco de dados é um sistema organizado para armazenar, gerenciar e recuperar informações de forma eficiente. Existem dois grandes modelos: <strong>Relacionais (SQL)</strong> e <strong>Não-relacionais (NoSQL)</strong>.</p><br>
-          <p>Os bancos de dados relacionais organizam dados em <strong>tabelas</strong> compostas por linhas (registros) e colunas (atributos). Cada tabela representa uma entidade do mundo real, como "Alunos", "Produtos" ou "Pedidos".</p><br>
-          <p>SGBDs (Sistemas Gerenciadores de Banco de Dados) populares: <strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>SQLite</strong> e <strong>SQL Server</strong>.</p>`,
-          exemplo: `TABELA: Alunos\n┌────┬──────────┬───────┬────────┐\n│ id │  nome    │ idade │ turma  │\n├────┼──────────┼───────┼────────┤\n│  1 │ Maria    │  16   │  A     │\n│  2 │ João     │  17   │  B     │\n│  3 │ Ana      │  16   │  A     │\n└────┴──────────┴───────┴────────┘\n\nCada linha = 1 registro\nCada coluna = 1 atributo`,
-          dica: { titulo: 'Chave Primária (PK)!', corpo: 'A chave primária identifica cada registro de forma única. A coluna "id" geralmente é a PK — nunca se repete e nunca pode ser nula.' }
-        },
-        {
-          id: 't3-2', titulo: 'Tópico 2 — Comandos SQL Básicos',
-          chaves: 3,
-          conteudo: `<p>SQL (Structured Query Language) é a linguagem padrão para interagir com bancos de dados relacionais. Os comandos principais são divididos em categorias:</p><br>
-          <p><strong>DML (Manipulação de Dados):</strong> <code>SELECT</code> (consultar), <code>INSERT</code> (inserir), <code>UPDATE</code> (atualizar) e <code>DELETE</code> (excluir).</p><br>
-          <p><strong>DDL (Definição de Dados):</strong> <code>CREATE TABLE</code> (criar tabela), <code>ALTER TABLE</code> (modificar) e <code>DROP TABLE</code> (excluir tabela).</p>`,
-          exemplo: `-- Consultar todos os alunos\nSELECT * FROM Alunos;\n\n-- Inserir novo aluno\nINSERT INTO Alunos (nome, idade, turma)\nVALUES ('Pedro', 17, 'C');\n\n-- Atualizar um registro\nUPDATE Alunos SET turma = 'B'\nWHERE id = 3;\n\n-- Excluir um registro\nDELETE FROM Alunos WHERE id = 3;`,
-          dica: { titulo: 'Cuidado com DELETE sem WHERE!', corpo: 'Um DELETE sem cláusula WHERE apaga TODOS os registros da tabela. Sempre filtre com WHERE antes de executar operações de exclusão ou atualização.' }
-        },
-        {
-          id: 't3-3', titulo: 'Tópico 3 — Filtros e Junções (JOIN)',
-          chaves: 3,
-          conteudo: `<p>A cláusula <strong>WHERE</strong> filtra registros com condições. Pode combinar condições com <strong>AND</strong>, <strong>OR</strong> e <strong>NOT</strong>. A cláusula <strong>ORDER BY</strong> ordena resultados.</p><br>
-          <p>O <strong>JOIN</strong> permite combinar dados de duas ou mais tabelas relacionadas. O tipo mais comum é o <strong>INNER JOIN</strong>, que retorna apenas registros com correspondência nas duas tabelas.</p>`,
-          exemplo: `-- Filtrar com WHERE\nSELECT nome, idade FROM Alunos\nWHERE turma = 'A' AND idade >= 16\nORDER BY nome ASC;\n\n-- JOIN: combinar Alunos com Notas\nSELECT A.nome, N.disciplina, N.valor\nFROM Alunos A\nINNER JOIN Notas N ON A.id = N.aluno_id\nWHERE N.valor >= 7;`,
-          dica: { titulo: 'INNER vs LEFT JOIN!', corpo: 'INNER JOIN retorna apenas correspondências. LEFT JOIN retorna todos os registros da tabela da esquerda, mesmo sem correspondência na da direita (preenchendo com NULL).' }
-        },
-        {
-          id: 't3-extra', titulo: 'Tópico Extra — Modelagem e Normalização',
-          chaves: 5, isExtra: true,
-          conteudo: `<p>Modelagem de dados é o processo de projetar a estrutura do banco antes de criá-lo. O <strong>Diagrama ER (Entidade-Relacionamento)</strong> representa entidades, seus atributos e os relacionamentos entre elas.</p><br>
-          <p><strong>Normalização</strong> é o processo de organizar as tabelas para eliminar redundâncias e anomalias. As três primeiras formas normais (1FN, 2FN, 3FN) são suficientes para a maioria dos projetos.</p><br>
-          <p>A <strong>Chave Estrangeira (FK)</strong> é o mecanismo que cria relacionamentos entre tabelas, referenciando a chave primária de outra tabela.</p>`,
-          exemplo: `-- Criando tabelas relacionadas\nCREATE TABLE Turmas (\n  id    INT PRIMARY KEY,\n  nome  VARCHAR(10) NOT NULL\n);\n\nCREATE TABLE Alunos (\n  id       INT PRIMARY KEY,\n  nome     VARCHAR(100) NOT NULL,\n  turma_id INT,\n  FOREIGN KEY (turma_id) REFERENCES Turmas(id)\n);`,
-          dica: { titulo: '1FN, 2FN, 3FN simplificado!', corpo: '1FN: sem grupos repetidos. 2FN: todo campo depende da PK inteira. 3FN: nenhum campo depende de outro campo não-chave. Seguindo essas regras, seu banco ficará íntegro.' }
-        }
-      ],
-      questoes: [
-        {
-          pergunta: 'Em um banco de dados relacional, o que é a Chave Primária (Primary Key)?',
-          codigo: `TABELA: Produtos\n┌────┬─────────────┬────────┐\n│ id │    nome     │ preco  │\n├────┼─────────────┼────────┤\n│  1 │ Notebook    │ 2500   │\n│  2 │ Monitor     │  900   │\n└────┴─────────────┴────────┘\n\nA coluna "id" é a Chave Primária`,
-          alternativas: [
-            { texto: 'A) Um campo que pode se repetir em vários registros', correta: false },
-            { texto: 'B) Um identificador único que nunca se repete na tabela', correta: true },
-            { texto: 'C) A primeira coluna obrigatória de toda tabela', correta: false },
-            { texto: 'D) Um campo numérico que armazena senhas criptografadas', correta: false },
-            { texto: 'E) O nome dado à tabela principal do banco', correta: false }
-          ]
-        },
-        {
-          pergunta: 'Qual comando SQL é utilizado para buscar dados em uma tabela?',
-          codigo: `-- Qual comando preenche a lacuna?\n_________ nome, idade FROM Alunos\nWHERE turma = 'A';`,
-          alternativas: [
-            { texto: 'A) GET', correta: false },
-            { texto: 'B) FETCH', correta: false },
-            { texto: 'C) FIND', correta: false },
-            { texto: 'D) SELECT', correta: true },
-            { texto: 'E) READ', correta: false }
-          ]
-        },
-        {
-          pergunta: 'O que o comando INNER JOIN faz em uma consulta SQL?',
-          codigo: `SELECT A.nome, N.valor\nFROM Alunos A\nINNER JOIN Notas N\nON A.id = N.aluno_id;`,
-          alternativas: [
-            { texto: 'A) Cria uma nova tabela combinando as duas existentes', correta: false },
-            { texto: 'B) Exclui registros duplicados de uma tabela', correta: false },
-            { texto: 'C) Retorna registros que têm correspondência nas duas tabelas', correta: true },
-            { texto: 'D) Ordena os resultados em ordem alfabética', correta: false },
-            { texto: 'E) Insere dados de uma tabela em outra', correta: false }
-          ]
-        }
-      ]
-    },
-    4: {
-      nome: 'Redes', icone: '',
-      chavesParaDesbloquear: 57,
-      topicos: [
-        {
-          id: 't4-1', titulo: 'Tópico 1 — Fundamentos de Redes',
-          chaves: 3,
-          conteudo: `<p>Uma rede de computadores é um conjunto de dispositivos interconectados que compartilham recursos e informações. As redes podem ser classificadas por abrangência: <strong>LAN</strong> (Local Area Network — rede local), <strong>MAN</strong> (Metropolitan Area Network) e <strong>WAN</strong> (Wide Area Network — como a Internet).</p><br>
-          <p>Os principais componentes de uma rede incluem: <strong>roteadores</strong> (direcionam pacotes entre redes), <strong>switches</strong> (conectam dispositivos numa mesma rede), <strong>modems</strong> (convertem sinais) e <strong>access points</strong> (Wi-Fi).</p><br>
-          <p>A comunicação em rede segue modelos de referência: o <strong>modelo OSI</strong> (7 camadas) e o <strong>modelo TCP/IP</strong> (4 camadas).</p>`,
-          exemplo: `CLASSIFICAÇÃO POR ABRANGÊNCIA\n\nLAN  — Local Area Network\n       Ex: rede da escola, empresa\n       Alcance: até alguns km\n\nMAN  — Metropolitan Area Network\n       Ex: rede de uma cidade\n       Alcance: dezenas de km\n\nWAN  — Wide Area Network\n       Ex: Internet\n       Alcance: global`,
-          dica: { titulo: 'LAN vs WLAN!', corpo: 'LAN usa cabos (ethernet), enquanto WLAN (Wireless LAN) usa ondas de rádio (Wi-Fi). Ambas são redes locais — a diferença está no meio de transmissão.' }
-        },
-        {
-          id: 't4-2', titulo: 'Tópico 2 — Modelo OSI e TCP/IP',
-          chaves: 3,
-          conteudo: `<p>O <strong>Modelo OSI</strong> divide a comunicação em rede em 7 camadas: Física, Enlace, Rede, Transporte, Sessão, Apresentação e Aplicação. É um modelo conceitual de referência.</p><br>
-          <p>O <strong>modelo TCP/IP</strong> é o modelo prático usado na Internet, com 4 camadas: Acesso à Rede, Internet, Transporte e Aplicação. Protocolos como <strong>IP</strong>, <strong>TCP</strong>, <strong>UDP</strong>, <strong>HTTP</strong> e <strong>DNS</strong> operam nesse modelo.</p><br>
-          <p><strong>TCP</strong> (orientado a conexão, confiável) vs <strong>UDP</strong> (sem conexão, mais rápido — usado em streaming e jogos).</p>`,
-          exemplo: `MODELO TCP/IP — 4 CAMADAS\n\n4. Aplicação   → HTTP, HTTPS, FTP, DNS, SMTP\n               → O que o usuário vê\n\n3. Transporte  → TCP, UDP\n               → Entrega dos dados\n\n2. Internet    → IP, ICMP\n               → Endereçamento e roteamento\n\n1. Acesso      → Ethernet, Wi-Fi\n   à Rede      → Transmissão física`,
-          dica: { titulo: 'TCP vs UDP: quando usar?', corpo: 'Use TCP quando a integridade dos dados é crítica (e-mail, transferência de arquivos, web). Use UDP quando a velocidade importa mais que a perfeição (videochamadas, jogos online, DNS).' }
-        },
-        {
-          id: 't4-3', titulo: 'Tópico 3 — Endereçamento IP e Sub-redes',
-          chaves: 3,
-          conteudo: `<p>O endereço <strong>IP (Internet Protocol)</strong> identifica cada dispositivo em uma rede. O <strong>IPv4</strong> usa 32 bits representados em 4 octetos decimais (ex: 192.168.1.10). O <strong>IPv6</strong> usa 128 bits para suportar muito mais dispositivos.</p><br>
-          <p>A <strong>máscara de sub-rede</strong> (subnet mask) define qual parte do IP é a rede e qual é o host. Ex: 255.255.255.0 (ou /24) indica que os 3 primeiros octetos identificam a rede.</p><br>
-          <p>O <strong>DHCP</strong> atribui IPs automaticamente. O <strong>DNS</strong> converte nomes de domínio em endereços IP.</p>`,
-          exemplo: `ENDEREÇAMENTO IPv4\n\nIP do dispositivo:  192.168.1 . 50\nMáscara (/24):      255.255.255.0\n\nParte de REDE:      192.168.1  (fixo)\nParte de HOST:                  50  (varia)\n\nRange de hosts:    192.168.1.1  a  .254\nGateway padrão:    192.168.1.1  (roteador)\nBroadcast:         192.168.1.255`,
-          dica: { titulo: 'IPs privados vs públicos!', corpo: 'IPs privados (192.168.x.x, 10.x.x.x, 172.16-31.x.x) são usados em redes internas e não roteados na Internet. IPs públicos são únicos globalmente e atribuídos pelo provedor (ISP).' }
-        },
-        {
-          id: 't4-extra', titulo: 'Tópico Extra — Segurança em Redes',
-          chaves: 5, isExtra: true,
-          conteudo: `<p>Segurança em redes envolve proteger dados e sistemas contra acessos não autorizados, ataques e falhas. Os principais conceitos são: <strong>confidencialidade</strong>, <strong>integridade</strong> e <strong>disponibilidade</strong> (tríade CIA).</p><br>
-          <p>Ferramentas e técnicas fundamentais: <strong>Firewall</strong> (filtra tráfego por regras), <strong>VPN</strong> (criptografa conexões remotas), <strong>HTTPS/TLS</strong> (criptografia na camada de aplicação) e <strong>IDS/IPS</strong> (detecção e prevenção de intrusões).</p><br>
-          <p>Ataques comuns: <strong>DDoS</strong> (sobrecarga de servidores), <strong>Man-in-the-Middle</strong> (interceptação), <strong>Phishing</strong> (engenharia social) e <strong>Port Scanning</strong> (varredura de portas).</p>`,
-          exemplo: `TRÍADE CIA DE SEGURANÇA\n\nC — Confidencialidade\n    Apenas pessoas autorizadas acessam\n    os dados. Ex: criptografia, senhas\n\nI — Integridade\n    Dados não são alterados sem autorização\n    Ex: hashing, assinatura digital\n\nA — Disponibilidade\n    Sistemas ficam acessíveis quando\n    necessário. Ex: redundância, backups`,
-          dica: { titulo: 'HTTPS é obrigatório!', corpo: 'Nunca trafegue dados sensíveis em HTTP puro. O HTTPS usa TLS para criptografar a comunicação. Um cadeado verde no navegador indica conexão segura.' }
-        }
-      ],
-      questoes: [
-        {
-          pergunta: 'O que diferencia uma rede LAN de uma rede WAN?',
-          codigo: `LAN — Local Area Network\nWAN — Wide Area Network\n\nExemplos:\nLAN: rede da escola ou empresa\nWAN: a própria Internet`,
-          alternativas: [
-            { texto: 'A) LAN usa apenas cabo e WAN usa apenas Wi-Fi', correta: false },
-            { texto: 'B) LAN tem abrangência local enquanto WAN cobre grandes distâncias', correta: true },
-            { texto: 'C) LAN é mais rápida que WAN em qualquer situação', correta: false },
-            { texto: 'D) WAN é uma rede privada e LAN é pública', correta: false },
-            { texto: 'E) Não há diferença, são apenas nomes distintos para a mesma coisa', correta: false }
-          ]
-        },
-        {
-          pergunta: 'Qual é a função do protocolo DNS em uma rede de computadores?',
-          codigo: `Você digita no navegador:\n  www.hytech.com.br\n\nO DNS resolve para:\n  192.0.2.45`,
-          alternativas: [
-            { texto: 'A) Criptografar o tráfego entre cliente e servidor', correta: false },
-            { texto: 'B) Atribuir endereços IP automaticamente aos dispositivos', correta: false },
-            { texto: 'C) Converter nomes de domínio em endereços IP', correta: true },
-            { texto: 'D) Filtrar pacotes de rede por regras de segurança', correta: false },
-            { texto: 'E) Gerenciar a largura de banda da rede local', correta: false }
-          ]
-        },
-        {
-          pergunta: 'Em relação aos protocolos TCP e UDP, qual afirmação está correta?',
-          codigo: `TCP → confiável, orientado à conexão\n      Ex: HTTP, e-mail, FTP\n\nUDP → rápido, sem garantia de entrega\n      Ex: streaming, jogos online`,
-          alternativas: [
-            { texto: 'A) UDP é mais confiável pois confirma entrega de todos os pacotes', correta: false },
-            { texto: 'B) TCP é usado em streaming de vídeo por ser mais rápido', correta: false },
-            { texto: 'C) TCP garante entrega e ordem dos dados; UDP prioriza velocidade', correta: true },
-            { texto: 'D) Ambos operam na camada de Rede do modelo TCP/IP', correta: false },
-            { texto: 'E) UDP e TCP são o mesmo protocolo com nomes diferentes', correta: false }
-          ]
-        }
-      ]
-    }
+    1: { nome: 'Programação',    icone: '', chavesParaDesbloquear: 0,  topicos: [], questoes: [] },
+    2: { nome: 'Design',         icone: '', chavesParaDesbloquear: 19, topicos: [], questoes: [] },
+    3: { nome: 'Banco de Dados', icone: '', chavesParaDesbloquear: 38, topicos: [], questoes: [] },
+    4: { nome: 'Redes',          icone: '', chavesParaDesbloquear: 57, topicos: [], questoes: [] }
   };
 
   // ── ESTADO DA PROGRESSÃO (em memória — reinicia com a página) ──
@@ -4142,19 +3934,12 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
 
   // ── STREAK: calcular dias consecutivos de atividade ──
   function calcularStreak() {
-    // Streak em memória apenas — reseta ao recarregar a página
-    return 1; // Simula 1 dia de acesso (sessão atual)
+    return _estadoAluno ? _estadoAluno.resumo.streak : 0;     // vem do banco
   }
 
-  // ── POSIÇÃO NO RANKING ──
-  function calcularPosicaoRanking(chavesAluno) {
-    const RANKING_EST = [
-      { chaves: 76 }, { chaves: 62 }, { chaves: 51 },
-      { chaves: 39 }, { chaves: 24 }
-    ];
-    // Conta quantos têm mais chaves que o aluno
-    const acima = RANKING_EST.filter(r => r.chaves > chavesAluno).length;
-    return acima + 1; // posição 1-indexed
+  // ── POSIÇÃO NO RANKING ── (vem do banco)
+  function calcularPosicaoRanking() {
+    return _estadoAluno ? _estadoAluno.resumo.posicao : '—';
   }
 
   function sincronizarChaves() {
@@ -4166,24 +3951,24 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       if (el) el.textContent = ch + (id === 'dash-chaves-display' ? ' Chaves coletadas' : ' Chaves');
     });
     // fases
-    let fases = 0;
-    Object.values(p.topicos || {}).forEach(t => { if (t.lido) fases++; });
+    const _cf = _contarFases(p);
+    const fases = _cf.feitas;
     const fd = document.getElementById('trilha-fases-display');
-    if (fd) fd.textContent = fases + '/16 completas';
+    if (fd) fd.textContent = fases + '/' + _cf.total + ' completas';
     // sidebar trilha
     for (let m = 1; m <= 4; m++) {
       const mat = MATERIAS_DATA[m];
       let concluidos = 0;
       mat.topicos.forEach(t => { if ((p.topicos[t.id] || {}).lido) concluidos++; });
       const el = document.getElementById('tril-prog-' + m);
-      if (el) el.textContent = concluidos + '/4';
+      if (el) el.textContent = concluidos + '/' + mat.topicos.length;
     }
     // ── STREAK dinâmico ──
     const streak = calcularStreak();
     const streakEl = document.getElementById('trilha-streak-display');
     if (streakEl) streakEl.textContent = streak + (streak === 1 ? ' dia 🔥' : ' dias 🔥');
     // ── RANKING dinâmico no painel lateral ──
-    const pos = calcularPosicaoRanking(ch);
+    const pos = calcularPosicaoRanking();
     const posEl = document.getElementById('trilha-ranking-pos');
     if (posEl) posEl.textContent = pos + '° lugar';
     // ── Atualizar dropdowns de perfil ──
@@ -4210,6 +3995,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
     _setMascoteMateria('pg-hub', mIdx);
     const p = loadProg();
     const mat = MATERIAS_DATA[mIdx];
+    if (!mat.topicos.length) { const _a = document.getElementById('hub-conteudo-area'); if (_a) _a.innerHTML = _MSG_SEM_CONTEUDO; return; }
     const tIdx = (topicoIdx !== undefined) ? topicoIdx : encontrarTopicoAtual(mIdx, p);
     _hubTopicoAtual = tIdx;
     const topico = mat.topicos[tIdx];
@@ -4233,7 +4019,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       if (!desbloqueado) cls += ' bloqueado';
       if (tLido) cls += ' concluido';
       if (i === tIdx && desbloqueado) cls += ' ativo-topico';
-      const chIcon = t.isExtra ? CHAVE_IMG + ' Vale 5 Chaves' : CHAVE_IMG + ' Vale 3 Chaves';
+      const chIcon = CHAVE_IMG + ' Vale ' + t.chaves + ' Chaves';
       const clicar = desbloqueado ? `onclick="renderHub(${mIdx},${i})"` : `onclick="mostrarToast('🔒 Conclua o tópico anterior primeiro!')"`;
       gridHtml += `<div class="${cls}" ${clicar}><h3>${t.titulo.split('—')[0].trim()}</h3><p>${t.titulo.includes('—') ? t.titulo.split('—')[1].trim() : ''}</p><div class="chaves-badge">${chIcon}</div></div>`;
     });
@@ -4263,14 +4049,15 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       ${gridHtml}
       <div class="texto-aula-box">
         <div class="topico-header">${topico.titulo}</div>
+        ${topico.autor ? `<div style="font-size:12px;color:var(--cinza-texto);margin-bottom:8px;">por ${_esc(topico.autor)}</div>` : ''}
         <h2>${mat.nome}</h2>
         <div class="texto-aula">${topico.conteudo}</div>
         <div style="font-weight:700;font-size:13px;text-align:center;margin-bottom:12px;">EXEMPLO</div>
-        <div class="exemplo-box"><span style="color:#7dd3fc;font-family:monospace;font-size:13px;white-space:pre;display:block;overflow-x:auto;">${topico.exemplo}</span></div>
+        <div class="exemplo-box"><span style="color:#7dd3fc;font-family:monospace;font-size:13px;white-space:pre;display:block;overflow-x:auto;">${_esc(topico.exemplo)}</span></div>
         <div class="dica-titulo">DICA</div>
         <div class="dica-box">
-          <h4>${topico.dica.titulo}</h4>
-          <p>${topico.dica.corpo}</p>
+          <h4>${_esc(topico.dica.titulo)}</h4>
+          <p>${_esc(topico.dica.corpo)}</p>
         </div>
         <div class="aula-acoes">
           ${botaoAcao}
@@ -4299,16 +4086,25 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
     return (p.topicos[mat.topicos[tIdx - 1].id] || {}).lido;
   }
 
-  function marcarLidoHub(mIdx, tIdx) {
+  async function marcarLidoHub(mIdx, tIdx) {
     const p = loadProg();
     const mat = MATERIAS_DATA[mIdx];
     const topico = mat.topicos[tIdx];
     if ((p.topicos[topico.id] || {}).lido) return;
-    p.topicos[topico.id] = { lido: true };
-    p.chaves = (p.chaves || 0) + topico.chaves;
-    saveProg(p);
-    mostrarToast(`🗝️ +${topico.chaves} chaves conquistadas!`);
-    renderHub(mIdx, tIdx);
+    if (!topico.dbId) { mostrarToast('⚠️ Este tópico ainda não está no banco.'); return; }
+    try {
+      // O BANCO credita as chaves (só na 1ª vez) e confere se isso fecha o certificado.
+      const r = await Api.post('/aluno/aulas/' + topico.dbId + '/concluir');
+      p.topicos[topico.id] = { lido: true };
+      p.chaves = r.saldoChaves;
+      saveProg(p);
+      mostrarToast(r.chavesGanhas > 0 ? '🗝️ +' + r.chavesGanhas + ' chaves conquistadas!' : 'Tópico concluído!');
+      if (r.certificadoEmitido) { _certNovo[mIdx] = true; await carregarEstadoDoAluno(); mostrarToast('🏆 Certificado de ' + mat.nome + ' emitido! +' + CONFIG_CHAVES.certificado + ' chaves!'); }
+      else carregarEstadoDoAluno();      // atualiza streak, posição e pontos sem travar a tela
+      renderHub(mIdx, tIdx);
+    } catch (e) {
+      mostrarToast('⚠️ ' + e.message);
+    }
   }
 
   function selecionarMateriaHub(m) {
@@ -4350,6 +4146,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       if (i === mIdx) el.classList.add('ativo');
     }
 
+    if (!mat.topicos.length) { const _a = document.getElementById('trilha-conteudo-area'); if (_a) _a.innerHTML = _MSG_SEM_CONTEUDO; return; }
     // Verificar se todos os tópicos da matéria estão concluídos
     const todosTopicosOk = mat.topicos.every(t => (p.topicos[t.id] || {}).lido);
     if (!todosTopicosOk) {
@@ -4412,11 +4209,11 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       else if (i === qIdx) cls += ' ativa desbloqueada';
       else cls += ' desbloqueada';
       const click = desbl && !concluida ? `onclick="renderTrilhaQuestao(${mIdx},${i})"` : '';
-      gridHtml += `<div class="${cls}" ${click}><h3>Questão ${i+1}</h3><p>${concluida ? 'Concluída ✅' : (desbl ? 'Disponível' : 'Bloqueada '+'<img class="ico-img ico-sm" src="assets/icons/trilha/cadeado.png" alt="">')}</p><div class="chaves-badge">${CHAVE_IMG} Vale ${CONFIG_CHAVES.questaoFacil} Chaves</div></div>`;
+      gridHtml += `<div class="${cls}" ${click}><h3>Questão ${i+1}</h3><p>${concluida ? 'Concluída ✅' : (desbl ? 'Disponível' : 'Bloqueada '+'<img class="ico-img ico-sm" src="assets/icons/trilha/cadeado.png" alt="">')}</p><div class="chaves-badge">${CHAVE_IMG} Vale ${q.chaves || CONFIG_CHAVES.questaoFacil} Chaves</div></div>`;
     });
     // Card certificado
     const todasQ = mat.questoes.every((q, i) => p.questoes['m' + mIdx + '-q' + i]);
-    gridHtml += `<div class="questao-card ${todasQ ? 'concluida desbloqueada' : 'bloqueada'}" ${todasQ ? 'onclick="renderCertificado(' + mIdx + ')"' : ''}><h3>🏆 Certificado</h3><p>${todasQ ? 'Disponível!' : 'Conclua todas as questões'}</p><div class="chaves-badge">${CHAVE_IMG} Vale 15 Chaves</div></div>`;
+    gridHtml += `<div class="questao-card ${todasQ ? 'concluida desbloqueada' : 'bloqueada'}" ${todasQ ? 'onclick="renderCertificado(' + mIdx + ')"' : ''}><h3>🏆 Certificado</h3><p>${todasQ ? 'Disponível!' : 'Conclua todas as questões'}</p><div class="chaves-badge">${CHAVE_IMG} Vale ${CONFIG_CHAVES.certificado} Chaves</div></div>`;
     gridHtml += '</div>';
 
     area.innerHTML = `
@@ -4426,13 +4223,13 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
           ${gridHtml}
           <div class="questao-detalhes" id="questao-detalhe-${mIdx}-${qIdx}">
             <div class="quest-header"><span class="quest-numero">Questão ${qIdx+1} de ${mat.questoes.length}</span></div>
-            <div class="quest-titulo">${questao.pergunta}</div>
+            <div class="quest-titulo">${_esc(questao.pergunta)}</div>
             <div class="codigo-titulo">Exemplo em Código</div>
-            <div class="codigo-box"><span style="color:#7dd3fc;font-family:monospace;font-size:13px;white-space:pre;display:block;overflow-x:auto;">${questao.codigo}</span></div>
+            <div class="codigo-box"><span style="color:#7dd3fc;font-family:monospace;font-size:13px;white-space:pre;display:block;overflow-x:auto;">${_esc(questao.codigo)}</span></div>
             <div class="alternativas" id="alts-container">
-              ${questao.alternativas.map((a, ai) => `<button class="alternativa" onclick="selecionarAltTrilha(this, ${a.correta})">${a.texto}</button>`).join('')}
+              ${questao.alternativas.map((a, ai) => `<button class="alternativa" onclick="selecionarAltTrilha(this, ${a.id ? 'null' : a.correta}, ${a.id || 'null'})">${_esc(a.texto)}</button>`).join('')}
             </div>
-            <div class="msg-resposta msg-acerto" id="msg-acerto-trilha"><img class="ico-img" src="assets/icons/trilha/acerto.png" alt="">Correto! +5 chaves conquistadas!</div>
+            <div class="msg-resposta msg-acerto" id="msg-acerto-trilha"><img class="ico-img" src="assets/icons/trilha/acerto.png" alt="">Correto! Chaves conquistadas!</div>
             <div class="msg-resposta msg-erro" id="msg-erro-trilha">❌ Tente novamente!</div>
             <button class="btn-confirmar" id="btn-confirmar-trilha" onclick="confirmarRespostaTrilha(${mIdx},${qIdx})">Confirmar Resposta</button>
             <button class="btn-proxima-pergunta" id="btn-proxima-trilha" onclick="proximaPergunta(${mIdx},${qIdx+1})">Próxima Pergunta →</button>
@@ -4442,39 +4239,69 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
     sincronizarChaves();
   }
 
-  function selecionarAltTrilha(btn, correta) {
+  let _trilhaAltId = null;   // id da alternativa escolhida (questões do banco)
+  function selecionarAltTrilha(btn, correta, altId) {
     if (_trilhaRespondido) return;
     document.querySelectorAll('#alts-container .alternativa').forEach(a => a.classList.remove('selecionada'));
     btn.classList.add('selecionada');
     _trilhaRespostaCorreta = correta;
+    _trilhaAltId = altId || null;
   }
 
-  function confirmarRespostaTrilha(mIdx, qIdx) {
+  async function confirmarRespostaTrilha(mIdx, qIdx) {
     if (_trilhaRespondido) return;
     const selecionada = document.querySelector('#alts-container .alternativa.selecionada');
     if (!selecionada) { mostrarToast('Selecione uma alternativa!'); return; }
 
+    const questao = MATERIAS_DATA[mIdx].questoes[qIdx];
     _trilhaRespondido = true;
     const acerto = document.getElementById('msg-acerto-trilha');
     const erro = document.getElementById('msg-erro-trilha');
     const btnConf = document.getElementById('btn-confirmar-trilha');
     const btnProx = document.getElementById('btn-proxima-trilha');
 
-    if (_trilhaRespostaCorreta) {
+    // Questão do banco: o SERVIDOR diz se acertou e quantas chaves valem. Questão local do professor: como antes.
+    let acertou, chavesGanhas = null, saldoServidor = null, certificadoEmitido = false;
+    if (questao.dbId) {
+      try {
+        const r = await Api.post('/aluno/questoes/' + questao.dbId + '/responder', { idAlternativa: _trilhaAltId });
+        acertou = r.acertou; chavesGanhas = r.chavesGanhas; saldoServidor = r.saldoChaves;
+        if (r.certificadoEmitido) _certNovo[mIdx] = true;
+        certificadoEmitido = !!r.certificadoEmitido;
+      } catch (e) {
+        _trilhaRespondido = false;
+        mostrarToast('⚠️ ' + e.message);
+        return;
+      }
+    } else {
+      // questão de teste local do professor: não existe no banco, então não vale chaves
+      acertou = !!_trilhaRespostaCorreta;
+      chavesGanhas = 0;
+    }
+
+    if (acertou) {
       selecionada.classList.remove('selecionada');
       selecionada.classList.add('correta');
       if (acerto) { acerto.style.display = 'block'; }
       if (btnConf) btnConf.style.display = 'none';
       if (btnProx) btnProx.style.display = 'block';
-      // Salvar progresso e chaves
+      // Salvar progresso e chaves (o valor vem do banco; 0 se já tinha acertado antes)
       const p = loadProg();
       const key = 'm' + mIdx + '-q' + qIdx;
       if (!p.questoes[key]) {
         p.questoes[key] = true;
-        p.chaves = (p.chaves || 0) + CONFIG_CHAVES.questaoFacil;
+        if (saldoServidor !== null) p.chaves = saldoServidor;      // o servidor é quem manda no saldo
         saveProg(p);
       }
-      mostrarToast('🗝️ +' + CONFIG_CHAVES.questaoFacil + ' chaves conquistadas!');
+      if (questao.dbId) {
+        if (certificadoEmitido) carregarEstadoDoAluno().then(function () { mostrarToast('🏆 Certificado de ' + MATERIAS_DATA[mIdx].nome + ' emitido! +' + CONFIG_CHAVES.certificado + ' chaves!'); });
+        else carregarEstadoDoAluno();
+      }
+      if (acerto) {
+        const ic = acerto.querySelector('img'); const icHtml = ic ? ic.outerHTML : '';
+        acerto.innerHTML = icHtml + (chavesGanhas > 0 ? 'Correto! +' + chavesGanhas + ' chaves conquistadas!' : 'Correto!');
+      }
+      mostrarToast(chavesGanhas > 0 ? '🗝️ +' + chavesGanhas + ' chaves conquistadas!' : 'Correto!');
     } else {
       selecionada.classList.remove('selecionada');
       selecionada.classList.add('errada');
@@ -4484,6 +4311,7 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
         if (erro) erro.style.display = 'none';
         _trilhaRespondido = false;
         _trilhaRespostaCorreta = null;
+        _trilhaAltId = null;
       }, 1600);
     }
   }
@@ -4509,25 +4337,32 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
     const area = document.getElementById('trilha-conteudo-area');
     if (!area) return;
 
-    // Dar +15 chaves do certificado se ainda não deu, e marcar matéria atual como concluída
-    const certKey = 'cert-m' + mIdx;
+    // O certificado é emitido PELO BANCO (quando a última aula/questão fecha a matéria). O site só mostra.
+    const cert = _certDaMateria(mIdx);
+    if (!cert) {
+      if (todasQ && !_certTentado[mIdx]) {        // confere uma vez no servidor e redesenha
+        _certTentado[mIdx] = true;
+        area.innerHTML = '<div style="padding:40px;text-align:center;color:var(--cinza-texto);">Conferindo seu certificado…</div>';
+        carregarEstadoDoAluno().then(function () { renderCertificado(mIdx); });
+        return;
+      }
+      area.innerHTML = '<div style="padding:8px 0 24px;"><button class="ticket-voltar-btn" onclick="renderTrilhaQuestao(' + mIdx + ', 0)">← Voltar para Questões</button></div>' +
+        '<div class="certificado-box"><div class="cert-titulo">Certificado ainda não disponível</div>' +
+        '<p style="opacity:0.85;font-size:14px;">Leia todos os tópicos e acerte todas as questões de ' + _esc(mat.nome) + ' para receber o certificado.</p></div>';
+      return;
+    }
+
     let bonus = '';
-    if (todasQ && !p.questoes[certKey]) {
-      p.questoes[certKey] = true;
-      p.chaves = (p.chaves || 0) + 15;
-      if (!p.materiaConcluida) p.materiaConcluida = {};
-      p.materiaConcluida[mIdx] = true; // marca a atual como concluída (necessário para gerar o botão desbloquear)
-      saveProg(p);
-      bonus = '<div style="margin-bottom:16px;"><span class="chave-ganho-badge"><img class="ico-img" src="assets/icons/perfil/chave.png" alt="">+15 Chaves de Certificado!</span></div>';
-      mostrarToast('🏆 Matéria ' + mIdx + ' concluída! +15 chaves!');
+    if (_certNovo[mIdx]) {
+      bonus = '<div style="margin-bottom:16px;"><span class="chave-ganho-badge"><img class="ico-img" src="assets/icons/perfil/chave.png" alt="">+' + CONFIG_CHAVES.certificado + ' Chaves de Certificado!</span></div>';
     }
 
     // Botão desbloquear próxima: só aparece se a atual está concluída E a próxima ainda não foi desbloqueada
     let proximaBtn = '';
-    if (mIdx < 4 && todasQ) {
+    if (mIdx < 4) {
       const proxMat = MATERIAS_DATA[mIdx + 1];
       const chavesNecessarias = proxMat.chavesParaDesbloquear;
-      const chavesAtual = loadProg().chaves || 0;
+      const chavesAtual = loadProg().chaves || 0;                      // saldo do banco (só para a dica na tela)
       const jaDesbloqueada = !!(loadProg().materiaConcluida && loadProg().materiaConcluida[mIdx + 1]);
       if (jaDesbloqueada) {
         proximaBtn = `<button class="btn-proxima-materia" onclick="irInterno('pg-hub');renderHub(${mIdx+1})"><img class="ico-img" src="assets/icons/perfil/fases.png" alt="">Ir para ${proxMat.nome} →</button>`;
@@ -4540,28 +4375,62 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
       proximaBtn = `<p style="opacity:0.8;font-size:14px;"><img class="ico-img inv" src="assets/icons/trilha/acerto.png" alt="">Você concluiu todas as matérias! Parabéns!</p>`;
     }
 
-    const hoje = new Date().toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
+    const hoje = new Date(cert.dataEmissao).toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });   // data gravada no banco
+
+    const tema = Certificado.paleta(mat.nome);
+    _certAtual = { aluno: nomeAluno, materia: mat.nome, dataConclusao: cert.dataEmissao };
+    const primeiroNome = String(nomeAluno).trim().split(/\s+/)[0];
+    const estrelinha = function (cor, estilo) {
+      return '<span class="cc-sparkle" style="' + estilo + '"><svg viewBox="0 0 24 24"><path fill="' + cor + '" d="M12 1l2.9 7.1L22 9.2l-5.5 4.8L18.2 22 12 18.1 5.8 22l1.7-8L2 9.2l7.1-1.1z"/></svg></span>';
+    };
+    const brilhos = estrelinha('#C4B5FD', 'top:8px;left:6px;animation-delay:0s;') + estrelinha('#7B61FF', 'top:46px;right:4px;width:34px;height:34px;animation-delay:.4s;') +
+      estrelinha('#A78BFA', 'top:150px;left:-2px;width:20px;height:20px;animation-delay:.8s;') + estrelinha('#7B61FF', 'bottom:18px;right:14px;animation-delay:1.1s;') +
+      estrelinha('#C4B5FD', 'bottom:56px;left:18px;width:30px;height:30px;animation-delay:.6s;') + estrelinha('#A78BFA', 'top:0;right:60px;width:18px;height:18px;animation-delay:1.4s;');
 
     area.innerHTML = `
       <div style="padding:8px 0 24px;">
         <button class="ticket-voltar-btn" onclick="renderTrilhaQuestao(${mIdx}, ${0})">← Voltar para Questões</button>
       </div>
-      <div class="certificado-box">
-        <div class="cert-titulo">Certificado de Conclusão</div>
-        <div style="margin-bottom:12px;"><img class="ico-img ico-lg" src="assets/professor/desempenho/certificados-emitidos.webp" alt=""></div>
-        <p style="opacity:0.75;font-size:13px;margin-bottom:6px;">Este certificado é concedido a</p>
-        <div class="cert-nome">${nomeAluno}</div>
-        <div class="cert-desc">por concluir com êxito o módulo</div>
-        <div class="cert-modulo">${mat.nome} — Python</div>
-        <div class="cert-data">Concluído em ${hoje}</div>
-        ${bonus}
-        ${proximaBtn}
-        <div style="margin-top:20px;">
-          <button onclick="gerarComprovanteTXT('${nomeAluno.replace(/'/g,"\\'")}','${mat.nome.replace(/'/g,"\\'")} — Python','${hoje}')" style="background:rgba(255,255,255,0.18);color:#fff;border:2px solid rgba(255,255,255,0.5);padding:10px 22px;border-radius:8px;font-family:var(--font-corpo);font-weight:700;font-size:13px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'"><img class="ico-img" src="assets/professor/desempenho/certificados-emitidos.webp" alt="">Baixar Comprovante TXT</button>
+      <div class="cert-conquista" style="--c-main:${tema.main};--c-dark:${tema.dark};--c-d1:${tema.d1};--c-d2:${tema.d2};">
+        <div class="cc-mascote">
+          ${brilhos}
+          <img class="mascote" src="assets/mascote/pose-corpo-1.png" alt="Mascote HyTech comemorando">
+        </div>
+        <div class="cc-centro">
+          <img class="cc-estrela" src="${tema.estrela}" alt="">
+          <div class="cc-eyebrow">Certificado de Conclusão</div>
+          <h2 class="cc-titulo">Parabéns, ${_esc(primeiroNome)}! Você conseguiu!</h2>
+          <p class="cc-texto">Você concluiu todas as aulas e questões do módulo</p>
+          <div class="cc-modulo"><img src="${tema.icone}" alt="">${_esc(mat.nome)}</div>
+          <div class="cc-infos">
+            <span class="cc-chip"><img src="assets/icons/trilha/acerto.png" alt="">Concluído com êxito</span>
+            <span class="cc-chip"><img src="assets/professor/desempenho/certificados-emitidos.webp" alt="">${hoje}</span>
+            ${_certNovo[mIdx] ? '<span class="cc-chip"><img src="assets/icons/perfil/chave.png" alt="">+' + CONFIG_CHAVES.certificado + ' chaves de certificado</span>' : ''}
+          </div>
+          <p class="cc-texto" style="font-size:13px;margin-bottom:12px;">Seu certificado está pronto: baixe em PDF ou imprima.</p>
+          <div class="cc-acoes">
+            <button class="cc-btn-pdf" id="btn-cert-pdf" onclick="baixarCertificadoPdf()"><img class="ico-img" src="assets/professor/desempenho/certificados-emitidos.webp" alt="">Baixar certificado (PDF)</button>
+            <button class="cc-btn-sec" id="btn-cert-imprimir" onclick="imprimirCertificado()">Imprimir</button>
+          </div>
+          ${proximaBtn}
+          <div><button class="cc-txt" onclick="gerarComprovanteTXT('${nomeAluno.replace(/'/g, "\\'")}','${mat.nome.replace(/'/g, "\\'")}','${hoje}')">ou baixar comprovante simples (.txt)</button></div>
         </div>
       </div>`;
     sincronizarChaves();
   }
+
+  // ── Certificado em PDF ──
+  var _certAtual = null;
+  async function _acaoCertificado(idBotao, acao) {
+    if (!_certAtual) return;
+    var btn = document.getElementById(idBotao), txt = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Gerando…'; }
+    try { await acao(_certAtual); }
+    catch (e) { mostrarToast('⚠️ ' + e.message); }
+    finally { if (btn) { btn.disabled = false; btn.innerHTML = txt; } }
+  }
+  function baixarCertificadoPdf() { _acaoCertificado('btn-cert-pdf', Certificado.baixar); }
+  function imprimirCertificado() { _acaoCertificado('btn-cert-imprimir', Certificado.imprimir); }
 
   // ============================================================
   // COMPROVANTE TXT DE CONCLUSÃO
@@ -4604,26 +4473,24 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
     mostrarToast('📄 Comprovante baixado com sucesso!');
   }
 
-  function desbloquearProximaMateria(mIdxAtual) {
+  async function desbloquearProximaMateria(mIdxAtual) {
     const p = loadProg();
     const proxIdx = mIdxAtual + 1;
     const proxMat = MATERIAS_DATA[proxIdx];
-    const chavesNecessarias = proxMat.chavesParaDesbloquear;
-    if ((p.chaves || 0) < chavesNecessarias) {
-      mostrarToast('🔒 Chaves insuficientes! Precisa de ' + chavesNecessarias + ' chaves.');
-      return;
+    if (!proxMat || !proxMat.dbId) { mostrarToast('⚠️ Matéria indisponível.'); return; }
+    try {
+      // O BANCO confere o saldo e se a matéria anterior tem certificado, e só então cobra as chaves.
+      const r = await Api.post('/aluno/materias/' + proxMat.dbId + '/desbloquear');
+      if (!p.materiaConcluida) p.materiaConcluida = {};
+      p.materiaConcluida[proxIdx] = true;
+      p.chaves = r.saldoChaves;
+      saveProg(p);
+      mostrarToast('🔓 ' + proxMat.nome + ' desbloqueada! ' + (r.chavesGastas > 0 ? '−' + r.chavesGastas + ' chaves usadas.' : ''));
+      carregarEstadoDoAluno();
+      setTimeout(() => { irInterno('pg-hub'); renderHub(proxIdx); }, 800);
+    } catch (e) {
+      mostrarToast('🔒 ' + e.message);
     }
-    if (!p.materiaConcluida) p.materiaConcluida = {};
-    // Consome as chaves necessárias e desbloqueia a próxima matéria
-    p.chaves = (p.chaves || 0) - chavesNecessarias;
-    p.materiaConcluida[proxIdx] = true;
-    saveProg(p);
-    mostrarToast('🔓 ' + proxMat.nome + ' desbloqueada! −' + chavesNecessarias + ' chaves usadas.');
-    // Navegar para o hub da próxima matéria
-    setTimeout(() => {
-      irInterno('pg-hub');
-      renderHub(proxIdx);
-    }, 800);
   }
 
   function tentarSelecionarMateriaTrilha(m) {
@@ -4803,67 +4670,101 @@ function _setMascoteMateria(pageId, i){ var el = document.querySelector('#' + pa
 // ============================================================
 // SISTEMA DE TICKETS DE SUPORTE
 // ============================================================
-var tickets = [];       // array global compartilhado
-var ticketIdCounter = 1;
+var tickets = [];            // cache da lista vinda da API (GET /tickets)
 var ticketAtivoAluno = null;
 var ticketAtivoProf  = null;
+var _ticketsTimer = null;
+var _ticketsEnviando = false;
 
-function gerarHora() {
-  var now = new Date();
-  return now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+// Chamado no logout e no início de todo login/cadastro: nada da pessoa anterior pode aparecer.
+function resetTickets() {
+  tickets = []; ticketAtivoAluno = null; ticketAtivoProf = null; _ticketsEnviando = false;
+  pararAtualizacaoTickets();
+  ['lista-tickets-aluno', 'lista-tickets-prof'].forEach(function (id) { var el = document.getElementById(id); if (el) el.innerHTML = ''; });
 }
 
-function gerarDataHora() {
-  var now = new Date();
-  return now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+// "hoje 14:32" ou "17/10/2026 14:32" (a data vem do banco)
+function formatarDataHoraTicket(iso) {
+  if (!iso) return '';
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return '';
+  var hora = d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+  return d.toDateString() === new Date().toDateString() ? hora : d.toLocaleDateString('pt-BR') + ' ' + hora;
 }
+
+// Sem WebSocket: enquanto a tela de tickets está aberta, confere novidades a cada 30 s.
+function iniciarAtualizacaoTickets() {
+  pararAtualizacaoTickets();
+  _ticketsTimer = setInterval(async function () {
+    var pagina = (document.querySelector('.pagina.ativa') || {}).id;
+    var papel = (Auth.getSessao() || {}).role;
+    if (!Api.temToken() || (pagina !== 'pg-aluno-tickets' && pagina !== 'pg-prof-tickets')) { pararAtualizacaoTickets(); return; }
+    var foco = document.activeElement;
+    var digitando = foco && foco.tagName === 'TEXTAREA' && foco.value.trim();
+    try {
+      await carregarTickets();
+      if (papel === 'professor') { renderListaProf(); if (ticketAtivoProf && !digitando) selecionarTicketProf(ticketAtivoProf, true); }
+      else { renderListaAluno(); if (ticketAtivoAluno && !digitando) selecionarTicketAluno(ticketAtivoAluno, true); }
+    } catch (e) { /* sem rede: tenta de novo no próximo ciclo */ }
+  }, 30000);
+}
+function pararAtualizacaoTickets() { if (_ticketsTimer) { clearInterval(_ticketsTimer); _ticketsTimer = null; } }
+
+async function carregarTickets() { tickets = await Api.get('/tickets'); return tickets; }
 
 // ── Abrir área do Aluno ──
-function abrirTicketsAluno() {
+async function abrirTicketsAluno() {
   irInterno('pg-aluno-tickets');
+  preencherMateriasTicket();
+  try { await carregarTickets(); } catch (e) { mostrarToast('⚠️ ' + e.message); }
   renderListaAluno();
+  iniciarAtualizacaoTickets();
 }
 
 // ── Abrir área do Professor ──
-function abrirTicketsProf() {
+async function abrirTicketsProf() {
   irInterno('pg-prof-tickets');
+  try { await carregarTickets(); } catch (e) { mostrarToast('⚠️ ' + e.message); }
   renderListaProf();
+  iniciarAtualizacaoTickets();
+}
+
+// Matérias do formulário: vêm do banco (value = id da matéria)
+function preencherMateriasTicket() {
+  var sel = document.getElementById('ticket-materia-aluno');
+  if (!sel) return;
+  var antes = sel.value;
+  var opcoes = Object.values(MATERIAS_DATA).filter(function (m) { return m.dbId; });
+  if (!opcoes.length) return;           // conteúdo ainda não carregou: mantém o que já está
+  sel.innerHTML = opcoes.map(function (m) { return '<option value="' + m.dbId + '">' + escHtml(m.nome) + '</option>'; }).join('');
+  if (antes && sel.querySelector('option[value="' + antes + '"]')) sel.value = antes;
 }
 
 // ── Aluno envia novo ticket ──
-function enviarTicketAluno() {
-  var materia = document.getElementById('ticket-materia-aluno').value.trim();
+async function enviarTicketAluno() {
+  if (_ticketsEnviando) return;
+  var idMateria = parseInt(document.getElementById('ticket-materia-aluno').value, 10);
   var assunto = document.getElementById('ticket-assunto-aluno').value.trim();
   var msg     = document.getElementById('ticket-msg-aluno').value.trim();
+  if (!idMateria) { mostrarToast('Escolha a matéria.'); return; }
   if (!assunto) { mostrarToast('Informe o assunto do ticket.'); return; }
   if (!msg)     { mostrarToast('Escreva sua mensagem antes de enviar.'); return; }
 
-  var sessao = Auth.getSessao();
-  var nomeAluno = sessao ? sessao.nome : 'Aluno';
-
-  var ticket = {
-    id: ticketIdCounter++,
-    materia: materia,
-    assunto: assunto,
-    aluno: nomeAluno,
-    status: 'aberto',
-    criado: gerarDataHora(),
-    mensagens: [
-      { remetente: 'aluno', nome: nomeAluno, texto: msg, hora: gerarHora() }
-    ]
-  };
-  tickets.unshift(ticket);
-
-  // Limpa form
-  document.getElementById('ticket-assunto-aluno').value = '';
-  document.getElementById('ticket-msg-aluno').value = '';
-
-  mostrarToast('Ticket enviado ao professor! ✅');
-  renderListaAluno();
-  selecionarTicketAluno(ticket.id);
+  _ticketsEnviando = true;
+  try {
+    var r = await Api.post('/tickets', { idMateria: idMateria, assunto: assunto, mensagem: msg });
+    document.getElementById('ticket-assunto-aluno').value = '';
+    document.getElementById('ticket-msg-aluno').value = '';
+    await carregarTickets();
+    renderListaAluno();
+    await selecionarTicketAluno(r.id);
+    var t = tickets.find(function (x) { return x.id === r.id; });
+    mostrarToast(t && t.papelDestinatario === 'admin' ? 'Ticket enviado! Foi encaminhado à administração.' : 'Ticket enviado ao professor!');
+  } catch (e) { mostrarToast('⚠️ ' + e.message); }
+  finally { _ticketsEnviando = false; }
 }
 
-// ── Renderiza lista na área do Aluno ──
+// ── Lista na área do Aluno ──
 function renderListaAluno() {
   var container = document.getElementById('lista-tickets-aluno');
   if (!container) return;
@@ -4878,31 +4779,37 @@ function renderListaAluno() {
       '<div class="ticket-item-titulo">' + escHtml(t.assunto) + '</div>' +
       '<div class="ticket-item-meta">' +
         '<span>' + escHtml(t.materia) + '</span>' +
-        '<span class="ticket-badge ' + statusClass + '">' + (t.status === 'respondido' ? 'Respondido' : 'Aguardando') + '</span>' +
+        '<span class="ticket-badge ' + statusClass + '">' + (t.status === 'respondido' ? 'Respondido' : t.status === 'fechado' ? 'Encerrado' : 'Aguardando') + '</span>' +
       '</div>' +
     '</div>';
   }).join('');
 }
 
-// ── Seleciona ticket na visão do Aluno ──
-function selecionarTicketAluno(id) {
+function _htmlMensagens(mensagens) {
+  return mensagens.map(function(m) {
+    var lado = m.remetente === 'aluno' ? 'msg-aluno' : 'msg-professor';
+    return '<div class="msg-balao ' + lado + '">' +
+      '<div class="msg-remetente">' + (m.remetente === 'aluno' ? '<img class="ico-img" src="assets/conta/aluno.webp" alt="">' + escHtml(m.nome) : '<img class="ico-img" src="assets/conta/professor.webp" alt="">' + escHtml(m.nome || 'Professor')) + '</div>' +
+      escHtml(m.texto) +
+      '<div class="msg-hora">' + escHtml(formatarDataHoraTicket(m.dataHora)) + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ── Seleciona ticket na visão do Aluno (silencioso = atualização automática, sem toast de erro) ──
+async function selecionarTicketAluno(id, silencioso) {
   ticketAtivoAluno = id;
+  var ticket;
+  try { ticket = await Api.get('/tickets/' + id); }
+  catch (e) { if (!silencioso) mostrarToast('⚠️ ' + e.message); return; }
+  if (ticketAtivoAluno !== id) return;           // o aluno já clicou em outro enquanto carregava
   renderListaAluno();
-  var ticket = tickets.find(function(t){ return t.id === id; });
-  if (!ticket) return;
   var detalhe = document.getElementById('detalhe-ticket-aluno');
   if (!detalhe) return;
 
-  var msgHtml = ticket.mensagens.map(function(m) {
-    var lado = m.remetente === 'aluno' ? 'msg-aluno' : 'msg-professor';
-    return '<div class="msg-balao ' + lado + '">' +
-      '<div class="msg-remetente">' + (m.remetente === 'aluno' ? '<img class="ico-img" src="assets/conta/aluno.webp" alt="">' + escHtml(m.nome) : '<img class="ico-img" src="assets/conta/professor.webp" alt="">Professor') + '</div>' +
-      escHtml(m.texto) +
-      '<div class="msg-hora">' + m.hora + '</div>' +
-    '</div>';
-  }).join('');
-
   var podeResponder = ticket.status !== 'fechado';
+  var aviso = ticket.papelDestinatario === 'admin'
+    ? '<p style="font-size:12px;color:var(--cinza-texto);margin:10px 0 0;">Este ticket foi encaminhado à administração.</p>' : '';
   var respAreaHtml = podeResponder
     ? '<div class="ticket-resposta-area">' +
         '<label class="campo-label">Adicionar mensagem</label>' +
@@ -4917,30 +4824,31 @@ function selecionarTicketAluno(id) {
     '<div class="ticket-detalhe-header">' +
       '<div>' +
         '<div class="ticket-detalhe-titulo">' + escHtml(ticket.assunto) + '</div>' +
-        '<div class="ticket-detalhe-info">Matéria: ' + escHtml(ticket.materia) + ' · Aberto em ' + ticket.criado + '</div>' +
+        '<div class="ticket-detalhe-info">Matéria: ' + escHtml(ticket.materia) + ' · Aberto em ' + escHtml(formatarDataHoraTicket(ticket.criadoEm)) + '</div>' +
       '</div>' +
-      '<span class="ticket-badge ' + ticket.status + '">' + statusLabel(ticket.status) + '</span>' +
-    '</div>' +
-    '<div class="conversa-area">' + msgHtml + '</div>' +
+      '<span class="ticket-badge ' + escHtml(ticket.status) + '">' + statusLabel(ticket.status) + '</span>' +
+    '</div>' + aviso +
+    '<div class="conversa-area">' + _htmlMensagens(ticket.mensagens) + '</div>' +
     respAreaHtml +
   '</div>';
   scrollConversa('detalhe-ticket-aluno');
 }
 
-function adicionarMsgAluno(id) {
+async function adicionarMsgAluno(id) {
   var input = document.getElementById('msg-aluno-input');
   if (!input || !input.value.trim()) { mostrarToast('Escreva uma mensagem antes de enviar.'); return; }
-  var sessao = Auth.getSessao();
-  var nome = sessao ? sessao.nome : 'Aluno';
-  var ticket = tickets.find(function(t){ return t.id === id; });
-  if (!ticket) return;
-  ticket.mensagens.push({ remetente: 'aluno', nome: nome, texto: input.value.trim(), hora: gerarHora() });
-  ticket.status = 'aberto';
-  mostrarToast('Mensagem enviada!');
-  selecionarTicketAluno(id);
+  if (_ticketsEnviando) return;
+  _ticketsEnviando = true;
+  try {
+    await Api.post('/tickets/' + id + '/mensagens', { texto: input.value.trim() });
+    mostrarToast('Mensagem enviada!');
+    await carregarTickets();
+    await selecionarTicketAluno(id);
+  } catch (e) { mostrarToast('⚠️ ' + e.message); await selecionarTicketAluno(id, true); }
+  finally { _ticketsEnviando = false; }
 }
 
-// ── Renderiza lista na área do Professor ──
+// ── Lista na área do Professor ──
 function renderListaProf() {
   var container = document.getElementById('lista-tickets-prof');
   if (!container) return;
@@ -4955,70 +4863,72 @@ function renderListaProf() {
       '<div class="ticket-item-titulo">' + escHtml(t.assunto) + '</div>' +
       '<div class="ticket-item-meta">' +
         '<span><img class="ico-img" src="assets/conta/aluno.webp" alt="">' + escHtml(t.aluno) + ' · ' + escHtml(t.materia) + '</span>' +
-        '<span class="ticket-badge ' + statusClass + '">' + (t.status === 'respondido' ? 'Respondido' : 'Aberto') + '</span>' +
+        '<span class="ticket-badge ' + statusClass + '">' + (t.status === 'respondido' ? 'Respondido' : t.status === 'fechado' ? 'Encerrado' : 'Aberto') + '</span>' +
       '</div>' +
     '</div>';
   }).join('');
 }
 
 // ── Seleciona ticket na visão do Professor ──
-function selecionarTicketProf(id) {
+async function selecionarTicketProf(id, silencioso) {
   ticketAtivoProf = id;
+  var ticket;
+  try { ticket = await Api.get('/tickets/' + id); }
+  catch (e) { if (!silencioso) mostrarToast('⚠️ ' + e.message); return; }
+  if (ticketAtivoProf !== id) return;
   renderListaProf();
-  var ticket = tickets.find(function(t){ return t.id === id; });
-  if (!ticket) return;
   var detalhe = document.getElementById('detalhe-ticket-prof');
   if (!detalhe) return;
 
-  var msgHtml = ticket.mensagens.map(function(m) {
-    var lado = m.remetente === 'aluno' ? 'msg-aluno' : 'msg-professor';
-    return '<div class="msg-balao ' + lado + '">' +
-      '<div class="msg-remetente">' + (m.remetente === 'aluno' ? '<img class="ico-img" src="assets/conta/aluno.webp" alt="">' + escHtml(m.nome) : '<img class="ico-img" src="assets/conta/professor.webp" alt="">Professor') + '</div>' +
-      escHtml(m.texto) +
-      '<div class="msg-hora">' + m.hora + '</div>' +
-    '</div>';
-  }).join('');
+  var rodape = ticket.status === 'fechado'
+    ? '<p style="font-size:13px;color:var(--cinza-texto);margin-top:16px;text-align:center;">Este ticket está encerrado.</p>'
+    : '<div class="ticket-resposta-area">' +
+        '<label class="campo-label">Responder ao aluno</label>' +
+        '<textarea id="msg-prof-input" placeholder="Escreva sua resposta..."></textarea>' +
+        '<div class="ticket-acoes">' +
+          '<button class="btn-lido" onclick="fecharTicketProf(' + id + ')">Encerrar Ticket</button>' +
+          '<button class="btn-amarelo" onclick="responderTicketProf(' + id + ')">Enviar Resposta ✅</button>' +
+        '</div>' +
+      '</div>';
 
   detalhe.outerHTML = '<div id="detalhe-ticket-prof" class="ticket-detalhe-box">' +
     '<div class="ticket-detalhe-header">' +
       '<div>' +
         '<div class="ticket-detalhe-titulo">' + escHtml(ticket.assunto) + '</div>' +
-        '<div class="ticket-detalhe-info">Aluno: ' + escHtml(ticket.aluno) + ' · Matéria: ' + escHtml(ticket.materia) + ' · Aberto em ' + ticket.criado + '</div>' +
+        '<div class="ticket-detalhe-info">Aluno: ' + escHtml(ticket.aluno) + ' · Matéria: ' + escHtml(ticket.materia) + ' · Aberto em ' + escHtml(formatarDataHoraTicket(ticket.criadoEm)) + '</div>' +
       '</div>' +
-      '<span class="ticket-badge ' + ticket.status + '">' + statusLabel(ticket.status) + '</span>' +
+      '<span class="ticket-badge ' + escHtml(ticket.status) + '">' + statusLabel(ticket.status) + '</span>' +
     '</div>' +
-    '<div class="conversa-area">' + msgHtml + '</div>' +
-    '<div class="ticket-resposta-area">' +
-      '<label class="campo-label">Responder ao aluno</label>' +
-      '<textarea id="msg-prof-input" placeholder="Escreva sua resposta..."></textarea>' +
-      '<div class="ticket-acoes">' +
-        '<button class="btn-lido" onclick="fecharTicketProf(' + id + ')">Encerrar Ticket</button>' +
-        '<button class="btn-amarelo" onclick="responderTicketProf(' + id + ')">Enviar Resposta ✅</button>' +
-      '</div>' +
-    '</div>' +
+    '<div class="conversa-area">' + _htmlMensagens(ticket.mensagens) + '</div>' +
+    rodape +
   '</div>';
   scrollConversa('detalhe-ticket-prof');
 }
 
-function responderTicketProf(id) {
+async function responderTicketProf(id) {
   var input = document.getElementById('msg-prof-input');
   if (!input || !input.value.trim()) { mostrarToast('Escreva uma resposta antes de enviar.'); return; }
-  var ticket = tickets.find(function(t){ return t.id === id; });
-  if (!ticket) return;
-  ticket.mensagens.push({ remetente: 'professor', nome: 'Professor', texto: input.value.trim(), hora: gerarHora() });
-  ticket.status = 'respondido';
-  mostrarToast('Resposta enviada ao aluno! ✅');
-  selecionarTicketProf(id);
-  renderListaProf();
+  if (_ticketsEnviando) return;
+  _ticketsEnviando = true;
+  try {
+    await Api.post('/tickets/' + id + '/mensagens', { texto: input.value.trim() });
+    mostrarToast('Resposta enviada ao aluno! ✅');
+    await carregarTickets();
+    await selecionarTicketProf(id);
+  } catch (e) { mostrarToast('⚠️ ' + e.message); await selecionarTicketProf(id, true); }
+  finally { _ticketsEnviando = false; }
 }
 
-function fecharTicketProf(id) {
-  var ticket = tickets.find(function(t){ return t.id === id; });
-  if (!ticket) return;
-  ticket.status = 'fechado';
-  mostrarToast('Ticket encerrado.');
-  selecionarTicketProf(id);
-  renderListaProf();
+async function fecharTicketProf(id) {
+  if (_ticketsEnviando) return;
+  _ticketsEnviando = true;
+  try {
+    await Api.post('/tickets/' + id + '/fechar');
+    mostrarToast('Ticket encerrado.');
+    await carregarTickets();
+    await selecionarTicketProf(id);
+  } catch (e) { mostrarToast('⚠️ ' + e.message); }
+  finally { _ticketsEnviando = false; }
 }
 
 // ── Utilitários ──
@@ -5069,7 +4979,7 @@ function abrirEdicao(campo) {
     nickname: { titulo: 'Editar Nickname', label: 'Novo nickname', tipo: 'text',     placeholder: '@seunickname',    valor: _perfilLocal.nickname },
     email:    { titulo: 'Editar Email',    label: 'Novo e-mail',   tipo: 'email',    placeholder: 'email@exemplo.com', valor: _perfilLocal.email },
     nome:     { titulo: 'Editar Nome',     label: 'Nome completo', tipo: 'text',     placeholder: 'Seu nome completo', valor: _perfilLocal.nome },
-    senha:    { titulo: 'Alterar Senha',   label: 'Nova senha',    tipo: 'password', placeholder: 'Digite a nova senha', valor: '' },
+    senha:    { titulo: 'Alterar Senha',   label: 'Nova senha (mín. 8 caracteres)',    tipo: 'password', placeholder: 'Digite a nova senha', valor: '' },
   }[campo];
   if (!cfg) return;
 
@@ -5080,7 +4990,8 @@ function abrirEdicao(campo) {
     '<div class="caixa">' +
       '<h3>' + cfg.titulo + '</h3>' +
       '<label style="font-size:12px;font-weight:700;color:var(--cinza-texto);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">' + cfg.label + '</label>' +
-      '<input type="' + cfg.tipo + '" id="input-edicao-campo" placeholder="' + cfg.placeholder + '" value="' + (campo === 'senha' ? '' : cfg.valor) + '">' +
+      (campo === 'senha' ? '<label style="font-size:12px;font-weight:700;color:var(--cinza-texto);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">Senha atual</label><input type="password" id="input-edicao-senha-atual" placeholder="Digite a senha atual" style="margin-bottom:12px;">' : '') +
+      '<input type="' + cfg.tipo + '" id="input-edicao-campo" placeholder="' + cfg.placeholder + '" value="' + (campo === 'senha' ? '' : _esc(cfg.valor)) + '">' +
       '<div class="acoes">' +
         '<button class="btn-cancelar-campo" onclick="document.getElementById(\'modal-edicao-campo\').remove()">Cancelar</button>' +
         '<button class="btn-salvar-campo" onclick="salvarEdicao(\'' + campo + '\')">Salvar</button>' +
@@ -5091,32 +5002,60 @@ function abrirEdicao(campo) {
   setTimeout(() => { const inp = document.getElementById('input-edicao-campo'); if (inp) { inp.focus(); inp.select(); } }, 50);
 }
 
-function salvarEdicao(campo) {
+// Grava o perfil no banco (aluno e professor usam a mesma rota). O servidor devolve um token novo
+// porque nome/e-mail/nickname ficam dentro dele.
+async function _salvarPerfilApi(campos) {
+  const r = await Api.put('/conta/perfil', campos);
+  Api.setToken(r.token);
+  const s = Auth.getSessao();
+  if (s) { s.nome = r.perfil.nome; s.nickname = r.perfil.nickname; s.email = r.perfil.email; s.inicial = (r.perfil.nome || '?').charAt(0).toUpperCase(); }
+  return r;
+}
+
+async function salvarEdicao(campo) {
   _initPerfilLocal();
   const inp = document.getElementById('input-edicao-campo');
   if (!inp) return;
   const val = inp.value.trim();
   if (!val) { mostrarToast('O campo não pode estar vazio!'); return; }
-
-  if (campo === 'senha') {
-    _perfilLocal.senha = val;
-    mostrarToast('🔒 Senha alterada com sucesso!');
-  } else if (campo === 'nickname') {
-    _perfilLocal.nickname = val;
-    atualizarCamposPerfil();
-    mostrarToast('✅ Nickname atualizado!');
-  } else if (campo === 'email') {
-    _perfilLocal.email = val;
-    atualizarCamposPerfil();
-    mostrarToast('✅ E-mail atualizado!');
-  } else if (campo === 'nome') {
-    _perfilLocal.nome = val;
-    _perfilLocal.inicial = val.charAt(0).toUpperCase();
-    atualizarCamposPerfil();
-    mostrarToast('✅ Nome atualizado!');
+  try {
+    if (campo === 'senha') {
+      const atual = (document.getElementById('input-edicao-senha-atual') || {}).value || '';
+      await Api.post('/conta/senha', { senhaAtual: atual, novaSenha: inp.value });
+      mostrarToast('🔒 Senha alterada com sucesso!');
+    } else {
+      const r = await _salvarPerfilApi({ [campo]: val });          // campo: 'nome' | 'nickname' | 'email'
+      _perfilLocal.nome = r.perfil.nome; _perfilLocal.nickname = r.perfil.nickname; _perfilLocal.email = r.perfil.email;
+      _perfilLocal.inicial = (r.perfil.nome || '?').charAt(0).toUpperCase();
+      atualizarCamposPerfil();
+      mostrarToast('✅ ' + ({ nome: 'Nome', nickname: 'Nickname', email: 'E-mail' }[campo]) + ' atualizado!');
+    }
+    const m = document.getElementById('modal-edicao-campo'); if (m) m.remove();
+  } catch (e) {
+    mostrarToast('⚠️ ' + e.message);       // ex.: "Este e-mail já está em uso.", "Senha atual incorreta."
   }
+}
 
-  document.getElementById('modal-edicao-campo').remove();
+// Reduz a foto no navegador (lado máximo 256 px, JPEG) antes de mandar para o banco
+function _reduzirImagem(file, lado) {
+  lado = lado || 256;
+  return new Promise(function (resolve, reject) {
+    const reader = new FileReader();
+    reader.onerror = function () { reject(new Error('Não foi possível ler a imagem.')); };
+    reader.onload = function (ev) {
+      const img = new Image();
+      img.onerror = function () { reject(new Error('Arquivo de imagem inválido.')); };
+      img.onload = function () {
+        const k = Math.min(1, lado / Math.max(img.width, img.height));
+        const c = document.createElement('canvas');
+        c.width = Math.max(1, Math.round(img.width * k)); c.height = Math.max(1, Math.round(img.height * k));
+        const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0, c.width, c.height);
+        resolve(c.toDataURL('image/jpeg', 0.8));
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
 function atualizarCamposPerfil() {
@@ -5148,9 +5087,8 @@ function atualizarCamposPerfil() {
       const progAtual = loadProg ? loadProg() : {};
       const ch = (progAtual.chaves || 0);
       const streak = typeof calcularStreak === 'function' ? calcularStreak() : 0;
-      const pos = typeof calcularPosicaoRanking === 'function' ? calcularPosicaoRanking(ch) : '—';
-      let fases = 0;
-      Object.values((progAtual.topicos || {})).forEach(function(t){ if(t.lido) fases++; });
+      const pos = typeof calcularPosicaoRanking === 'function' ? calcularPosicaoRanking() : '—';
+      const fases = _contarFases(progAtual).feitas;
       atualizarDropdownsPerfil(p, ch, streak, pos, fases);
     }
   } catch(e) {}
@@ -5168,17 +5106,18 @@ function _setText(id, val) {
   if (el) el.textContent = val;
 }
 
-function processarFotoPerfil(input) {
+async function processarFotoPerfil(input) {
   const file = input.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    _fotoDataURL = e.target.result;
-    // Aplicar foto em todos os avatares que existem no DOM
+  try {
+    const foto = await _reduzirImagem(file);
+    await _salvarPerfilApi({ foto: foto });
+    _fotoDataURL = foto;
     aplicarFotoEmTudo(_fotoDataURL);
     mostrarToast('📷 Foto de perfil atualizada!');
-  };
-  reader.readAsDataURL(file);
+  } catch (e) {
+    mostrarToast('⚠️ ' + e.message);
+  } finally { input.value = ''; }
 }
 
 function aplicarFotoEmTudo(src) {
@@ -5241,8 +5180,7 @@ window.irInterno = function(id) {
 function atualizarEstatisticasPerfil() {
   const p = typeof loadProg === 'function' ? loadProg() : { chaves: 0, topicos: {} };
   const ch = p.chaves || 0;
-  let fases = 0;
-  Object.values(p.topicos || {}).forEach(t => { if (t.lido) fases++; });
+  const fases = _contarFases(p).feitas;
   _setText('perfil-chaves-display', ch + ' Chaves');
   _setText('perfil-fases-stat', fases + ' Fases Concluídas');
 }
@@ -5260,7 +5198,7 @@ function _initPerfilProfLocal() {
   _perfilProfLocal = {
     nome:         sessao ? sessao.nome          : 'Professor',
     nickname:     sessao ? (sessao.nickname || '@professor') : '@professor',
-    email:        sessao ? sessao.email         : 'professor@hytech.com',
+    email:        sessao ? sessao.email         : '',
     especialidade:sessao ? (sessao.especialidade || 'Programação') : 'Programação',
     inicial:      sessao ? sessao.inicial       : 'P',
   };
@@ -5301,11 +5239,10 @@ function atualizarCamposPerfilProf() {
 }
 
 function atualizarStatsPerfilProf() {
-  const enviados  = (window._PROF_CONTEUDOS  || []).length + (window._PROF_QUESTOES || []).length;
-  const aprovados = (window._PROF_CONTEUDOS  || []).filter(function(c){ return c.status === 'aprovado'; }).length +
-                    (window._PROF_QUESTOES    || []).filter(function(c){ return c.status === 'aprovado'; }).length;
-  _setText('prof-perfil-stat-enviados',  enviados  + ' Conteúdos Enviados');
-  _setText('prof-perfil-stat-aprovados', aprovados + ' Aprovados');
+  var r = (_perfilProfessor && _perfilProfessor.resumo) || { enviados: 0, aprovados: 0, alunosAtivos: 0 };
+  _setText('prof-perfil-stat-enviados',  r.enviados  + ' Conteúdos Enviados');
+  _setText('prof-perfil-stat-aprovados', r.aprovados + ' Aprovados');
+  _setText('prof-perfil-stat-alunos',    r.alunosAtivos + ' Alunos Ativos');
 }
 
 function selecionarEspProf(btn) {
@@ -5374,7 +5311,8 @@ function abrirEdicaoProf(campo) {
     '<div class="caixa">' +
       '<h3>' + cfg.titulo + '</h3>' +
       '<label style="font-size:12px;font-weight:700;color:var(--cinza-texto);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">' + cfg.label + '</label>' +
-      '<input type="' + cfg.tipo + '" id="input-edicao-campo-prof" placeholder="' + cfg.placeholder + '" value="' + (campo === 'senha' ? '' : cfg.valor) + '">' +
+      (campo === 'senha' ? '<label style="font-size:12px;font-weight:700;color:var(--cinza-texto);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">Senha atual</label><input type="password" id="input-edicao-senha-atual-prof" placeholder="Digite a senha atual" style="margin-bottom:12px;">' : '') +
+      '<input type="' + cfg.tipo + '" id="input-edicao-campo-prof" placeholder="' + cfg.placeholder + '" value="' + (campo === 'senha' ? '' : _esc(cfg.valor)) + '">' +
       '<div class="acoes">' +
         '<button class="btn-cancelar-campo" onclick="document.getElementById(\'modal-edicao-campo-prof\').remove()">Cancelar</button>' +
         '<button class="btn-salvar-campo" onclick="salvarEdicaoProf(\'' + campo + '\')">Salvar</button>' +
@@ -5385,46 +5323,42 @@ function abrirEdicaoProf(campo) {
   setTimeout(() => { const inp = document.getElementById('input-edicao-campo-prof'); if (inp) { inp.focus(); if (inp.select) inp.select(); } }, 50);
 }
 
-function salvarEdicaoProf(campo) {
+async function salvarEdicaoProf(campo) {
   _initPerfilProfLocal();
   const inp = document.getElementById('input-edicao-campo-prof');
   if (!inp) return;
   const val = inp.value.trim ? inp.value.trim() : inp.value;
   if (!val) { mostrarToast('O campo não pode estar vazio!'); return; }
-
-  if (campo === 'senha') {
-    mostrarToast('🔒 Senha alterada com sucesso!');
-  } else if (campo === 'nickname') {
-    _perfilProfLocal.nickname = val;
-    atualizarCamposPerfilProf();
-    mostrarToast('✅ Nickname atualizado!');
-  } else if (campo === 'email') {
-    _perfilProfLocal.email = val;
-    atualizarCamposPerfilProf();
-    mostrarToast('✅ E-mail atualizado!');
-  } else if (campo === 'nome') {
-    _perfilProfLocal.nome = val;
-    _perfilProfLocal.inicial = val.charAt(0).toUpperCase();
-    atualizarCamposPerfilProf();
-    mostrarToast('✅ Nome atualizado!');
-  } else if (campo === 'especialidade') {
-    _perfilProfLocal.especialidade = val;
-    atualizarCamposPerfilProf();
-    mostrarToast('✅ Especialidade atualizada!');
+  try {
+    if (campo === 'senha') {
+      const atual = (document.getElementById('input-edicao-senha-atual-prof') || {}).value || '';
+      await Api.post('/conta/senha', { senhaAtual: atual, novaSenha: inp.value });
+      mostrarToast('🔒 Senha alterada com sucesso!');
+    } else {
+      const r = await _salvarPerfilApi({ [campo]: val });
+      _perfilProfLocal.nome = r.perfil.nome; _perfilProfLocal.nickname = r.perfil.nickname; _perfilProfLocal.email = r.perfil.email;
+      _perfilProfLocal.inicial = (r.perfil.nome || '?').charAt(0).toUpperCase();
+      atualizarCamposPerfilProf();
+      mostrarToast('✅ ' + ({ nome: 'Nome', nickname: 'Nickname', email: 'E-mail' }[campo]) + ' atualizado!');
+    }
+    const m = document.getElementById('modal-edicao-campo-prof'); if (m) m.remove();
+  } catch (e) {
+    mostrarToast('⚠️ ' + e.message);
   }
-  document.getElementById('modal-edicao-campo-prof').remove();
 }
 
-function processarFotoProfessor(input) {
+async function processarFotoProfessor(input) {
   const file = input.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    _fotoProfDataURL = e.target.result;
+  try {
+    const foto = await _reduzirImagem(file);
+    await _salvarPerfilApi({ foto: foto });
+    _fotoProfDataURL = foto;
     aplicarFotoProfEmTudo(_fotoProfDataURL);
     mostrarToast('📷 Foto de perfil atualizada!');
-  };
-  reader.readAsDataURL(file);
+  } catch (e) {
+    mostrarToast('⚠️ ' + e.message);
+  } finally { input.value = ''; }
 }
 
 function aplicarFotoProfEmTudo(src) {
@@ -5466,52 +5400,59 @@ const CONQUISTAS_DEF = [
   { id: 'c8',  img: 'pythonista', nome: 'Pythonista',       desc: 'Completou todas as matérias',   chaves: 90  },
 ];
 
-// Ranking estático dos outros alunos
-const RANKING_ESTATICO = [
-  { nome: 'Alberto Caeiro',    inicial: 'A', chaves: 76, fases: 14 },
-  { nome: 'Álvaro de Campos',  inicial: 'Á', chaves: 62, fases: 11 },
-  { nome: 'Ricardo Reis',      inicial: 'R', chaves: 51, fases: 9  },
-  { nome: 'Bernardo Soares',   inicial: 'B', chaves: 39, fases: 7  },
-  { nome: 'Charles R. Anon',   inicial: 'C', chaves: 24, fases: 4  },
-];
+// (O ranking agora vem do banco: GET /ranking)
 
 function obterNivel(chaves) {
   return NIVEIS.find(n => chaves >= n.min && chaves <= n.max) || NIVEIS[0];
 }
 
-function renderRanking() {
-  const p = typeof loadProg === 'function' ? loadProg() : { chaves: 0, topicos: {} };
-  const ch = p.chaves || 0;
-  let fases = 0;
-  Object.values(p.topicos || {}).forEach(t => { if (t.lido) fases++; });
+// Conquistas calculadas com o que está no banco (pontos, tópicos, questões, matérias, certificados)
+function _conquistaDesbloqueada(c, ctx) {
+  switch (c.id) {
+    case 'c1': return ctx.topicosLidos >= 1;
+    case 'c2': return ctx.topicosLidos >= 4;
+    case 'c3': return ctx.pontos >= 19;
+    case 'c4': return ctx.questoes >= 1;
+    case 'c5': return ctx.materiasLiberadas >= 2;
+    case 'c6': return ctx.certificados >= 1;
+    case 'c7': return ctx.certificados >= 2;
+    case 'c8': return ctx.certificados >= Object.keys(MATERIAS_DATA).length;
+  }
+  return false;
+}
 
-  const nivel = obterNivel(ch);
+async function renderRanking() {
+  const p = typeof loadProg === 'function' ? loadProg() : { chaves: 0, topicos: {}, questoes: {} };
+  const r = _estadoAluno ? _estadoAluno.resumo : { pontos: 0, saldoChaves: 0, certificados: 0, posicao: '—' };
+  const pontos = r.pontos;            // NÍVEL e RANKING usam o total ganho (gastar chaves não faz perder nível)
+
+  const nivel = obterNivel(pontos);
   const nivelIdx = NIVEIS.indexOf(nivel);
   const proximoNivel = NIVEIS[nivelIdx + 1];
 
   // Banner de nível
   _setNivelBadge(nivel);
   _setText('nivel-titulo-display', nivel.nome);
-  _setText('nivel-chaves-display', ch + ' chaves coletadas');
+  _setText('nivel-chaves-display', pontos + ' chaves coletadas');
   _setText('nivel-prox-display', proximoNivel ? 'Próximo nível: ' + proximoNivel.nome + ' (' + proximoNivel.min + ' chaves)' : 'Nível máximo!');
 
   // Barra XP
   const xpMin = nivel.min;
   const xpMax = proximoNivel ? proximoNivel.min : nivel.max;
-  const xpAtual = ch - xpMin;
+  const xpAtual = pontos - xpMin;
   const xpTotal = xpMax - xpMin;
   const pct = proximoNivel ? Math.min(100, Math.round((xpAtual / xpTotal) * 100)) : 100;
   _setText('nivel-atual-label', nivel.nome);
-  (function(){var _np=document.getElementById('nivel-prox-label'); if(_np) _np.innerHTML = proximoNivel ? nivel.nome + ' → ' + proximoNivel.nome + ' (' + proximoNivel.min + ' ' + CHAVE_IMG + ')' : 'Mestre!';})();
+  (function(){var _np=document.getElementById('nivel-prox-label'); if(_np) _np.innerHTML = proximoNivel ? nivel.nome + ' → ' + proximoNivel.nome + ' (' + proximoNivel.min + ' ' + CHAVE_IMG + ')' : 'Nível máximo!';})();
   const fillEl = document.getElementById('barra-xp-fill');
   if (fillEl) fillEl.style.width = pct + '%';
-  _setText('xp-legenda', proximoNivel ? ch + ' / ' + xpMax + ' chaves para ' + proximoNivel.nome : 'Nível máximo alcançado!');
+  _setText('xp-legenda', proximoNivel ? pontos + ' / ' + xpMax + ' chaves para ' + proximoNivel.nome : 'Nível máximo alcançado!');
 
   // Progresso por matéria
   const matLista = document.getElementById('materias-progresso-lista');
   if (matLista && typeof MATERIAS_DATA !== 'undefined') {
     matLista.innerHTML = Object.entries(MATERIAS_DATA).map(([idx, mat]) => {
-      const totalTop = mat.topicos.length;
+      const totalTop = mat.topicos.length || 1;
       const concluidos = mat.topicos.filter(t => (p.topicos[t.id] || {}).lido).length;
       const pctMat = Math.round((concluidos / totalTop) * 100);
       const desbloq = typeof materiaDesbloqueada === 'function' ? materiaDesbloqueada(Number(idx), p) : idx == 1;
@@ -5519,7 +5460,7 @@ function renderRanking() {
         '<div class="materia-progress-row">' +
           '<span class="mat-icone">' + matImg(idx, 'mat-ico-rank') + '</span>' +
           '<div class="mat-info">' +
-            '<div class="mat-nome">' + mat.nome + (desbloq ? '' : ' <img class="ico-img ico-sm" src="assets/icons/trilha/cadeado.png" alt="">') + '</div>' +
+            '<div class="mat-nome">' + _esc(mat.nome) + (desbloq ? '' : ' <img class="ico-img ico-sm" src="assets/icons/trilha/cadeado.png" alt="">') + '</div>' +
             '<div class="mat-barra"><div class="mat-barra-fill" style="width:' + (desbloq ? pctMat : 0) + '%"></div></div>' +
           '</div>' +
           '<span class="mat-pct">' + (desbloq ? pctMat + '%' : '—') + '</span>' +
@@ -5531,17 +5472,17 @@ function renderRanking() {
   // Conquistas
   const grid = document.getElementById('conquistas-grid');
   if (grid) {
+    const ctx = {
+      pontos: pontos,
+      topicosLidos: Object.keys(p.topicos || {}).filter(k => p.topicos[k].lido).length,
+      questoes: _estadoAluno ? _estadoAluno.questoesConcluidas.length : 0,
+      materiasLiberadas: _estadoAluno ? _estadoAluno.materias.filter(m => m.desbloqueada).length : 1,
+      certificados: _estadoAluno ? _estadoAluno.certificados.length : 0
+    };
     grid.innerHTML = CONQUISTAS_DEF.map(c => {
-      let desbloqueada = false;
-      if (c.chaves !== undefined && ch >= c.chaves) desbloqueada = true;
-      if (c.questoes !== undefined) {
-        let q = 0;
-        Object.keys(p.questoes || {}).forEach(k => { if (k.startsWith('m') && !k.startsWith('m1-') && p.questoes[k]) q++; });
-        Object.keys(p.questoes || {}).forEach(k => { if (k.startsWith('m1-q')) q++; });
-        if (q >= c.questoes) desbloqueada = true;
-      }
+      const desbloqueada = _conquistaDesbloqueada(c, ctx);
       return (
-        '<div class="conquista-item' + (desbloqueada ? '' : ' bloqueada') + '" title="' + c.desc + '">' +
+        '<div class="conquista-item' + (desbloqueada ? '' : ' bloqueada') + '" title="' + _esc(c.desc) + '">' +
           '<div class="conq-icone">' + '<img class="conq-img" src="' + IMG_CONQUISTAS[c.nome] + '" alt="' + c.nome + '">' + '</div>' +
           '<div class="conq-nome">' + c.nome + '</div>' +
         '</div>'
@@ -5549,39 +5490,38 @@ function renderRanking() {
     }).join('');
   }
 
-  // Ranking lista
+  // Ranking lista (do banco)
   const lista = document.getElementById('ranking-lista-completo');
   if (!lista) return;
-  _initPerfilLocal();
-  const nomeAluno = _perfilLocal ? _perfilLocal.nome : 'Você';
-  const inicialAluno = _perfilLocal ? _perfilLocal.inicial : 'U';
-
-  // Inserir aluno na posição correta
-  const todos = [...RANKING_ESTATICO, { nome: nomeAluno, inicial: inicialAluno, chaves: ch, fases: fases, eu: true }];
-  todos.sort((a, b) => b.chaves - a.chaves || b.fases - a.fases);
+  lista.innerHTML = '<div style="padding:24px;text-align:center;color:var(--cinza-texto);">Carregando ranking…</div>';
+  let top;
+  try { top = await Api.get('/ranking?top=10'); }
+  catch (e) { lista.innerHTML = '<div style="padding:24px;text-align:center;color:var(--cinza-texto);">Não foi possível carregar o ranking agora.</div>'; return; }
 
   const medalhas = ['ouro', 'prata', 'bronze'];
-  lista.innerHTML = todos.map((item, i) => {
-    const pos = i + 1;
-    const badgeCls = pos <= 3 ? medalhas[pos - 1] : '';
-    const euCls = item.eu ? ' eu' : '';
-    const avatarStyle = item.eu && _fotoDataURL
-      ? 'style="background-image:url(' + _fotoDataURL + ');background-size:cover;background-position:center;color:transparent;"'
-      : '';
+  function linha(item, posTxt) {
+    const inicial = (item.nome || '?').charAt(0).toUpperCase();
+    const comFoto = _fotoSegura(item.foto);
+    const avatarStyle = comFoto ? 'style="background-image:url(\'' + item.foto + '\');background-size:cover;background-position:center;color:transparent;"' : '';
+    const badgeCls = (typeof posTxt === 'number' && posTxt <= 3) ? medalhas[posTxt - 1] : '';
     return (
-      '<div class="ranking-item' + euCls + '">' +
-        '<span class="ranking-posicao-badge ' + badgeCls + '">' + pos + '</span>' +
-        '<div class="ranking-avatar" ' + avatarStyle + '>' + (item.eu && _fotoDataURL ? '' : item.inicial) + '</div>' +
-        '<div class="ranking-nome">' + item.nome + (item.eu ? ' (você)' : '') + '</div>' +
-        '<div class="ranking-stats"><strong>' + item.chaves + ' chaves</strong>' + item.fases + '/16 fases</div>' +
+      '<div class="ranking-item' + (item.souEu ? ' eu' : '') + '">' +
+        '<span class="ranking-posicao-badge ' + badgeCls + '">' + posTxt + '</span>' +
+        '<div class="ranking-avatar" ' + avatarStyle + '>' + (comFoto ? '' : _esc(inicial)) + '</div>' +
+        '<div class="ranking-nome">' + _esc(item.nome) + (item.souEu ? ' (você)' : '') + '</div>' +
+        '<div class="ranking-stats"><strong>' + item.pontos + ' chaves</strong>' + item.fases + ' fases</div>' +
       '</div>'
     );
-  }).join('');
+  }
+  let html = top.map(item => linha(item, item.posicao)).join('');
+  if (!top.some(i => i.souEu) && _estadoAluno) {          // fora do top 10: mostra a linha do aluno no fim
+    const eu = { nome: (_perfilLocal || {}).nome || 'Você', foto: _fotoDataURL, pontos: r.pontos, fases: r.fasesConcluidas, souEu: true };
+    html += '<div style="text-align:center;color:var(--cinza-texto);padding:4px 0;">⋯</div>' + linha(eu, r.posicao);
+  }
+  lista.innerHTML = html || '<div style="padding:24px;text-align:center;color:var(--cinza-texto);">Ainda não há alunos no ranking.</div>';
 
-  // Sync painel lateral com posição real calculada aqui
-  const posReal = todos.findIndex(item => item.eu) + 1;
   const posEl = document.getElementById('trilha-ranking-pos');
-  if (posEl) posEl.textContent = posReal + '° lugar';
+  if (posEl && _estadoAluno) posEl.textContent = r.posicao + '° lugar';
 }
 
 // Sincronizar ranking quando chaves mudam
@@ -5589,80 +5529,19 @@ const _sincronizarChavesOrig = typeof sincronizarChaves === 'function' ? sincron
 // Não sobrescrever — renderRanking é chamado ao entrar na página
 
 // ============================================================
-// PROFESSOR — ENGINE DE CONTEÚDOS, QUESTÕES E DESEMPENHO
+// PROFESSOR — conteúdos, questões, desafios e desempenho (tudo pela API; nada fica só no navegador)
+// Quem aprova o conteúdo é o administrador (HytechAdmin). "Enviar" = mandar para a fila de aprovação.
 // ============================================================
+var _perfilProfessor = null;   // GET /professor/perfil
+var _meusConteudos = null;     // GET /professor/meus
+var _desempenho = null;        // GET /professor/desempenho
+var _edicaoAtual = null;       // { tipo: 'aulas'|'questoes'|'desafios', id, dicaTitulo }
+var _desafiosAluno = null;     // GET /aluno/desafios (cache da tela do aluno)
 
-// ============================================================
-// LQ_STORE — Armazenamento em memória (sem persistência)
-// ============================================================
-var LQ_STORE = {
-  _defaults: {
-    conteudos: [
-      { id: 'c-init-1', tipo: 'conteudo', titulo: 'Introdução a Variáveis', materia: 'Programação', topico: 'Tópico 1', status: 'aprovado',  data: '02/05/2026', authorId: 2, texto: '', codigo: '', dica: '' },
-      { id: 'c-init-2', tipo: 'conteudo', titulo: 'Estruturas de Repetição', materia: 'Programação', topico: 'Tópico 2', status: 'aprovado',  data: '05/05/2026', authorId: 2, texto: '', codigo: '', dica: '' },
-      { id: 'c-init-3', tipo: 'conteudo', titulo: 'Funções e Escopo',        materia: 'Programação', topico: 'Tópico 3', status: 'pendente',  data: '08/05/2026', authorId: 2, texto: '', codigo: '', dica: '' },
-      { id: 'c-init-4', tipo: 'conteudo', titulo: 'Introdução ao Design',    materia: 'Design',       topico: 'Tópico 1', status: 'rascunho', data: '09/05/2026', authorId: 2, texto: '', codigo: '', dica: '' },
-    ],
-    questoes: [
-      { id: 'q-init-1', tipo: 'questao', enunciado: 'O que é uma variável?',               materia: 'Programação', dificuldade: 'Fácil', status: 'aprovado', data: '03/05/2026', authorId: 2, alternativas: [], gabaritoIdx: 0 },
-      { id: 'q-init-2', tipo: 'questao', enunciado: 'Qual a diferença entre for e while?', materia: 'Programação', dificuldade: 'Médio', status: 'pendente', data: '08/05/2026', authorId: 2, alternativas: [], gabaritoIdx: 0 },
-      { id: 'q-init-3', tipo: 'questao', enunciado: 'O que é escopo de variável?',         materia: 'Programação', dificuldade: 'Médio', status: 'rascunho', data: '09/05/2026', authorId: 2, alternativas: [], gabaritoIdx: 0 },
-    ]
-  },
-
-  _conteudos: null,
-  _questoes: null,
-
-  // Conteúdos
-  getConteudos: function() {
-    if (!this._conteudos) this._conteudos = JSON.parse(JSON.stringify(this._defaults.conteudos));
-    return this._conteudos;
-  },
-  saveConteudos: function(arr) { this._conteudos = arr; },
-
-  // Questões
-  getQuestoes: function() {
-    if (!this._questoes) this._questoes = JSON.parse(JSON.stringify(this._defaults.questoes));
-    return this._questoes;
-  },
-  saveQuestoes: function(arr) { this._questoes = arr; },
-
-  // Itens aprovados para a trilha (questões com alternativas completas)
-  getQuestoesTrilha: function(materia) {
-    var aprovadas = this.getQuestoes().filter(function(q) {
-      return q.status === 'aprovado' && q.materia === materia && q.alternativas && q.alternativas.length >= 2;
-    });
-    return aprovadas.map(function(q) {
-      return {
-        pergunta: q.enunciado,
-        codigo: q.codigo || '',
-        alternativas: q.alternativas.map(function(a, i) {
-          return { texto: a.texto, correta: (i === q.gabaritoIdx) };
-        })
-      };
-    });
-  },
-
-  // Conteúdos aprovados para o hub de uma matéria
-  getConteudosHub: function(materia) {
-    return this.getConteudos().filter(function(c) {
-      return c.status === 'aprovado' && c.materia === materia;
-    });
-  }
-};
-
-// ── ESTADO GLOBAL — apenas em memória ──
-var _PROF_CONTEUDOS = LQ_STORE.getConteudos();
-var _PROF_QUESTOES  = LQ_STORE.getQuestoes();
-
-function _idNovo() { return 'item-' + Date.now() + '-' + Math.floor(Math.random()*1000); }
-
-function _salvarEstadoGlobal() {
-  LQ_STORE.saveConteudos(_PROF_CONTEUDOS);
-  LQ_STORE.saveQuestoes(_PROF_QUESTOES);
+function resetProf() {
+  _perfilProfessor = null; _meusConteudos = null; _desempenho = null; _edicaoAtual = null; _desafiosAluno = null;
 }
 
-// ── CONTADOR PAINEL PROFESSOR ──
 function _setBoasVindasProf(nome) {
   var h = document.getElementById('prof-boas-vindas');
   if (!h) return;
@@ -5672,441 +5551,391 @@ function _setBoasVindasProf(nome) {
   h.appendChild(i);
 }
 
+function _fmtData(iso) {
+  if (!iso) return '—';
+  var d = new Date(iso);
+  return isNaN(d) ? '—' : d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+// ── PERFIL / PAINEL ──
+async function carregarPerfilProfessor() {
+  try {
+    _perfilProfessor = await Api.get('/professor/perfil');
+    var s = Auth.getSessao();
+    if (s) s.especialidade = _perfilProfessor.especialidade;
+    atualizarInterface(s);
+    _travarMateriaDoProfessor();
+    atualizarContadoresDashProf();
+  } catch (e) {
+    console.warn('Perfil do professor indisponível:', e.message);
+    mostrarToast('⚠️ Não foi possível carregar o seu painel.');
+  }
+}
+
+// O professor só cria conteúdo da própria especialidade: os selects de matéria ficam travados nela.
+function _travarMateriaDoProfessor() {
+  var p = _perfilProfessor;
+  ['cont-materia', 'quest-materia', 'desafio-materia'].forEach(function (id) {
+    var sel = document.getElementById(id);
+    if (!sel) return;
+    sel.innerHTML = '';
+    var o = document.createElement('option');
+    o.value = p && p.idMateriaEspecialidade ? p.idMateriaEspecialidade : '';
+    o.textContent = p && p.especialidade ? p.especialidade : 'Sem especialidade definida';
+    sel.appendChild(o);
+  });
+}
+
 function atualizarContadoresDashProf() {
-  var todos = _PROF_CONTEUDOS.concat(_PROF_QUESTOES);
-  var total   = todos.length;
-  var aprovados = todos.filter(function(i){ return i.status === 'aprovado'; }).length;
-  var pendentes = todos.filter(function(i){ return i.status === 'pendente'; }).length;
-  var elEnv = document.getElementById('dash-prof-enviados');
-  var elAprov = document.getElementById('dash-prof-aprovados');
-  var elPend = document.getElementById('dash-prof-pendentes');
-  if (elEnv) elEnv.textContent = total;
-  if (elAprov) elAprov.textContent = aprovados;
-  if (elPend) elPend.textContent = pendentes;
+  var r = (_perfilProfessor && _perfilProfessor.resumo) || { enviados: 0, aprovados: 0, aguardando: 0 };
+  _setText('dash-prof-enviados', r.enviados);
+  _setText('dash-prof-aprovados', r.aprovados);
+  _setText('dash-prof-pendentes', r.aguardando);
+  _setText('dash-prof-alunos', (_perfilProfessor && _perfilProfessor.resumo) ? _perfilProfessor.resumo.alunosAtivos : 0);
 }
 
-// ── SALVAR RASCUNHO — CONTEÚDO ──
-function salvarRascunhoConteudo() {
-  var titulo = (document.getElementById('cont-titulo') || {}).value || '';
-  var materia = (document.getElementById('cont-materia') || {}).value || 'Programação';
-  var topico = (document.getElementById('cont-topico') || {}).value || 'Sem tópico';
-  if (!titulo.trim()) { mostrarToast('⚠️ Informe o título do conteúdo!'); return; }
-  var texto  = (document.getElementById('cont-texto')  || {}).value || '';
-  var codigo = (document.getElementById('cont-codigo') || {}).value || '';
-  var dica   = (document.getElementById('cont-dica')   || {}).value || '';
-  var sessao = typeof Auth !== 'undefined' ? Auth.getSessao() : null;
-  var item = { id: _idNovo(), tipo: 'conteudo', titulo: titulo.trim(), materia: materia, topico: topico || 'Sem tópico',
-    status: 'rascunho', data: _hoje(), texto: texto, codigo: codigo, dica: dica,
-    authorId: sessao ? sessao.id : null, authorNome: sessao ? sessao.nome : 'Professor' };
-  _PROF_CONTEUDOS.push(item);
-  _salvarEstadoGlobal();
-  _limparFormConteudo();
-  mostrarToast('📝 Rascunho salvo em Meus Conteúdos!');
-  atualizarContadoresDashProf();
+async function _atualizarResumoProf() {
+  try { _perfilProfessor = await Api.get('/professor/perfil'); atualizarContadoresDashProf(); } catch (e) {}
 }
 
-// ── ENVIAR PARA APROVAÇÃO — CONTEÚDO ──
-function enviarConteudoAprovacao() {
-  var titulo = (document.getElementById('cont-titulo') || {}).value || '';
-  var materia = (document.getElementById('cont-materia') || {}).value || 'Programação';
-  var topico = (document.getElementById('cont-topico') || {}).value || 'Sem tópico';
-  if (!titulo.trim()) { mostrarToast('⚠️ Informe o título do conteúdo!'); return; }
-  var texto  = (document.getElementById('cont-texto')  || {}).value || '';
-  var codigo = (document.getElementById('cont-codigo') || {}).value || '';
-  var dica   = (document.getElementById('cont-dica')   || {}).value || '';
-  var sessao = typeof Auth !== 'undefined' ? Auth.getSessao() : null;
-  var item = { id: _idNovo(), tipo: 'conteudo', titulo: titulo.trim(), materia: materia, topico: topico || 'Sem tópico',
-    status: 'aprovado', data: _hoje(), texto: texto, codigo: codigo, dica: dica,
-    authorId: sessao ? sessao.id : null, authorNome: sessao ? sessao.nome : 'Professor' };
-  _PROF_CONTEUDOS.push(item);
-  _salvarEstadoGlobal();
-  _limparFormConteudo();
-  mostrarToast('✅ Conteúdo publicado!');
-  atualizarContadoresDashProf();
+// ── CARREGAR "MEUS CONTEÚDOS" ──
+async function carregarMeusConteudos() {
+  try {
+    _meusConteudos = await Api.get('/professor/meus');
+  } catch (e) {
+    mostrarToast('⚠️ ' + e.message);
+    if (!_meusConteudos) _meusConteudos = { aulas: [], questoes: [], desafios: [] };
+  }
 }
 
+// ── ENVIAR/SALVAR — formulário de CONTEÚDO (aula) ──
+function _val(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+function _lerFormConteudo() {
+  var titulo = _val('cont-titulo').trim();
+  if (!titulo) { mostrarToast('⚠️ Informe o título do conteúdo!'); return null; }
+  return { idMateria: Number(_val('cont-materia')), titulo: titulo, topico: _val('cont-topico').trim(),
+    texto: _val('cont-texto'), codigo: _val('cont-codigo'),
+    dicaTitulo: (_edicaoAtual && _edicaoAtual.tipo === 'aulas' && _edicaoAtual.dicaTitulo) || (_val('cont-dica').trim() ? 'Dica' : ''),
+    dica: _val('cont-dica') };
+}
+
+async function _gravar(tipo, corpo, enviar, ok) {
+  var edit = _edicaoAtual && _edicaoAtual.tipo === tipo ? _edicaoAtual.id : null;
+  corpo.enviar = !!enviar;
+  try {
+    if (edit) await Api.put('/professor/' + tipo + '/' + edit, corpo);
+    else await Api.post('/professor/' + tipo, corpo);
+    _edicaoAtual = null;
+    mostrarToast(enviar ? '📤 Enviado para aprovação do administrador!' : ok);
+    await carregarMeusConteudos();
+    _atualizarResumoProf();
+    return true;
+  } catch (e) {
+    mostrarToast('⚠️ ' + e.message);
+    return false;
+  }
+}
+
+async function salvarRascunhoConteudo() {
+  var c = _lerFormConteudo(); if (!c) return;
+  if (await _gravar('aulas', c, false, '📝 Rascunho salvo em Meus Conteúdos!')) _limparFormConteudo();
+}
+async function enviarConteudoAprovacao() {
+  var c = _lerFormConteudo(); if (!c) return;
+  if (await _gravar('aulas', c, true)) _limparFormConteudo();
+}
 function _limparFormConteudo() {
-  ['cont-titulo','cont-topico','cont-texto','cont-codigo','cont-dica'].forEach(function(id){
+  ['cont-titulo', 'cont-topico', 'cont-texto', 'cont-codigo', 'cont-dica'].forEach(function (id) {
     var el = document.getElementById(id); if (el) el.value = '';
   });
+  _edicaoAtual = null;
 }
 
-// ── SALVAR RASCUNHO — QUESTÃO ──
-function salvarRascunhoQuestao() {
-  var enunciado = (document.getElementById('quest-enunciado') || {}).value || '';
-  var materia   = (document.getElementById('quest-materia') || {}).value || 'Programação';
-  var dific     = (document.getElementById('quest-dific') || {}).value || 'Fácil';
-  if (!enunciado.trim()) { mostrarToast('⚠️ Informe o enunciado da questão!'); return; }
-  var alts = _coletarAlternativas();
-  var gabarito = _coletarGabarito();
-  var codigo = (document.getElementById('quest-codigo') || {}).value || '';
-  var sessao = typeof Auth !== 'undefined' ? Auth.getSessao() : null;
-  var item = { id: _idNovo(), tipo: 'questao', enunciado: enunciado.trim(), materia: materia,
-    dificuldade: dific.split(' ')[0], status: 'rascunho', data: _hoje(),
-    alternativas: alts, gabaritoIdx: gabarito, codigo: codigo,
-    authorId: sessao ? sessao.id : null, authorNome: sessao ? sessao.nome : 'Professor' };
-  _PROF_QUESTOES.push(item);
-  _salvarEstadoGlobal();
-  _limparFormQuestao();
-  mostrarToast('📝 Rascunho de questão salvo!');
-  atualizarContadoresDashProf();
-}
-
-// ── ENVIAR PARA APROVAÇÃO — QUESTÃO ──
-function enviarQuestaoAprovacao() {
-  var enunciado = (document.getElementById('quest-enunciado') || {}).value || '';
-  var materia   = (document.getElementById('quest-materia') || {}).value || 'Programação';
-  var dific     = (document.getElementById('quest-dific') || {}).value || 'Fácil';
-  if (!enunciado.trim()) { mostrarToast('⚠️ Informe o enunciado da questão!'); return; }
-  var alts = _coletarAlternativas();
-  var gabarito = _coletarGabarito();
-  if (alts.length < 2) { mostrarToast('⚠️ Preencha pelo menos 2 alternativas!'); return; }
-  if (gabarito < 0)    { mostrarToast('⚠️ Marque a alternativa correta!'); return; }
-  var codigo = (document.getElementById('quest-codigo') || {}).value || '';
-  var sessao = typeof Auth !== 'undefined' ? Auth.getSessao() : null;
-  var item = { id: _idNovo(), tipo: 'questao', enunciado: enunciado.trim(), materia: materia,
-    dificuldade: dific.split(' ')[0], status: 'aprovado', data: _hoje(),
-    alternativas: alts, gabaritoIdx: gabarito, codigo: codigo,
-    authorId: sessao ? sessao.id : null, authorNome: sessao ? sessao.nome : 'Professor' };
-  _PROF_QUESTOES.push(item);
-  _salvarEstadoGlobal();
-  _limparFormQuestao();
-  mostrarToast('✅ Questão publicada!');
-  atualizarContadoresDashProf();
-  if (typeof _injetarQuestaoNaTrilha === 'function' && item.alternativas.length >= 2) _injetarQuestaoNaTrilha(item);
-}
-
-function _limparFormQuestao() {
-  var enunciado = document.getElementById('quest-enunciado'); if (enunciado) enunciado.value = '';
-  var codigo = document.getElementById('quest-codigo'); if (codigo) codigo.value = '';
-  ['quest-alt-a','quest-alt-b','quest-alt-c','quest-alt-d','quest-alt-e'].forEach(function(id){
-    var el = document.getElementById(id); if (el) el.value = '';
-  });
+// ── FORMULÁRIO DE QUESTÃO ──
+var _ALT_IDS = ['quest-alt-a', 'quest-alt-b', 'quest-alt-c', 'quest-alt-d', 'quest-alt-e'];
+function _coletarGabarito() {
   var radios = document.querySelectorAll('input[name="gabarito"]');
-  radios.forEach(function(r){ r.checked = false; });
+  for (var i = 0; i < radios.length; i++) if (radios[i].checked) return parseInt(radios[i].value, 10);
+  return -1;
+}
+function _lerFormQuestao(enviar) {
+  var enunciado = _val('quest-enunciado').trim();
+  if (!enunciado) { mostrarToast('⚠️ Informe o enunciado da questão!'); return null; }
+  // alternativas na ordem A..E (vazias ficam ""), o índice da correta é a posição do rádio marcado
+  var alts = _ALT_IDS.map(function (id) { return _val(id).trim(); });
+  var idx = _coletarGabarito();
+  if (enviar) {
+    if (alts.filter(Boolean).length < 2) { mostrarToast('⚠️ Preencha pelo menos 2 alternativas!'); return null; }
+    if (idx < 0 || !alts[idx]) { mostrarToast('⚠️ Marque a alternativa correta!'); return null; }
+  }
+  return { idMateria: Number(_val('quest-materia')), enunciado: enunciado, dificuldade: _val('quest-dific').split(' ')[0],
+    alternativas: alts, indiceCorreta: idx, codigo: _val('quest-codigo') };
+}
+async function salvarRascunhoQuestao() {
+  var q = _lerFormQuestao(false); if (!q) return;
+  if (await _gravar('questoes', q, false, '📝 Rascunho de questão salvo!')) _limparFormQuestao();
+}
+async function enviarQuestaoAprovacao() {
+  var q = _lerFormQuestao(true); if (!q) return;
+  if (await _gravar('questoes', q, true)) _limparFormQuestao();
+}
+function _limparFormQuestao() {
+  ['quest-enunciado', 'quest-codigo'].concat(_ALT_IDS).forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ''; });
+  document.querySelectorAll('input[name="gabarito"]').forEach(function (r) { r.checked = false; });
+  _edicaoAtual = null;
 }
 
-// ── RENDERIZAR MEUS CONTEÚDOS ──
-function renderMeusConteudos() {
+// ── LISTAS "MEUS CONTEÚDOS" ──
+async function renderMeusConteudos() {
+  await carregarMeusConteudos();
   renderListaConteudos();
   renderListaQuestoes();
 }
 
 function _badgePill(status) {
-  var map = { rascunho: ['badge-rascunho','📄 Rascunho'], pendente: ['badge-pendente','⏳ Pendente'], aprovado: ['badge-aprovado','✅ Aprovado'], rejeitado: ['badge-rejeitado','❌ Rejeitado'] };
-  var cfg = map[status] || ['badge-pendente', status];
+  var map = { rascunho: ['badge-rascunho', '📄 Rascunho'], pendente: ['badge-pendente', '⏳ Aguardando aprovação'], aprovado: ['badge-aprovado', '✅ Aprovado'], rejeitado: ['badge-rejeitado', '❌ Rejeitado'] };
+  var cfg = map[status] || ['badge-pendente', _esc(status)];
   return '<span class="badge-status-pill ' + cfg[0] + '">' + cfg[1] + '</span>';
+}
+function _motivoHtml(item) {
+  return item.status === 'rejeitado' && item.motivo
+    ? '<div style="font-size:12px;color:#b91c1c;margin-top:6px;"><strong>Motivo da rejeição:</strong> ' + _esc(item.motivo) + '</div>' : '';
+}
+function _acoesItem(tipo, item) {
+  var editavel = item.status === 'rascunho' || item.status === 'rejeitado';
+  var excluir = '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'' + tipo + '\', ' + item.id + ')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
+  if (item.status === 'aprovado') return '';          // aprovado não se edita nem exclui
+  if (!editavel) return excluir;                       // pendente: só pode retirar
+  return '<button class="btn-mini btn-mini-editar" onclick="editarItem(\'' + tipo + '\', ' + item.id + ')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
+         '<button class="btn-mini btn-mini-enviar" onclick="enviarItem(\'' + tipo + '\', ' + item.id + ')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>' + excluir;
 }
 
 function renderListaConteudos() {
   var lista = document.getElementById('lista-conteudos-prof');
   if (!lista) return;
-  if (_PROF_CONTEUDOS.length === 0) {
+  var itens = (_meusConteudos && _meusConteudos.aulas) || [];
+  if (!itens.length) {
     lista.innerHTML = '<div class="lista-vazia-prof"><div class="icone-vazio"><img src="assets/professor/meus/textos-explicativos.webp" alt=""></div><p>Nenhum conteúdo ainda. Crie seu primeiro conteúdo!</p></div>';
     return;
   }
-  lista.innerHTML = _PROF_CONTEUDOS.map(function(item) {
-    var acoes = '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'conteudo\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
-    if (item.status === 'rascunho') {
-      acoes = '<button class="btn-mini btn-mini-editar" onclick="editarConteudo(\'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
-              '<button class="btn-mini btn-mini-enviar" onclick="enviarRascunhoConteudo(\'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>' +
-              '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'conteudo\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
-    }
+  lista.innerHTML = itens.map(function (item) {
     return '<div class="conteudo-item-card">' +
       '<div class="conteudo-item-tipo"><img src="assets/professor/meus/textos-explicativos.webp" alt=""></div>' +
       '<div class="conteudo-item-body">' +
-        '<div class="conteudo-item-titulo">' + item.titulo + '</div>' +
-        '<div class="conteudo-item-meta"><span>📚 ' + item.materia + '</span><span>🗂 ' + item.topico + '</span><span>📅 ' + item.data + '</span>' + _badgePill(item.status) + '</div>' +
-        '<div class="conteudo-item-acoes">' + acoes + '</div>' +
-      '</div>' +
-    '</div>';
+        '<div class="conteudo-item-titulo">' + _esc(item.titulo) + '</div>' +
+        '<div class="conteudo-item-meta"><span>📚 ' + _esc(item.materia) + '</span><span>🗂 ' + _esc(item.topico || 'Sem tópico') + '</span><span>📅 ' + _fmtData(item.data) + '</span>' + _badgePill(item.status) + '</div>' +
+        _motivoHtml(item) +
+        '<div class="conteudo-item-acoes">' + _acoesItem('aulas', item) + '</div>' +
+      '</div></div>';
   }).join('');
 }
 
 function renderListaQuestoes() {
   var lista = document.getElementById('lista-questoes-prof');
   if (!lista) return;
-  if (_PROF_QUESTOES.length === 0) {
+  var itens = (_meusConteudos && _meusConteudos.questoes) || [];
+  if (!itens.length) {
     lista.innerHTML = '<div class="lista-vazia-prof"><div class="icone-vazio"><img src="assets/professor/meus/questoes.webp" alt=""></div><p>Nenhuma questão ainda. Crie sua primeira questão!</p></div>';
     return;
   }
-  lista.innerHTML = _PROF_QUESTOES.map(function(item) {
-    var acoes = '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'questao\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
-    if (item.status === 'rascunho') {
-      acoes = '<button class="btn-mini btn-mini-editar" onclick="mostrarToast(\'Editar: abra o formulário de Enviar Questões\')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
-              '<button class="btn-mini btn-mini-enviar" onclick="enviarRascunhoQuestao(\'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>' +
-              '<button class="btn-mini btn-mini-excluir" onclick="pedirExclusao(\'questao\', \'' + item.id + '\')"><img class="btn-ico" src="assets/professor/acoes/excluir.png" alt="">Excluir</button>';
-    }
+  lista.innerHTML = itens.map(function (item) {
     return '<div class="conteudo-item-card">' +
       '<div class="conteudo-item-tipo"><img src="assets/professor/meus/questoes.webp" alt=""></div>' +
       '<div class="conteudo-item-body">' +
-        '<div class="conteudo-item-titulo">' + item.enunciado + '</div>' +
-        '<div class="conteudo-item-meta"><span>📚 ' + item.materia + '</span><span>⚡ ' + item.dificuldade + '</span><span>📅 ' + item.data + '</span>' + _badgePill(item.status) + '</div>' +
-        '<div class="conteudo-item-acoes">' + acoes + '</div>' +
-      '</div>' +
-    '</div>';
+        '<div class="conteudo-item-titulo">' + _esc(item.enunciado) + '</div>' +
+        '<div class="conteudo-item-meta"><span>📚 ' + _esc(item.materia) + '</span><span>⚡ ' + _esc(item.dificuldade) + '</span><span>📅 ' + _fmtData(item.data) + '</span>' + _badgePill(item.status) + '</div>' +
+        _motivoHtml(item) +
+        '<div class="conteudo-item-acoes">' + _acoesItem('questoes', item) + '</div>' +
+      '</div></div>';
   }).join('');
+}
+
+function _achar(tipo, id) {
+  return ((_meusConteudos && _meusConteudos[tipo]) || []).find(function (i) { return i.id === id; });
+}
+
+// ── EDITAR / ENVIAR / EXCLUIR (aulas | questoes | desafios) ──
+function editarItem(tipo, id) {
+  var item = _achar(tipo, id); if (!item) return;
+  if (tipo === 'desafios') { editarDesafio(id); return; }
+  irInterno(tipo === 'aulas' ? 'pg-prof-conteudo' : 'pg-prof-questoes');
+  setTimeout(function () {
+    var set = function (i, v) { var el = document.getElementById(i); if (el) el.value = v == null ? '' : v; };
+    if (tipo === 'aulas') {
+      set('cont-titulo', item.titulo); set('cont-topico', item.topico); set('cont-texto', item.texto);
+      set('cont-codigo', item.codigo); set('cont-dica', item.dica);
+    } else {
+      set('quest-enunciado', item.enunciado); set('quest-codigo', item.codigo);
+      var sel = document.getElementById('quest-dific');
+      if (sel) Array.prototype.forEach.call(sel.options, function (o) { if (o.text.indexOf(item.dificuldade) === 0) sel.value = o.value || o.text; });
+      _ALT_IDS.forEach(function (i, k) { set(i, item.alternativas[k] || ''); });
+      document.querySelectorAll('input[name="gabarito"]').forEach(function (r) { r.checked = parseInt(r.value, 10) === item.indiceCorreta; });
+    }
+    _edicaoAtual = { tipo: tipo, id: id, dicaTitulo: item.dicaTitulo || '' };   // depois do irInterno (ele zera ao sair de outra tela)
+    mostrarToast('✏️ Editando. Salve ou envie ao terminar.');
+  }, 150);
+}
+
+async function enviarItem(tipo, id) {
+  try {
+    await Api.post('/professor/' + tipo + '/' + id + '/enviar', {});
+    mostrarToast('📤 Enviado para aprovação do administrador!');
+    await carregarMeusConteudos(); renderListaConteudos(); renderListaQuestoes(); renderDesafios();
+    _atualizarResumoProf();
+  } catch (e) { mostrarToast('⚠️ ' + e.message); }
 }
 
 var _exclusaoPendente = null;
 function pedirExclusao(tipo, id) {
-  var nomes = { conteudo: ['Excluir conteúdo?', 'Deseja mesmo excluir este conteúdo?'],
-                questao:  ['Excluir questão?',  'Deseja mesmo excluir esta questão?'],
-                desafio:  ['Excluir desafio?',  'Deseja mesmo excluir este desafio?'] }[tipo];
+  var nomes = { aulas: ['Excluir conteúdo?', 'Deseja mesmo excluir este conteúdo?'],
+                questoes: ['Excluir questão?', 'Deseja mesmo excluir esta questão?'],
+                desafios: ['Excluir desafio?', 'Deseja mesmo excluir este desafio?'] }[tipo];
   if (!nomes) return;
   _exclusaoPendente = { tipo: tipo, id: id };
   document.getElementById('exclusao-titulo').textContent = nomes[0];
   document.getElementById('exclusao-texto').textContent = nomes[1];
   abrirModal('modal-confirmar-exclusao');
 }
-function cancelarExclusao() {
-  _exclusaoPendente = null;
-  fecharModal('modal-confirmar-exclusao');
-}
-function confirmarExclusao() {
+function cancelarExclusao() { _exclusaoPendente = null; fecharModal('modal-confirmar-exclusao'); }
+async function confirmarExclusao() {
   var p = _exclusaoPendente;
   _exclusaoPendente = null;
   fecharModal('modal-confirmar-exclusao');
   if (!p) return;
-  if (p.tipo === 'conteudo') excluirConteudo(p.id);
-  else if (p.tipo === 'questao') excluirQuestao(p.id);
-  else if (p.tipo === 'desafio') excluirDesafio(p.id);
-}
-
-function excluirConteudo(id) {
-  _PROF_CONTEUDOS = _PROF_CONTEUDOS.filter(function(i){ return i.id !== id; });
-  _salvarEstadoGlobal();
-  renderListaConteudos();
-  atualizarContadoresDashProf();
-  mostrarToast('🗑 Conteúdo removido.');
-}
-function excluirQuestao(id) {
-  _PROF_QUESTOES = _PROF_QUESTOES.filter(function(i){ return i.id !== id; });
-  _salvarEstadoGlobal();
-  renderListaQuestoes();
-  atualizarContadoresDashProf();
-  mostrarToast('🗑 Questão removida.');
-}
-function editarConteudo(id) {
-  var item = _PROF_CONTEUDOS.find(function(i){ return i.id === id; });
-  if (!item) return;
-  irInterno('pg-prof-conteudo');
-  setTimeout(function() {
-    var t = document.getElementById('cont-titulo'); if (t) t.value = item.titulo;
-    var top = document.getElementById('cont-topico'); if (top) top.value = item.topico;
-    excluirConteudo(id);
-    mostrarToast('✏️ Editando rascunho. Salve novamente ao terminar.');
-  }, 200);
-}
-function enviarRascunhoConteudo(id) {
-  var item = _PROF_CONTEUDOS.find(function(i){ return i.id === id; });
-  if (!item) return;
-  item.status = 'aprovado';
-  _salvarEstadoGlobal();
-  renderListaConteudos();
-  atualizarContadoresDashProf();
-  mostrarToast('✅ Conteúdo publicado!');
-}
-function enviarRascunhoQuestao(id) {
-  var item = _PROF_QUESTOES.find(function(i){ return i.id === id; });
-  if (!item) return;
-  item.status = 'aprovado';
-  _salvarEstadoGlobal();
-  renderListaQuestoes();
-  atualizarContadoresDashProf();
-  mostrarToast('✅ Questão publicada!');
-  if (typeof _injetarQuestaoNaTrilha === 'function' && item.alternativas && item.alternativas.length >= 2) _injetarQuestaoNaTrilha(item);
+  try {
+    await Api.del('/professor/' + p.tipo + '/' + p.id);
+    mostrarToast('🗑 Item removido.');
+    await carregarMeusConteudos(); renderListaConteudos(); renderListaQuestoes(); renderDesafios();
+    _atualizarResumoProf();
+  } catch (e) { mostrarToast('⚠️ ' + e.message); }
 }
 
 // ── DESEMPENHO DOS ALUNOS ──
-var _ALUNOS_TURMA = [
-  { nome: 'Alberto Caiero',   email: 'alberto.caiero@edu.br',    chaves: 76, fases: 14, acerto: 94, certs: 3, ultima: 'Hoje'           },
-  { nome: 'Álvaro de Campos', email: 'alvaro.campos@edu.br',     chaves: 62, fases: 11, acerto: 88, certs: 2, ultima: 'Ontem'          },
-  { nome: 'Ricardo Reis',     email: 'ricardo.reis@edu.br',      chaves: 51, fases: 9,  acerto: 81, certs: 2, ultima: '2 dias atrás'   },
-  { nome: 'Bernardo Soares',  email: 'bernardo.soares@edu.br',   chaves: 39, fases: 7,  acerto: 72, certs: 1, ultima: '3 dias atrás'   },
-  { nome: 'Maria Helena',     email: 'maria.helena@edu.br',      chaves: 28, fases: 5,  acerto: 67, certs: 1, ultima: '5 dias atrás'   },
-  { nome: 'João Ninguém',     email: 'joao.ninguem@edu.br',      chaves: 19, fases: 3,  acerto: 58, certs: 0, ultima: '1 semana atrás' },
-  { nome: 'Fernanda Lima',    email: 'fernanda.lima@edu.br',     chaves: 14, fases: 2,  acerto: 52, certs: 0, ultima: '1 semana atrás' },
-  { nome: 'Carlos Eduardo',   email: 'carlos.eduardo@edu.br',    chaves: 8,  fases: 1,  acerto: 40, certs: 0, ultima: '2 semanas atrás'},
-];
-
-function renderDesempenhoAlunos() {
-  var tbody = document.getElementById('alunos-desempenho-tbody');
-  if (!tbody) return;
-  tbody.innerHTML = _ALUNOS_TURMA.map(function(a) {
-    return '<tr>' +
-      '<td><strong>' + a.nome + '</strong></td>' +
-      '<td class="aluno-email-cell">' + a.email + '</td>' +
-      '<td><img class="chave-ico" src="assets/icons/perfil/chave.png" alt=""> ' + a.chaves + '</td>' +
-      '<td>' + a.fases + '/16</td>' +
-      '<td><div style="font-size:13px;font-weight:700;">' + a.acerto + '%</div><div class="acerto-bar"><div class="acerto-bar-fill" style="width:' + a.acerto + '%"></div></div></td>' +
-      '<td>' + (a.certs > 0 ? '<img class="cert-ico" src="assets/professor/desempenho/certificados-emitidos.webp" alt=""> ' + a.certs : '—') + '</td>' +
-      '<td>' + a.ultima + '</td>' +
-      '<td><button class="btn-tabela success" onclick="mostrarToast(\'E-mail enviado para ' + a.nome + '!\')"><img class="email-ico" src="assets/professor/desempenho/email.png" alt="">E-mail</button></td>' +
-    '</tr>';
-  }).join('');
-
-  // Atualizar taxa média
-  var media = Math.round(_ALUNOS_TURMA.reduce(function(s,a){ return s + a.acerto; }, 0) / _ALUNOS_TURMA.length);
-  var elMedia = document.getElementById('taxa-acerto-media');
-  if (elMedia) elMedia.textContent = media + '%';
+function _ultimaAtividade(iso) {
+  if (!iso) return 'Nunca';
+  var dias = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  if (isNaN(dias)) return '—';
+  if (dias <= 0) return 'Hoje';
+  if (dias === 1) return 'Ontem';
+  if (dias < 7) return dias + ' dias atrás';
+  return Math.floor(dias / 7) + (dias < 14 ? ' semana atrás' : ' semanas atrás');
 }
 
-// ── UTILITÁRIO ──
-function _hoje() {
-  return new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+async function renderDesempenhoAlunos() {
+  var tbody = document.getElementById('alunos-desempenho-tbody');
+  if (!tbody) return;
+  try { _desempenho = await Api.get('/professor/desempenho'); }
+  catch (e) { mostrarToast('⚠️ ' + e.message); _desempenho = _desempenho || []; }
+  tbody.innerHTML = _desempenho.map(function (a) {
+    var mail = String(a.email || '');
+    return '<tr>' +
+      '<td><strong>' + _esc(a.nome) + '</strong></td>' +
+      '<td class="aluno-email-cell">' + _esc(mail) + '</td>' +
+      '<td><img class="chave-ico" src="assets/icons/perfil/chave.png" alt=""> ' + Number(a.chaves) + '</td>' +
+      '<td>' + Number(a.fases) + '</td>' +
+      '<td><div style="font-size:13px;font-weight:700;">' + Number(a.acerto) + '%</div><div class="acerto-bar"><div class="acerto-bar-fill" style="width:' + Math.min(100, Number(a.acerto)) + '%"></div></div></td>' +
+      '<td>' + (a.certificados > 0 ? '<img class="cert-ico" src="assets/professor/desempenho/certificados-emitidos.webp" alt=""> ' + Number(a.certificados) : '—') + '</td>' +
+      '<td>' + _ultimaAtividade(a.ultimaAtividade) + '</td>' +
+      '<td><a class="btn-tabela success" style="text-decoration:none;" href="mailto:' + encodeURIComponent(mail).replace(/%40/g, '@') + '"><img class="email-ico" src="assets/professor/desempenho/email.png" alt="">E-mail</a></td>' +
+    '</tr>';
+  }).join('');
+  var media = _desempenho.length ? Math.round(_desempenho.reduce(function (s, a) { return s + Number(a.acerto); }, 0) / _desempenho.length) : 0;
+  _setText('taxa-acerto-media', media + '%');
+  _setText('desempenho-total-alunos', _desempenho.length);
+  _setText('desempenho-total-certs', _desempenho.reduce(function (s, a) { return s + Number(a.certificados); }, 0));
 }
 
 // ── HOOK irInterno para professor ──
-(function() {
-  var _origIrInternoProfRemap = window.irInterno;
-  window.irInterno = function(id) {
-    if (typeof _origIrInternoProfRemap === 'function') _origIrInternoProfRemap(id);
-    setTimeout(function() {
+(function () {
+  var _orig = window.irInterno;
+  window.irInterno = function (id) {
+    // sair da tela de edição abandona a edição
+    var eraEdicao = _edicaoAtual;
+    if (eraEdicao && id !== 'pg-prof-conteudo' && id !== 'pg-prof-questoes') {
+      if (eraEdicao.tipo === 'aulas') _limparFormConteudo(); else if (eraEdicao.tipo === 'questoes') _limparFormQuestao();
+      _edicaoAtual = null;
+    }
+    if (typeof _orig === 'function') _orig(id);
+    setTimeout(function () {
       if (id === 'pg-prof-dashboard') { atualizarContadoresDashProf(); }
       if (id === 'pg-prof-meus')      { renderMeusConteudos(); }
-      if (id === 'pg-prof-alunos')    { sincronizarAlunosNaTurma(); renderDesempenhoAlunos(); }
+      if (id === 'pg-prof-alunos')    { renderDesempenhoAlunos(); }
+      if (id === 'pg-desafios-aluno') { carregarDesafiosAluno(); }
     }, 80);
   };
 })();
 
-// Inicializar se já na página correta
-atualizarContadoresDashProf();
-
 // ============================================================
 // DESAFIOS DO PROFESSOR
 // ============================================================
-
-var _DESAFIOS_DB = [
-  { id: 1, titulo: 'Calcular média de notas com Python', materia: 'Programação', dificuldade: 'Fácil',
-    enunciado: 'Escreva uma função que receba uma lista de notas e retorne a média aritmética. Considere que as notas vão de 0 a 10.',
-    codigo: 'def calcular_media(notas):\n    # seu código aqui\n    pass',
-    dica: 'Use a função sum() e len() do Python.', status: 'aprovado', data: '10/05/2026' },
-  { id: 2, titulo: 'Criar layout de card com CSS Grid', materia: 'Design', dificuldade: 'Médio',
-    enunciado: 'Monte um card de produto usando CSS Grid com imagem, título, preço e botão de compra. O card deve ser responsivo.',
-    codigo: '', dica: 'Use grid-template-areas para organizar as zonas.', status: 'aprovado', data: '09/05/2026' },
-  { id: 3, titulo: 'Consulta SQL com JOIN entre 3 tabelas', materia: 'Banco de Dados', dificuldade: 'Difícil',
-    enunciado: 'Dado o schema de Pedidos, Clientes e Produtos, escreva uma query que retorne o nome do cliente, produto comprado e valor total de cada pedido.',
-    codigo: '-- Tabelas: clientes(id, nome), pedidos(id, cliente_id, produto_id, qtd), produtos(id, nome, preco)',
-    dica: 'Use INNER JOIN e multiplique qtd * preco para obter o valor total.', status: 'pendente', data: '11/05/2026' },
-  { id: 4, titulo: 'Configurar VLAN em switch simulado', materia: 'Redes', dificuldade: 'Médio',
-    enunciado: 'No Packet Tracer, configure duas VLANs (10 e 20) em um switch e associe portas específicas a cada VLAN. Teste a comunicação.',
-    codigo: '', dica: 'Use os comandos: vlan, name, interface, switchport mode access.', status: 'rascunho', data: '08/05/2026' },
-  { id: 5, titulo: 'Implementar busca binária', materia: 'Programação', dificuldade: 'Médio',
-    enunciado: 'Implemente o algoritmo de busca binária em uma lista ordenada. A função deve retornar o índice do elemento ou -1 se não encontrado.',
-    codigo: 'def busca_binaria(lista, alvo):\n    # seu código aqui\n    pass',
-    dica: 'Calcule o meio com (inicio + fim) // 2.', status: 'aprovado', data: '07/05/2026' },
-  { id: 6, titulo: 'Paleta de cores para identidade visual', materia: 'Design', dificuldade: 'Fácil',
-    enunciado: 'Crie uma paleta de 5 cores para uma marca fictícia de tecnologia sustentável. Justifique cada escolha com base na psicologia das cores.',
-    codigo: '', dica: 'Pense em verde, azul e tons neutros para transmitir confiança e sustentabilidade.', status: 'rascunho', data: '06/05/2026' },
-];
 var _desafioMateriaFiltro = 'Todas';
-var _nextDesafioId = 10;
-
-var _MAT_BADGE_CLASS = {
-  'Programação':    'desafio-badge-prog',
-  'Design':         'desafio-badge-design',
-  'Banco de Dados': 'desafio-badge-bd',
-  'Redes':          'desafio-badge-redes'
-};
-var _MAT_ICONE = {};
-var _DIFIC_ICONE = { 'Fácil':'🟢', 'Médio':'🟡', 'Difícil':'🔴' };
+var _MAT_BADGE_CLASS = { 'Programação': 'desafio-badge-prog', 'Design': 'desafio-badge-design', 'Banco de Dados': 'desafio-badge-bd', 'Redes': 'desafio-badge-redes' };
+var _DIFIC_ICONE = { 'Fácil': '🟢', 'Médio': '🟡', 'Difícil': '🔴' };
 
 function sincronizarSidebarEspDesafios() {
-  const sessao = typeof Auth !== 'undefined' ? Auth.getSessao() : null;
-  if (!sessao) return;
-  const icones = {};
-  const esp = sessao.especialidade || '';
-  const el = document.getElementById('sidebar-prof-esp-desafios');
+  var esp = _perfilProfessor ? _perfilProfessor.especialidade : '';
+  var el = document.getElementById('sidebar-prof-esp-desafios');
   if (el && esp) { el.textContent = esp; el.style.display = 'block'; }
 }
 
 function filtrarDesafiosMateria(mat) {
   _desafioMateriaFiltro = mat;
-  document.querySelectorAll('.desafio-aba').forEach(function(btn) {
-    btn.classList.toggle('ativo', btn.id === 'aba-' + mat);
-  });
+  document.querySelectorAll('.desafio-aba').forEach(function (btn) { btn.classList.toggle('ativo', btn.id === 'aba-' + mat); });
   renderDesafios();
 }
 
-function renderDesafios() {
-  var busca = (document.getElementById('busca-desafios') || {}).value || '';
-  var dificFiltro = (document.getElementById('filtro-dific-desafio') || {}).value || '';
-  busca = busca.toLowerCase();
-
-  var lista = _DESAFIOS_DB.filter(function(d) {
+async function renderDesafios() {
+  if (!_meusConteudos) await carregarMeusConteudos();
+  var busca = (_val('busca-desafios') || '').toLowerCase();
+  var dificFiltro = _val('filtro-dific-desafio');
+  var lista = ((_meusConteudos && _meusConteudos.desafios) || []).filter(function (d) {
     if (_desafioMateriaFiltro !== 'Todas' && d.materia !== _desafioMateriaFiltro) return false;
     if (dificFiltro && d.dificuldade !== dificFiltro) return false;
     if (busca && d.titulo.toLowerCase().indexOf(busca) === -1 && d.enunciado.toLowerCase().indexOf(busca) === -1) return false;
     return true;
   });
-
-  var grid = document.getElementById('desafios-grid');
-  var vazio = document.getElementById('desafios-vazio');
+  var grid = document.getElementById('desafios-grid'), vazio = document.getElementById('desafios-vazio');
   if (!grid) return;
-
-  if (lista.length === 0) {
-    grid.style.display = 'none';
-    if (vazio) vazio.style.display = 'block';
-    return;
-  }
+  if (!lista.length) { grid.style.display = 'none'; if (vazio) vazio.style.display = 'block'; return; }
   grid.style.display = 'grid';
   if (vazio) vazio.style.display = 'none';
-
-  var statusLabel = { rascunho: 'Rascunho', pendente: 'Aguardando aprovação', aprovado: 'Aprovado' };
-  var statusClass = { rascunho: 'dst-rascunho', pendente: 'dst-pendente', aprovado: 'dst-aprovado' };
-  var dificClassKey = { 'Fácil':'Facil', 'Médio':'Medio', 'Difícil':'Dificil' };
-
-  grid.innerHTML = lista.map(function(d) {
-    var matCls = _MAT_BADGE_CLASS[d.materia] || 'desafio-badge-prog';
-    var dCls   = 'dific-' + (dificClassKey[d.dificuldade] || 'Facil');
-    var stCls  = statusClass[d.status] || 'dst-rascunho';
-    var stLbl  = statusLabel[d.status] || d.status;
-    return (
-      '<div class="desafio-card">' +
-        '<div class="desafio-badges">' +
-          '<span class="desafio-badge-mat ' + matCls + '">' + d.materia + '</span>' +
-          '<span class="desafio-badge-dific ' + dCls + '">' + (_DIFIC_ICONE[d.dificuldade]||'') + ' ' + d.dificuldade + '</span>' +
-        '</div>' +
-        '<div class="desafio-card-titulo">' + _esc(d.titulo) + '</div>' +
-        '<div class="desafio-enunciado-preview">' + _esc(d.enunciado) + '</div>' +
-        (d.dica ? '<div style="font-size:12px;color:#7b61ff;font-weight:600;">💡 ' + _esc(d.dica) + '</div>' : '') +
-        '<div class="desafio-card-footer">' +
-          '<span class="desafio-status-badge ' + stCls + '">' + stLbl + '</span>' +
-          '<div class="desafio-acoes">' +
-            '<button class="btn-tabela" onclick="editarDesafio(' + d.id + ')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
-            (d.status === 'rascunho' ? '<button class="btn-tabela" onclick="enviarDesafioAprovacao(' + d.id + ')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>' : '') +
-            '<button class="btn-tabela danger" title="Excluir" onclick="pedirExclusao(\'desafio\', ' + d.id + ')"><img class="btn-ico btn-ico-solo" src="assets/professor/acoes/excluir.png" alt=""></button>' +
-          '</div>' +
-        '</div>' +
-      '</div>'
-    );
+  var statusLabel = { rascunho: 'Rascunho', pendente: 'Aguardando aprovação', aprovado: 'Aprovado', rejeitado: 'Rejeitado' };
+  var statusClass = { rascunho: 'dst-rascunho', pendente: 'dst-pendente', aprovado: 'dst-aprovado', rejeitado: 'dst-rascunho' };
+  var dificKey = { 'Fácil': 'Facil', 'Médio': 'Medio', 'Difícil': 'Dificil' };
+  grid.innerHTML = lista.map(function (d) {
+    var editavel = d.status === 'rascunho' || d.status === 'rejeitado';
+    var acoes = '';
+    if (editavel) acoes += '<button class="btn-tabela" onclick="editarDesafio(' + d.id + ')"><img class="btn-ico" src="assets/professor/acoes/editar.png" alt="">Editar</button>' +
+      '<button class="btn-tabela" onclick="enviarItem(\'desafios\', ' + d.id + ')"><img class="btn-ico" src="assets/professor/acoes/enviar.png" alt="">Enviar</button>';
+    if (d.status !== 'aprovado') acoes += '<button class="btn-tabela danger" title="Excluir" onclick="pedirExclusao(\'desafios\', ' + d.id + ')"><img class="btn-ico btn-ico-solo" src="assets/professor/acoes/excluir.png" alt=""></button>';
+    return '<div class="desafio-card">' +
+      '<div class="desafio-badges"><span class="desafio-badge-mat ' + (_MAT_BADGE_CLASS[d.materia] || 'desafio-badge-prog') + '">' + _esc(d.materia) + '</span>' +
+      '<span class="desafio-badge-dific dific-' + (dificKey[d.dificuldade] || 'Facil') + '">' + (_DIFIC_ICONE[d.dificuldade] || '') + ' ' + _esc(d.dificuldade) + '</span></div>' +
+      '<div class="desafio-card-titulo">' + _esc(d.titulo) + '</div>' +
+      '<div class="desafio-enunciado-preview">' + _esc(d.enunciado) + '</div>' +
+      (d.dica ? '<div style="font-size:12px;color:#7b61ff;font-weight:600;">💡 ' + _esc(d.dica) + '</div>' : '') +
+      _motivoHtml(d) +
+      '<div class="desafio-card-footer"><span class="desafio-status-badge ' + (statusClass[d.status] || 'dst-rascunho') + '">' + (statusLabel[d.status] || _esc(d.status)) + '</span>' +
+      '<div class="desafio-acoes">' + acoes + '</div></div></div>';
   }).join('');
 }
 
 function abrirModalNovoDesafio() {
+  _edicaoAtual = null;
   document.getElementById('desafio-edit-id').value = '';
   document.getElementById('modal-desafio-titulo').textContent = 'Novo Desafio';
-  document.getElementById('desafio-titulo').value = '';
-  document.getElementById('desafio-enunciado').value = '';
-  document.getElementById('desafio-codigo').value = '';
-  document.getElementById('desafio-dica').value = '';
-  document.getElementById('desafio-materia').value = 'Programação';
+  ['desafio-titulo', 'desafio-enunciado', 'desafio-codigo', 'desafio-dica'].forEach(function (i) { document.getElementById(i).value = ''; });
   document.getElementById('desafio-dific').value = 'Fácil';
   document.getElementById('modal-novo-desafio').style.display = 'flex';
 }
-
-function fecharModalNovoDesafio() {
-  document.getElementById('modal-novo-desafio').style.display = 'none';
-}
+function fecharModalNovoDesafio() { document.getElementById('modal-novo-desafio').style.display = 'none'; }
 
 function editarDesafio(id) {
-  var d = _DESAFIOS_DB.find(function(x){ return x.id === id; });
-  if (!d) return;
+  var d = _achar('desafios', id); if (!d) return;
   document.getElementById('desafio-edit-id').value = id;
   document.getElementById('modal-desafio-titulo').textContent = 'Editar Desafio';
   document.getElementById('desafio-titulo').value = d.titulo;
-  document.getElementById('desafio-materia').value = d.materia;
   document.getElementById('desafio-dific').value = d.dificuldade;
   document.getElementById('desafio-enunciado').value = d.enunciado;
   document.getElementById('desafio-codigo').value = d.codigo || '';
@@ -6114,175 +5943,60 @@ function editarDesafio(id) {
   document.getElementById('modal-novo-desafio').style.display = 'flex';
 }
 
-function salvarDesafio(statusNovo) {
-  var titulo    = (document.getElementById('desafio-titulo').value || '').trim();
-  var materia   = document.getElementById('desafio-materia').value;
-  var dific     = document.getElementById('desafio-dific').value;
-  var enunciado = (document.getElementById('desafio-enunciado').value || '').trim();
-  var codigo    = (document.getElementById('desafio-codigo').value || '').trim();
-  var dica      = (document.getElementById('desafio-dica').value || '').trim();
+// statusNovo: 'rascunho' salva; qualquer outro valor ('aprovado' no botão antigo) = enviar para aprovação
+async function salvarDesafio(statusNovo) {
+  var titulo = _val('desafio-titulo').trim(), enunciado = _val('desafio-enunciado').trim();
   if (!titulo || !enunciado) { mostrarToast('⚠️ Preencha título e enunciado.'); return; }
-
-  var editId = parseInt(document.getElementById('desafio-edit-id').value);
-  if (editId) {
-    var d = _DESAFIOS_DB.find(function(x){ return x.id === editId; });
-    if (d) { d.titulo = titulo; d.materia = materia; d.dificuldade = dific; d.enunciado = enunciado; d.codigo = codigo; d.dica = dica; if (d.status === 'rascunho') d.status = statusNovo; }
-  } else {
-    _DESAFIOS_DB.unshift({ id: _nextDesafioId++, titulo: titulo, materia: materia, dificuldade: dific,
-      enunciado: enunciado, codigo: codigo, dica: dica, status: statusNovo,
-      data: new Date().toLocaleDateString('pt-BR') });
-  }
-  fecharModalNovoDesafio();
-  renderDesafios();
-  var msg = statusNovo === 'aprovado' ? '📤 Desafio publicado!' : '💾 Rascunho salvo!';
-  mostrarToast(msg);
-}
-
-function enviarDesafioAprovacao(id) {
-  var d = _DESAFIOS_DB.find(function(x){ return x.id === id; });
-  if (d) { d.status = 'aprovado'; renderDesafios(); mostrarToast('📤 Desafio publicado!'); }
-}
-
-function excluirDesafio(id) {
-  _DESAFIOS_DB = _DESAFIOS_DB.filter(function(x){ return x.id !== id; });
-  renderDesafios();
-  mostrarToast('🗑️ Desafio excluído.');
-}
-
-
-// ============================================================
-// HELPERS DE FORMULÁRIO DE QUESTÃO
-// ============================================================
-
-function _coletarAlternativas() {
-  var ids = ['quest-alt-a','quest-alt-b','quest-alt-c','quest-alt-d','quest-alt-e'];
-  var alts = [];
-  ids.forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el && el.value.trim()) alts.push({ texto: el.value.trim() });
-  });
-  return alts;
-}
-
-function _coletarGabarito() {
-  var radios = document.querySelectorAll('input[name="gabarito"]');
-  for (var i = 0; i < radios.length; i++) {
-    if (radios[i].checked) return parseInt(radios[i].value);
-  }
-  return -1;
+  var editId = parseInt(_val('desafio-edit-id'), 10);
+  _edicaoAtual = editId ? { tipo: 'desafios', id: editId } : null;
+  var enviar = statusNovo !== 'rascunho';
+  var ok = await _gravar('desafios', { idMateria: Number(_val('desafio-materia')), titulo: titulo, dificuldade: _val('desafio-dific'),
+    enunciado: enunciado, codigo: _val('desafio-codigo').trim(), dica: _val('desafio-dica').trim() }, enviar, '💾 Rascunho salvo!');
+  if (ok) { fecharModalNovoDesafio(); renderDesafios(); }
 }
 
 // ============================================================
-// INJEÇÃO DE QUESTÕES DO PROFESSOR NA TRILHA DO ALUNO
+// DESAFIOS DO ALUNO (aprovados pelo administrador)
 // ============================================================
-
-function _injetarQuestaoNaTrilha(item) {
-  // Mapear matéria do professor para índice de MATERIAS_DATA
-  var materiaMap = { 'Programação': 1, 'Design': 2, 'Banco de Dados': 3, 'Redes': 4 };
-  var mIdx = materiaMap[item.materia];
-  if (!mIdx || typeof MATERIAS_DATA === 'undefined' || !MATERIAS_DATA[mIdx]) return;
-
-  // Verificar se já existe (evitar duplicatas)
-  var jaExiste = MATERIAS_DATA[mIdx].questoes.some(function(q) { return q._profId === item.id; });
-  if (jaExiste) return;
-
-  // Converter formato professor → formato da trilha
-  var questaoTrilha = {
-    _profId: item.id,
-    pergunta: item.enunciado,
-    codigo: item.codigo || '# Questão enviada pelo professor',
-    alternativas: item.alternativas.map(function(a, i) {
-      return { texto: ['A) ','B) ','C) ','D) ','E) '][i] + a.texto, correta: (i === item.gabaritoIdx) };
-    })
-  };
-
-  MATERIAS_DATA[mIdx].questoes.push(questaoTrilha);
+async function carregarDesafiosAluno() {
+  try { _desafiosAluno = await Api.get('/aluno/desafios'); }
+  catch (e) { console.warn('Desafios indisponíveis:', e.message); _desafiosAluno = _desafiosAluno || []; }
+  renderDesafiosAluno();
 }
 
-// ── Ao iniciar: restaurar questões aprovadas que já estavam salvas ──
-function _restaurarQuestoesProfNaTrilha() {
-  var questoes = LQ_STORE.getQuestoes();
-  questoes.filter(function(q) {
-    return q.status === 'aprovado' && q.alternativas && q.alternativas.length >= 2;
-  }).forEach(function(q) {
-    _injetarQuestaoNaTrilha(q);
-  });
+function verDesafioAluno(id) {
+  var d = (_desafiosAluno || []).find(function (x) { return x.id === id; });
+  if (!d) return;
+  var antigo = document.getElementById('modal-desafio-aluno'); if (antigo) antigo.remove();
+  var m = document.createElement('div');
+  m.id = 'modal-desafio-aluno'; m.className = 'modal-editar-campo';
+  m.innerHTML = '<div class="caixa" style="max-width:560px;max-height:85vh;overflow:auto;">' +
+    '<h3>' + _esc(d.titulo) + '</h3>' +
+    '<div style="font-size:12px;color:var(--cinza-texto);margin-bottom:10px;">' + _esc(d.materia) + ' · ' + _esc(d.dificuldade) + (d.autor ? ' · por ' + _esc(d.autor) : '') + '</div>' +
+    '<div style="font-size:14px;line-height:1.6;white-space:pre-wrap;margin-bottom:12px;">' + _esc(d.enunciado) + '</div>' +
+    (d.codigo ? '<div style="background:#1e1e2e;color:#cdd6f4;font-family:monospace;font-size:12px;padding:12px;border-radius:8px;white-space:pre;overflow-x:auto;margin-bottom:12px;">' + _esc(d.codigo) + '</div>' : '') +
+    (d.dica ? '<div style="font-size:12px;color:#7b61ff;font-weight:600;margin-bottom:12px;">💡 ' + _esc(d.dica) + '</div>' : '') +
+    '<div class="acoes"><button class="btn-cancelar-campo" onclick="document.getElementById(\'modal-desafio-aluno\').remove()">Fechar</button>' +
+    (d.concluido ? '<button class="btn-salvar-campo" disabled>✅ Concluído</button>'
+                 : '<button class="btn-salvar-campo" id="btn-concluir-desafio" onclick="concluirDesafioAluno(' + d.id + ')">Marcar como concluído</button>') +
+    '</div></div>';
+  m.addEventListener('click', function (e) { if (e.target === m) m.remove(); });
+  document.body.appendChild(m);
 }
 
-// ============================================================
-// SEÇÃO "NOVOS CONTEÚDOS DO PROFESSOR" NO HUB DO ALUNO
-// ============================================================
-
-function renderConteudosProfNoHub(mIdx) {
-  var materiaMap = { 1: 'Programação', 2: 'Design', 3: 'Banco de Dados', 4: 'Redes' };
-  var matNome = materiaMap[mIdx];
-  if (!matNome) return '';
-
-  var conteudos = LQ_STORE.getConteudosHub(matNome);
-  if (conteudos.length === 0) return '';
-
-  var html = '<div style="margin-top:24px;border-top:2px dashed #e0e0e0;padding-top:20px;">';
-  html += '<h3 style="font-family:var(--font-titulo);font-size:16px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;"><img class="ico-img" src="assets/professor/meus/textos-explicativos.webp" alt=""> <span>Conteúdos Extras do Professor</span> <span style="background:#7b61ff;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;">' + conteudos.length + ' novo' + (conteudos.length > 1 ? 's' : '') + '</span></h3>';
-
-  conteudos.forEach(function(c) {
-    html += '<div style="background:#f8f6ff;border:1.5px solid #e8e0ff;border-radius:12px;padding:18px;margin-bottom:12px;">';
-    html += '<div style="font-family:var(--font-titulo);font-size:14px;font-weight:900;margin-bottom:6px;"><img class="ico-img" src="assets/professor/meus/textos-explicativos.webp" alt="">' + _esc(c.titulo) + '</div>';
-    html += '<div style="font-size:12px;color:var(--cinza-texto);margin-bottom:8px;">🗂 ' + _esc(c.topico) + ' · <img class="ico-img ico-sm" src="assets/conta/professor.webp" alt="">' + _esc(c.authorNome || 'Professor') + ' · 📅 ' + _esc(c.data) + '</div>';
-    if (c.texto) {
-      html += '<div style="font-size:13px;color:#333;line-height:1.6;margin-bottom:8px;">' + _esc(c.texto).replace(/\n/g, '<br>') + '</div>';
-    }
-    if (c.codigo) {
-      html += '<div style="background:#1e1e2e;color:#cdd6f4;font-family:monospace;font-size:12px;padding:12px;border-radius:8px;white-space:pre;overflow-x:auto;margin-bottom:8px;">' + _esc(c.codigo) + '</div>';
-    }
-    if (c.dica) {
-      html += '<div style="background:#fff8e1;border-left:4px solid #f59e0b;padding:10px 14px;border-radius:0 8px 8px 0;font-size:12px;color:#78350f;"><strong>💡 Dica:</strong> ' + _esc(c.dica) + '</div>';
-    }
-    html += '</div>';
-  });
-
-  html += '</div>';
-  return html;
+async function concluirDesafioAluno(id) {
+  var btn = document.getElementById('btn-concluir-desafio'); if (btn) btn.disabled = true;
+  try {
+    var r = await Api.post('/aluno/desafios/' + id + '/concluir', {});
+    var m = document.getElementById('modal-desafio-aluno'); if (m) m.remove();
+    mostrarToast(r.jaConcluido ? 'Você já tinha concluído este desafio.' : '🏆 Desafio concluído! +' + r.chavesGanhas + ' chaves');
+    await carregarDesafiosAluno();
+    if (typeof carregarEstadoDoAluno === 'function') await carregarEstadoDoAluno();
+  } catch (e) { mostrarToast('⚠️ ' + e.message); if (btn) btn.disabled = false; }
 }
 
-// ── Patch renderHub para incluir conteúdos do professor ──
-// Guardamos referência ao renderHub original e o extendemos
-(function() {
-  // Aguardar o DOM estar pronto
-  var _patchTentativas = 0;
-  function _tentarPatchRenderHub() {
-    if (typeof renderHub === 'undefined') {
-      _patchTentativas++;
-      if (_patchTentativas < 20) setTimeout(_tentarPatchRenderHub, 300);
-      return;
-    }
-    var _renderHubOriginal = renderHub;
-    window.renderHub = function(mIdx, topicoIdx) {
-      _renderHubOriginal(mIdx, topicoIdx);
-      // Após renderizar, adicionar seção de conteúdos do professor
-      setTimeout(function() {
-        var area = document.getElementById('hub-conteudo-area');
-        if (!area) return;
-        var jaTemSecao = area.querySelector('.prof-conteudos-hub');
-        if (jaTemSecao) return; // Evitar duplicatas
-        var extras = renderConteudosProfNoHub(mIdx);
-        if (extras) {
-          var wrapper = document.createElement('div');
-          wrapper.className = 'prof-conteudos-hub';
-          wrapper.innerHTML = extras;
-          var textoBox = area.querySelector('.texto-aula-box');
-          if (textoBox) textoBox.appendChild(wrapper);
-        }
-      }, 80);
-    };
-    // Restaurar questões aprovadas na trilha ao iniciar
-    _restaurarQuestoesProfNaTrilha();
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', _tentarPatchRenderHub);
-  } else {
-    setTimeout(_tentarPatchRenderHub, 400);
-  }
-})();
+function _hoje() { return new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }); }
+
 
 </script>
 

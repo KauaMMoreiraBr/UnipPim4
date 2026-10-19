@@ -4,7 +4,15 @@
 // Para mudar o endereço da API: defina window.HYTECH_API_URL antes de carregar este arquivo.
 // ============================================================
 (function () {
-  var BASE = (window.HYTECH_API_URL || 'http://localhost:3000').replace(/\/$/, '');
+  // Endereço da API: 1) window.HYTECH_API_URL, se definido; 2) em desenvolvimento (arquivo ou localhost em outra porta
+  // que não a 3000) usa http://localhost:3000; 3) em produção usa a mesma origem do site.
+  function _base() {
+    if (window.HYTECH_API_URL) return window.HYTECH_API_URL;
+    var l = window.location;
+    var dev = l.protocol === 'file:' || ((l.hostname === 'localhost' || l.hostname === '127.0.0.1') && l.port !== '3000' && l.port !== '');
+    return dev ? 'http://localhost:3000' : '';
+  }
+  var BASE = _base().replace(/\/$/, '');
   var _token = null;
 
   async function chamar(metodo, rota, corpo) {
@@ -36,6 +44,7 @@
     base: BASE,
     temToken: function () { return !!_token; },
     sair: function () { _token = null; },
+    setToken: function (t) { _token = t; },      // o servidor devolve token novo quando nome/e-mail mudam
 
     // ── Autenticação ──
     login: async function (email, senha) {
